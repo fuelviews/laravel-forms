@@ -2,7 +2,10 @@
 
 namespace Fuelviews\LaravelForms;
 
+use App\Http\Controllers\FormSubmitController;
 use Fuelviews\LaravelForms\Commands\LaravelFormsCommand;
+use Fuelviews\Sitemap\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -18,8 +21,12 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-forms')
             ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel-forms_table')
             ->hasCommand(LaravelFormsCommand::class);
+    }
+
+    public function PackageRegistered(): void
+    {
+        Route::get('/validate-form', [FormSubmitController::class, 'handle'])
+            ->name('validate.form');
     }
 }
