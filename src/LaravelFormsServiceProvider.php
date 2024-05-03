@@ -5,6 +5,7 @@ namespace Fuelviews\LaravelForms;
 use Fuelviews\LaravelForms\Contracts\LaravelFormsHandlerService;
 use Fuelviews\LaravelForms\Http\Controllers\LaravelFormsSubmitController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Fuelviews\LaravelForms\Services\LaravelFormsSubmitService;
@@ -16,7 +17,8 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-forms')
             ->hasConfigFile('forms')
-            ->hasViews('laravel-forms');
+            ->hasViews('laravel-forms')
+            ->hasViewComponent('forms-modal', 'modal');
     }
 
     public function PackageRegistered(): void
@@ -26,8 +28,20 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
             LaravelFormsSubmitService::class,
         );
 
-        Route::post('/validate-form', [LaravelFormsSubmitController::class, 'handle'])
+        Route::post('/form-submit', [LaravelFormsSubmitController::class, 'handle'])
             ->name('validate.form');
+
+        Route::post('/form-step', [LaravelFormsSubmitController::class, 'handleStep'])
+            ->middleware('web')
+            ->name('form.handle.step');
+
+        Route::get('/form-modal', [LaravelFormsSubmitController::class, 'showForm'])
+            ->middleware('web')
+            ->name('form.show');
+
+        Route::get('/form-back', [LaravelFormsSubmitController::class, 'backStep'])
+            ->name('form.back');
+
 
         Route::get('/thank-you', function () {
             return view('laravel-forms::thank-you');

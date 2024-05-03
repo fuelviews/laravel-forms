@@ -15,7 +15,8 @@ class LaravelFormsSubmitService implements LaravelFormsHandlerService
             $response = Http::withOptions(['verify' => false])->asForm()->post($data['url'], $data['validatedData']);
 
             if ($response->successful()) {
-                session(['last_form_submission' => now()]);
+                session(['last_form_submit' => now()]);
+                session()->forget(['form_data', 'form_step', 'form_location']);
 
                 return ['status' => 'success'];
             }
