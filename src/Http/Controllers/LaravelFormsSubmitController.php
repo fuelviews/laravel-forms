@@ -31,6 +31,7 @@ class LaravelFormsSubmitController extends Controller
                     'email' => 'sometimes|email',
                     'phone' => 'sometimes|min:7|max:19',
                     'message' => 'sometimes|max:255',
+                    'zipCode' => 'sometimes|min:4|max:9',
                     'gotcha' => 'nullable|string',
                     'isSpam' => 'nullable|string',
                     'gclid' => 'nullable|string',
@@ -48,8 +49,8 @@ class LaravelFormsSubmitController extends Controller
         $openModal = $request->session()->pull('modal_open', true);
 
         $step = $request->session()->get('form_step', 1);
-        // Retrieve location from session or set a default value if none exists
-        $location = $request->session()->get('form_location', null);  // Default to null or any appropriate value
+
+        $location = $request->session()->get('form_location', null);
         return view('laravel-forms::components.modal', compact('step', 'location', 'openModal'));
     }
 
@@ -108,6 +109,7 @@ class LaravelFormsSubmitController extends Controller
             'lastName' => 'sometimes|min:2|max:24',
             'email' => 'sometimes|email',
             'phone' => 'sometimes|min:7|max:19',
+            'zipCode' => 'sometimes|min:4|max:9',
             'message' => 'sometimes|max:255',
             'location' => 'nullable|string',
             'gotcha' => 'nullable|string',
@@ -157,7 +159,7 @@ class LaravelFormsSubmitController extends Controller
     {
         return ! is_null($request->input('gotcha')) ||
             ! is_null($request->input('isSpam')) ||
-            $request->has('fakeSubmitClicked');
+            $request->has('submitClicked');
     }
 
     protected function redirectSpam(): \Illuminate\Http\RedirectResponse
