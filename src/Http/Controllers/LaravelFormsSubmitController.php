@@ -5,8 +5,10 @@ namespace Fuelviews\LaravelForms\Http\Controllers;
 use Illuminate\Http\Request;
 use Fuelviews\LaravelForms\Contracts\LaravelFormsHandlerService;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Carbon;
+use Spatie\GoogleTagManager\GoogleTagManager;
 
-class LaravelFormSubmitController extends Controller
+class LaravelFormsSubmitController extends Controller
 {
     protected LaravelFormsHandlerService $formHandler;
 
@@ -15,18 +17,11 @@ class LaravelFormSubmitController extends Controller
         $this->formHandler = $formHandler;
     }
 
-    public function handle(Request $request)
+    public function handle(Request $request): \Illuminate\Http\RedirectResponse
     {
-        // Check for UTM parameters and handle their absence
-        $gclid = $request->input('gclid', 'gclid');  // Provide a default value or handle it differently
-
-        \Log::info('Parameters', [
-            'gclid' => $gclid,
-        ]);
-
-        /*if ($this->isSpamRequest($request)) {
-            return redirect()->to('https://yelp.com');
-        }*/
+        if ($this->isSpamRequest($request)) {
+            return $this->redirectSpam();
+        }
 
         $validatedData = $request->validate([
             'firstName' => 'required|min:2|max:24',
@@ -44,7 +39,6 @@ class LaravelFormSubmitController extends Controller
             'utm_term' => 'nullable|string',
             'utm_content' => 'nullable|string',
         ]);
-
         $validatedData['ip'] = $request->ip();
 
         $data = [
@@ -56,10 +50,14 @@ class LaravelFormSubmitController extends Controller
         $result = $this->formHandler->handle($data);
 
         if ($result['status'] === 'success') {
+                app(GoogleTagManager::class)->flash('event', $data['gtmEventName'], [
+                    'event_label' => $data['gtmEventName'],
+                ]);
+
             return redirect()->route('thank-you')->with('status', 'success');
-        } else {
-            return redirect()->route('thank-you')->with('status', 'failure')->with('error', $result['error'] ?? 'An unknown error occurred.');
         }
+
+        return redirect()->route('thank-you')->with('status', 'failure');
     }
 
     private function getApiUrl($formKey, $lastSubmission)
@@ -73,17 +71,26 @@ class LaravelFormSubmitController extends Controller
             return false;
         }
 
-        /*if (app()->isProduction() && ! config('app.debug') ? 'production_url' : 'development_url' && $lastSubmission && now()->diffInMinutes($lastSubmission) < 60) {
-            return redirect(route('home'));
-        }*/
+        if (app()->isProduction() && !config('app.debug') && $lastSubmission && now()->diffInMinutes(Carbon::parse($lastSubmission)) < 60) {
+            return redirect()->back();
+        }
 
         return $url;
     }
 
-    protected function isSpamRequest(Request $request)
+    protected function isSpamRequest(Request $request): bool
     {
         return ! is_null($request->input('_gotcha')) ||
             ! is_null($request->input('is_spam')) ||
             $request->has('fakeSubmitClicked');
+    }
+
+    protected function redirectSpam(): \Illuminate\Http\RedirectResponse
+    {
+        $redirects = config('forms.spam_redirects', []);
+
+        $randomRedirect = array_rand($redirects);
+
+        return redirect()->to($redirects[$randomRedirect]);
     }
 }

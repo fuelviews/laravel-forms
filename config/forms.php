@@ -17,4 +17,9 @@ return [
         'development_url' => 'https://development.fuelforms.com/api/f/n6vyojfwjfvyqmylt0th',
         'gtm_event' => 'Painter_Application_Form_Submission',
     ],
+
+    'spam_redirects' => [
+        'yelp' => 'https://yelp.com',
+        'bbb' => 'https://bbb.org',
+    ],
 ];

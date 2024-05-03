@@ -9,21 +9,8 @@ use Spatie\GoogleTagManager\GoogleTagManager;
 
 class LaravelFormsSubmitService implements LaravelFormsHandlerService
 {
-    /*protected $gtm;
-
-    public function __construct(GoogleTagManager $gtm)
-    {
-        $this->gtm = $gtm;
-    }*/
-
-    /**
-     * @throws ConnectionException
-     */
     public function handle(array $data): array
     {
-        // Debugging the URL
-        \Log::info("Attempting to post to URL: ", ['url' => $data['url']]);
-
         try {
             $response = Http::withOptions(['verify' => false])->asForm()->post($data['url'], $data['validatedData']);
 
@@ -32,8 +19,6 @@ class LaravelFormsSubmitService implements LaravelFormsHandlerService
 
                 return ['status' => 'success'];
             }
-
-            \Log::info("Status ", ['status' => $data['status']]);
 
             return ['status' => 'failure', 'error' => $response->body()];
         } catch (\Exception $exception) {
