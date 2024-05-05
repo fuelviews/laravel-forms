@@ -2,8 +2,8 @@
 
 namespace Fuelviews\LaravelForms\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Fuelviews\LaravelForms\Contracts\LaravelFormsHandlerService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Spatie\GoogleTagManager\GoogleTagManager;
@@ -23,6 +23,7 @@ class LaravelFormsSubmitController extends Controller
             case 1:
                 return $request->validate([
                     'location' => 'required|in:inside,outside,cabinets',
+                    'isSpam' => 'nullable|string',
                 ]);
             case 2:
                 return $request->validate([
@@ -47,34 +48,38 @@ class LaravelFormsSubmitController extends Controller
     public function showForm(Request $request)
     {
         $openModal = $request->session()->pull('modal_open', true);
-
         $step = $request->session()->get('form_step', 1);
 
-        $location = $request->session()->get('form_location', null);
-        return view('laravel-forms::components.modal', compact('step', 'location', 'openModal'));
+        return view('laravel-forms::components.modals.modal', compact('step', 'openModal'));
     }
 
     public function handleStep(Request $request)
     {
+        \Log::info(['Received location: ', $request->input('location')]);
+
         $request->session()->put('modal_open', true);
         $step = $request->session()->get('form_step', 1);
         $allData = $request->session()->get('form_data', []);
 
-        $this->validateStepData($request, $step);
+        $validatedData = $this->validateStepData($request, $step);
+        $allData[$step] = $validatedData;
 
-        // Store the validated data for the current step
-        $allData[$step] = $request->all();
+        // Store location in session if it's part of the current step's data
+        if (isset($validatedData['location'])) {
+            $request->session()->put('location', $validatedData['location']);
+        }
+
         $request->session()->put('form_data', $allData);
-        $request->session()->put('form_location', $request->input('location'));
 
         if ($this->isLastStep($step)) {
-            $request->session()->forget(['form_data', 'form_step', 'form_location']);
+            $request->session()->forget(['form_data', 'form_step', 'modal_open']);
             return redirect()->route('thank-you')->with('status', 'success');
         } else {
             $request->session()->put('form_step', $step + 1);
             return redirect()->route('form.show');
         }
     }
+
 
     public function backStep(Request $request): \Illuminate\Http\RedirectResponse
     {
@@ -94,6 +99,7 @@ class LaravelFormsSubmitController extends Controller
 
     public function handle(Request $request): \Illuminate\Http\RedirectResponse
     {
+        \Log::info("Location set in session", ['location' => $request->session()->get('location')]);
         $request->session()->put('modal_open', true);
 
         if ($this->isRateLimited($request)) {
@@ -122,6 +128,7 @@ class LaravelFormsSubmitController extends Controller
             'utmContent' => 'nullable|string',
         ]);
         $validatedData['ip'] = $request->ip();
+        $validatedData['location'] = $request->session()->get('location');
 
         $gclid = $request->input('gclid') ?? $request->cookie('gclid');
         $gtmEventGclid = config("forms.{$request->input('form_key')}.gtm_event_gclid");
@@ -152,6 +159,7 @@ class LaravelFormsSubmitController extends Controller
     private function getApiUrl($formKey)
     {
         $environment = app()->isProduction() && ! config('app.debug') ? 'production_url' : 'development_url';
+
         return config("forms.{$formKey}.{$environment}", false);
     }
 
@@ -166,17 +174,18 @@ class LaravelFormsSubmitController extends Controller
     {
         $redirects = config('forms.spam_redirects', []);
         $randomRedirect = array_rand($redirects);
+
         return redirect()->to($redirects[$randomRedirect]);
     }
 
     private function isRateLimited(Request $request): bool
     {
-        if (!app()->isProduction() || config('app.debug')) {
+        if (! app()->isProduction() || config('app.debug')) {
             return false;
         }
 
         $lastSubmit = session('last_form_submit');
-        if (!$lastSubmit) {
+        if (! $lastSubmit) {
             return false;
         }
 

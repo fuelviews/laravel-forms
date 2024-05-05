@@ -3,9 +3,7 @@
 namespace Fuelviews\LaravelForms\Services;
 
 use Fuelviews\LaravelForms\Contracts\LaravelFormsHandlerService;
-use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
-use Spatie\GoogleTagManager\GoogleTagManager;
 
 class LaravelFormsSubmitService implements LaravelFormsHandlerService
 {
@@ -16,7 +14,7 @@ class LaravelFormsSubmitService implements LaravelFormsHandlerService
 
             if ($response->successful()) {
                 session(['last_form_submit' => now()]);
-                session()->forget(['form_data', 'form_step', 'form_location']);
+                session()->forget(['form_data', 'form_step', 'location']);
 
                 return ['status' => 'success'];
             }
