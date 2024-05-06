@@ -1,6 +1,5 @@
 <?php
 
-
 return [
     'free_estimate' => [
         'production_url' => '',
@@ -24,7 +23,7 @@ return [
 
     'modal' => [
         'title' => 'Your Project Info',
-        'form_key' => 'free_estimate'
+        'form_key' => 'free_estimate',
     ],
 
     'modal_tos' => [
@@ -36,7 +35,7 @@ return [
         'enabled' => true,
         'title' => 'Looking to work with us?',
         'link_text' => 'Apply Here',
-        'link_route' => 'welcome'
+        'link_route' => 'welcome',
     ],
 
     'spam_redirects' => [

@@ -16,8 +16,7 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-forms')
             ->hasConfigFile('forms')
-            ->hasViews('laravel-forms')
-            ->hasViewComponent('forms-modal', 'forms-modal');
+            ->hasViews('laravel-forms');
     }
 
     public function PackageRegistered(): void
@@ -27,18 +26,26 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
             LaravelFormsSubmitService::class,
         );
 
-        Route::post('/form-submit', [LaravelFormsSubmitController::class, 'handle'])
-            ->name('validate.form');
+        view()->composer('laravel-forms::*', function ($view) {
+            $view->with([
+                'modal_tos_enabled' => LaravelForms::isModalTosEnabled(),
+                'modal_tos_content' => LaravelForms::getModalTosContent(),
+                'modal_optional_div_enabled' => LaravelForms::isModalOptionalDivEnabled(),
+                'modal_optional_div_title' => LaravelForms::getModalOptionalDivTitle(),
+                'modal_optional_div_link_text' => LaravelForms::getModalOptionalDivLinkText(),
+                'modal_optional_div_link_route' => LaravelForms::getModalOptionalDivLinkRoute(),
+            ]);
+        });
 
-        Route::post('/form-step', [LaravelFormsSubmitController::class, 'handleStep'])
+        Route::post('/forms-submit', [LaravelFormsSubmitController::class, 'handle'])
+            ->name('validate.form');
+        Route::post('/forms-step', [LaravelFormsSubmitController::class, 'handleStep'])
             ->middleware('web')
             ->name('form.handle.step');
-
-        Route::get('/form-modal', [LaravelFormsSubmitController::class, 'showForm'])
+        Route::get('/forms-modal', [LaravelFormsSubmitController::class, 'showForm'])
             ->middleware('web')
             ->name('form.show');
-
-        Route::get('/form-back', [LaravelFormsSubmitController::class, 'backStep'])
+        Route::get('/forms-back', [LaravelFormsSubmitController::class, 'backStep'])
             ->name('form.back');
 
         Route::get('/thank-you', function () {

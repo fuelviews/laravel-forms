@@ -15,12 +15,12 @@
              @click="open = false">
 
             <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border" @click.stop>
-                @include('laravel-forms::components.modals.title', ['title' => 'Your Project Info'])
-                @include('laravel-forms::components.steps.step-one', ['title' => 'Where do you need painting?'])
-                @include('laravel-forms::components.steps.step-two')
+                @include('laravel-forms::components.modal.title', ['title' => 'Your Project Info'])
+                @include('laravel-forms::components.modal.steps.step-one', ['title' => 'Where do you need painting?'])
+                @include('laravel-forms::components.modal.steps.step-two')
             </div>
 
-            @include('laravel-forms::components.modals.tos')
+            @include('laravel-forms::components.modal.tos')
         </div>
     </div>
 @endsection

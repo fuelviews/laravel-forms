@@ -52,11 +52,8 @@ class LaravelFormsSubmitController extends Controller
         $formData = $request->session()->get('form_data', []);
         $oldData = $formData[$step] ?? [];
 
-        $formKey = config('forms.modal.form_key');
-
-        return view('laravel-forms::components.modals.modal', compact('step', 'openModal', 'oldData', 'formKey'));
+        return view('laravel-forms::components.modal.modal', compact('step', 'openModal', 'oldData'));
     }
-
 
     public function handleStep(Request $request)
     {
@@ -67,8 +64,6 @@ class LaravelFormsSubmitController extends Controller
         $validatedData = $this->validateStepData($request, $step);
         $allData[$step] = $validatedData;
 
-        $formKey = $request->input('form_key');
-
         if (isset($validatedData['location'])) {
             $request->session()->put('location', $validatedData['location']);
         }
@@ -77,10 +72,12 @@ class LaravelFormsSubmitController extends Controller
 
         if ($this->isLastStep($step)) {
             $request->session()->forget(['form_data', 'form_step', 'modal_open']);
+
             return redirect()->route('thank-you')->with('status', 'success');
         } else {
             $request->session()->put('form_step', $step + 1);
-            return redirect()->route('form.show')->with('form_key', $formKey);
+
+            return redirect()->route('form.show');
         }
     }
 
@@ -93,6 +90,7 @@ class LaravelFormsSubmitController extends Controller
         }
 
         $formData = $request->session()->get('form_data', []);
+
         return redirect()->route('form.show')->withInput($formData[$step - 1] ?? []);
     }
 
