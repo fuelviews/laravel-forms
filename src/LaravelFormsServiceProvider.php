@@ -26,17 +26,6 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
             LaravelFormsSubmitService::class,
         );
 
-        view()->composer('laravel-forms::*', function ($view) {
-            $view->with([
-                'modal_tos_enabled' => LaravelForms::isModalTosEnabled(),
-                'modal_tos_content' => LaravelForms::getModalTosContent(),
-                'modal_optional_div_enabled' => LaravelForms::isModalOptionalDivEnabled(),
-                'modal_optional_div_title' => LaravelForms::getModalOptionalDivTitle(),
-                'modal_optional_div_link_text' => LaravelForms::getModalOptionalDivLinkText(),
-                'modal_optional_div_link_route' => LaravelForms::getModalOptionalDivLinkRoute(),
-            ]);
-        });
-
         Route::post('/forms-submit', [LaravelFormsSubmitController::class, 'handle'])
             ->name('validate.form');
         Route::post('/forms-step', [LaravelFormsSubmitController::class, 'handleStep'])

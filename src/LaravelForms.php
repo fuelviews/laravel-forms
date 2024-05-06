@@ -9,7 +9,7 @@ class LaravelForms
      *
      * @return string
      */
-    public static function getModalFormKey()
+    public static function getModalFormKey(): string
     {
         return config('forms.modal.form_key');
     }
@@ -19,7 +19,7 @@ class LaravelForms
      *
      * @return bool
      */
-    public static function isModalTosEnabled()
+    public static function isModalTosEnabled(): bool
     {
         return config('forms.modal_tos.enabled', false);
     }
@@ -29,7 +29,7 @@ class LaravelForms
      *
      * @return string|null
      */
-    public static function getModalTosContent()
+    public static function getModalTosContent(): ?string
     {
         return config('forms.modal_tos.content');
     }
@@ -39,7 +39,7 @@ class LaravelForms
      *
      * @return bool
      */
-    public static function isModalOptionalDivEnabled()
+    public static function isModalOptionalDivEnabled(): bool
     {
         return config('forms.modal_optional_div.enabled', false);
     }
@@ -49,7 +49,7 @@ class LaravelForms
      *
      * @return string|null
      */
-    public static function getModalOptionalDivTitle()
+    public static function getModalOptionalDivTitle(): ?string
     {
         return config('forms.modal_optional_div.title');
     }
@@ -59,7 +59,7 @@ class LaravelForms
      *
      * @return string|null
      */
-    public static function getModalOptionalDivLinkText()
+    public static function getModalOptionalDivLinkText(): ?string
     {
         return config('forms.modal_optional_div.link_text');
     }
@@ -69,7 +69,7 @@ class LaravelForms
      *
      * @return string|null
      */
-    public static function getModalOptionalDivLinkRoute()
+    public static function getModalOptionalDivLinkRoute(): ?string
     {
         return config('forms.modal_optional_div.link_route');
     }

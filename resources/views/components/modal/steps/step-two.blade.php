@@ -10,7 +10,7 @@
             <input type="text" name="isSpam" style="display:none"/>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.forms.text-input', [
+                @include('laravel-forms::components.modal.form.text-input', [
                     'label' => 'First Name:',
                     'type' => 'text',
                     'name' => 'firstName',
@@ -20,7 +20,7 @@
             </div>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.forms.text-input', [
+                @include('laravel-forms::components.modal.form.text-input', [
                     'label' => 'Last Name:',
                     'type' => 'text',
                     'name' => 'lastName',
@@ -30,7 +30,7 @@
             </div>
 
             <div class="sm:col-span-2">
-                @include('laravel-forms::components.forms.text-input', [
+                @include('laravel-forms::components.modal.form.text-input', [
                     'label' => 'Email Address:',
                     'type' => 'email',
                     'name' => 'email',
@@ -40,7 +40,7 @@
             </div>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.forms.text-input', [
+                @include('laravel-forms::components.modal.form.text-input', [
                     'label' => 'Phone:',
                     'type' => 'phone',
                     'name' => 'phone',
@@ -50,7 +50,7 @@
             </div>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.forms.text-input', [
+                @include('laravel-forms::components.modal.form.text-input', [
                     'label' => 'Zip Code:',
                     'type' => 'zipCode',
                     'name' => 'zipCode',
@@ -60,7 +60,7 @@
             </div>
 
             <div x-data="{ open: false }" class="sm:col-span-2">
-                @include('laravel-forms::components.forms.collapsible-textarea', [
+                @include('laravel-forms::components.modal.form.collapsible-textarea', [
                     'toggleText' => 'Add additional project info (optional)',
                     'label' => 'Message:',
                     'id' => 'message',
@@ -72,16 +72,16 @@
         </div>
 
         <input type="text" name="gotcha" style="display:none"/>
-        @include('laravel-forms::components.forms.meta')
+        @include('laravel-forms::components.meta')
         <input type="hidden" name="form_key" value="{{ LaravelForms::getModalFormKey() }}">
 
-        @include('laravel-forms::components.forms.divider')
+        @include('laravel-forms::components.modal.form.divider')
 
         <div class="flex justify-between items-center w-full">
             <div class="flex space-x-4 pr-4 md:pr-0">
-                @include('laravel-forms::components.buttons.fake-button', ['buttonText' => 'Submit'])
-                @include('laravel-forms::components.buttons.back-button', ['buttonText' => 'Back'])
-                @include('laravel-forms::components.buttons.submit-button', ['buttonText' => 'Submit'])
+                @include('laravel-forms::components.modal.buttons.fake-button', ['buttonText' => 'Submit'])
+                @include('laravel-forms::components.modal.buttons.back-button', ['buttonText' => 'Back'])
+                @include('laravel-forms::components.modal.buttons.submit-button', ['buttonText' => 'Submit'])
             </div>
 
             @include('laravel-forms::components.modal.optional-div')

@@ -2,47 +2,29 @@
 
 namespace Fuelviews\LaravelForms\Http\Controllers;
 
+use AllowDynamicProperties;
 use Fuelviews\LaravelForms\Contracts\LaravelFormsHandlerService;
+use Fuelviews\LaravelForms\Services\ValidationRuleService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Carbon;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
-class LaravelFormsSubmitController extends Controller
+#[AllowDynamicProperties] class LaravelFormsSubmitController extends Controller
 {
     protected LaravelFormsHandlerService $formHandler;
 
-    public function __construct(LaravelFormsHandlerService $formHandler)
+    public function __construct(LaravelFormsHandlerService $formHandler, ValidationRuleService $validationService)
     {
         $this->formHandler = $formHandler;
+        $this->validationService = $validationService;
+
     }
 
-    protected function validateStepData(Request $request, $step)
+    protected function validateStepData(Request $request, $step): array
     {
-        switch ($step) {
-            case 1:
-                return $request->validate([
-                    'location' => 'required|in:inside,outside,cabinets',
-                    'isSpam' => 'nullable|string',
-                ]);
-            case 2:
-                return $request->validate([
-                    'firstName' => 'required|min:2|max:24',
-                    'lastName' => 'sometimes|min:2|max:24',
-                    'email' => 'sometimes|email',
-                    'phone' => 'sometimes|min:7|max:19',
-                    'message' => 'sometimes|max:255',
-                    'zipCode' => 'sometimes|min:4|max:9',
-                    'gotcha' => 'nullable|string',
-                    'isSpam' => 'nullable|string',
-                    'gclid' => 'nullable|string',
-                    'utmSource' => 'nullable|string',
-                    'utmMedium' => 'nullable|string',
-                    'utmCampaign' => 'nullable|string',
-                    'utmTerm' => 'nullable|string',
-                    'utmContent' => 'nullable|string',
-                ]);
-        }
+        $rules = $this->validationService->getRulesForStep($step);
+        return $request->validate($rules);
     }
 
     public function showForm(Request $request)
@@ -111,23 +93,7 @@ class LaravelFormsSubmitController extends Controller
             return $this->redirectSpam();
         }
 
-        $validatedData = $request->validate([
-            'firstName' => 'required|min:2|max:24',
-            'lastName' => 'sometimes|min:2|max:24',
-            'email' => 'sometimes|email',
-            'phone' => 'sometimes|min:7|max:19',
-            'zipCode' => 'sometimes|min:4|max:9',
-            'message' => 'sometimes|max:255',
-            'location' => 'nullable|string',
-            'gotcha' => 'nullable|string',
-            'isSpam' => 'nullable|string',
-            'gclid' => 'nullable|string',
-            'utmSource' => 'nullable|string',
-            'utmMedium' => 'nullable|string',
-            'utmCampaign' => 'nullable|string',
-            'utmTerm' => 'nullable|string',
-            'utmContent' => 'nullable|string',
-        ]);
+        $validatedData = $request->validate(ValidationRuleService::defaultRules());
         $validatedData['ip'] = $request->ip();
         $validatedData['location'] = $request->session()->get('location');
 
