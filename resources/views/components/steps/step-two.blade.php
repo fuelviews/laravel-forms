@@ -1,10 +1,18 @@
+@props([
+    'titleStepTwo' => config('forms.modal_steps.step_two.title'),
+    'textTitle' => config('forms.theme.modal_steps.step_two_title.text'),
+    'textSizeTitle' => config('forms.theme.modal_steps.step_two_title.text_size'),
+    'fontWeightTitle' => config('forms.theme.modal_steps.step_two_title.font_weight'),
+    'paddingYTitle' => config('forms.theme.modal_steps.step_two_title.padding_y'),
+])
+
 @if(isset($step) && $step === 2)
     <form method="POST" action="{{ route('validate.form') }}">
         @csrf
         <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 py-6">
             <div class="col-span-2">
                 @if (config('forms.modal_steps.step_two.title'))
-                    <h3 class="my-1 font-extrabold text-gray-900 lg:text-2xl">{{ config('forms.modal_steps.step_two.title') }}</h3>
+                    <h3 class="my-1 {{ $textTitle }} {{ $textSizeTitle }} {{ $fontWeightTitle }} {{ $paddingYTitle }}">{{ $titleStepTwo }}</h3>
                 @endif
             </div>
             <div>
@@ -18,8 +26,7 @@
                         id="firstName"
                         autocomplete="given-name"
                         value="{{ old('firstName') }}"
-                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:sm:leading-6"
-                        title="First name must be at least 2 letters and only contain letters."/>
+                        class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:sm:leading-6"/>
                     @include('laravel-forms::components.error', ['errorKey' => 'firstName'])
                 </div>
             </div>
@@ -35,7 +42,7 @@
                         autocomplete="family-name"
                         value="{{ old('lastName') }}"
                         class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:sm:leading-6"
-                        title="Last name must be at least 2 characters."/>
+                        />
                     @include('laravel-forms::components.error', ['errorKey' => 'lastName'])
                 </div>
             </div>
@@ -67,7 +74,7 @@
                         autocomplete="tel"
                         aria-describedby="phone-description"
                         class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:sm:leading-6"
-                        title="Phone number must have 7 to 11 digits and may include parentheses, spaces, and hyphens."/>
+                        />
                     @include('laravel-forms::components.error', ['errorKey' => 'phone'])
                 </div>
             </div>
@@ -84,7 +91,7 @@
                         value="{{ old('zipCode') }}"
                         aria-describedby="zip-code-description"
                         class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:sm:leading-6"
-                        title="Zipcode"/>
+                        />
                     @include('laravel-forms::components.error', ['errorKey' => 'zipCode'])
                 </div>
             </div>
@@ -119,7 +126,6 @@
                     </div>
                     <input type="text" name="gotcha" style="display:none"/>
                 </div>
-
             </div>
         </div>
 

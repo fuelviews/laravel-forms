@@ -10,7 +10,7 @@
     <form method="POST" action="{{ route('form.handle.step') }}">
         @csrf
         <div class="mb-4">
-            <h3 class="my-1  {{ $textTitle }} {{ $textSizeTitle }} {{ $fontWeightTitle }} {{ $paddingYTitle }}">{{ $title }}</h3>
+            <h3 class="my-1 {{ $textTitle }} {{ $textSizeTitle }} {{ $fontWeightTitle }} {{ $paddingYTitle }}">{{ $title }}</h3>
             <div class="flex space-x-2">
                 <div class="flex space-x-2 -ml-2">
                     <input type="text" name="isSpam" style="display:none"/>
@@ -26,6 +26,7 @@
                 </div>
             </div>
         </div>
+
         @include('laravel-forms::components.error', ['errorKey' => 'location'])
 
         <hr class="h-px mt-8 mb-6">
