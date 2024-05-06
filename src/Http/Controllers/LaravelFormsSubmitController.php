@@ -37,7 +37,7 @@ use Spatie\GoogleTagManager\GoogleTagManager;
         return view('laravel-forms::components.modal.modal', compact('step', 'openModal', 'oldData'));
     }
 
-    public function handleStep(Request $request)
+    public function handleStep(Request $request): ?\Illuminate\Http\RedirectResponse
     {
         $request->session()->put('modal_open', true);
         $step = $request->session()->get('form_step', 1);
@@ -93,7 +93,7 @@ use Spatie\GoogleTagManager\GoogleTagManager;
             return $this->redirectSpam();
         }
 
-        $validatedData = $request->validate(ValidationRuleService::defaultRules());
+        $validatedData = $request->validate(ValidationRuleService::getRulesForDefault());
         $validatedData['ip'] = $request->ip();
         $validatedData['location'] = $request->session()->get('location');
 

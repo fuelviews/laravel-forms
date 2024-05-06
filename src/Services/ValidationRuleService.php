@@ -3,13 +3,44 @@
 namespace Fuelviews\LaravelForms\Services;
 class ValidationRuleService
 {
-    public static function defaultRules()
+    /**
+     * Returns a combined array of default rules and configuration-based additional rules.
+     *
+     * @return array The merged rules
+     */
+    public static function getRulesForDefault(): array
     {
-        return config("forms.validation.default", []);
+        $defaultRules = [
+            'firstName' => 'required|min:2|max:24',
+            'lastName' => 'required|min:2|max:24',
+            'email' => 'required|email',
+            'phone' => 'required|min:7|max:19',
+            'message' => 'nullable|max:255',
+            'location' => 'nullable|string',
+            'gotcha' => 'nullable|string',
+            'isSpam' => 'nullable|string',
+            'gclid' => 'nullable|string',
+            'utmSource' => 'nullable|string',
+            'utmMedium' => 'nullable|string',
+            'utmCampaign' => 'nullable|string',
+            'utmTerm' => 'nullable|string',
+            'utmContent' => 'nullable|string',
+        ];
+
+        $additionalRules = config('forms.validation.default', []);
+
+        return array_merge($defaultRules, $additionalRules);
     }
 
-    public function getRulesForStep($step)
+    public function getRulesForStep($step): array
     {
-        return config("forms.validation.steps.{$step}", []);
+        $defaultRules = [
+            'isSpam' => 'nullable|string',
+            'gotcha' => 'nullable|string',
+        ];
+
+        $additionalRules = config("forms.validation.steps.{$step}", []);
+
+        return array_merge($additionalRules, $defaultRules);
     }
 }
