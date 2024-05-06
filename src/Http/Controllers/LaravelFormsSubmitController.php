@@ -49,14 +49,17 @@ class LaravelFormsSubmitController extends Controller
     {
         $openModal = $request->session()->pull('modal_open', true);
         $step = $request->session()->get('form_step', 1);
+        $formData = $request->session()->get('form_data', []);
+        $oldData = $formData[$step] ?? [];
 
-        return view('laravel-forms::components.modals.modal', compact('step', 'openModal'));
+        $formKey = config('forms.modal.form_key');
+
+        return view('laravel-forms::components.modals.modal', compact('step', 'openModal', 'oldData', 'formKey'));
     }
+
 
     public function handleStep(Request $request)
     {
-        \Log::info(['Received location: ', $request->input('location')]);
-
         $request->session()->put('modal_open', true);
         $step = $request->session()->get('form_step', 1);
         $allData = $request->session()->get('form_data', []);
@@ -64,7 +67,8 @@ class LaravelFormsSubmitController extends Controller
         $validatedData = $this->validateStepData($request, $step);
         $allData[$step] = $validatedData;
 
-        // Store location in session if it's part of the current step's data
+        $formKey = $request->input('form_key');
+
         if (isset($validatedData['location'])) {
             $request->session()->put('location', $validatedData['location']);
         }
@@ -76,10 +80,9 @@ class LaravelFormsSubmitController extends Controller
             return redirect()->route('thank-you')->with('status', 'success');
         } else {
             $request->session()->put('form_step', $step + 1);
-            return redirect()->route('form.show');
+            return redirect()->route('form.show')->with('form_key', $formKey);
         }
     }
-
 
     public function backStep(Request $request): \Illuminate\Http\RedirectResponse
     {
@@ -89,7 +92,8 @@ class LaravelFormsSubmitController extends Controller
             $request->session()->put('form_step', $step - 1);
         }
 
-        return redirect()->route('form.show');
+        $formData = $request->session()->get('form_data', []);
+        return redirect()->route('form.show')->withInput($formData[$step - 1] ?? []);
     }
 
     protected function isLastStep($step)
@@ -99,7 +103,6 @@ class LaravelFormsSubmitController extends Controller
 
     public function handle(Request $request): \Illuminate\Http\RedirectResponse
     {
-        \Log::info("Location set in session", ['location' => $request->session()->get('location')]);
         $request->session()->put('modal_open', true);
 
         if ($this->isRateLimited($request)) {

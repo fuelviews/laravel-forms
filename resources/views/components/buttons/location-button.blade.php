@@ -1,19 +1,7 @@
-@props([
-    'background' => config('forms.theme.location_button.background'),
-    'backgroundHover' => config('forms.theme.location_button.background_hover'),
-    'backgroundSelected' => config('forms.theme.location_button.background_selected'),
-    'textColor' => config('forms.theme.location_button.text'),
-    'padding' => config('forms.theme.location_button.padding'),
-    'textSize' => config('forms.theme.buttons.text_size'),
-    'fontWeight' => config('forms.theme.buttons.font_weight'),
-    'rounded' => config('forms.theme.buttons.rounded'),
-])
+<input type="radio" id="{{ $location }}" name="location" value="{{ $location }}"
+       class="sr-only peer" {{ old('location', session('location')) === $location ? 'checked' : '' }}>
 
-<input type="radio" id="{{ $name }}" name="location" value="{{ $name }}"
-       class="sr-only peer" {{ old('location', $location ?? '') === $name ? 'checked' : '' }}>
-
-<label for="{{ $name }}"
-       class="{{ $background }} {{ $textColor }} {{ $fontWeight }} {{ $textSize }} {{ $padding }} {{ $rounded }} cursor-pointer {{ $backgroundSelected }} {{ $backgroundHover }}">
-    {{ ucfirst($name) }}
+<label for="{{ $location }}"
+       class="bg-gray-500 text-white font-bold text-md py-4 px-3 cursor-pointer hover:bg-blue-500 peer-checked:bg-blue-700 rounded-lg">
+    {{ ucfirst($location) }}
 </label>
-

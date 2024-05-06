@@ -1,27 +1,19 @@
-@props([
-    'title' => config('forms.modal_steps.step_one.title'),
-    'textTitle' => config('forms.theme.modal_steps.step_one_title.text'),
-    'textSizeTitle' => config('forms.theme.modal_steps.step_one_title.text_size'),
-    'fontWeightTitle' => config('forms.theme.modal_steps.step_one_title.font_weight'),
-    'paddingYTitle' => config('forms.theme.modal_steps.step_one_title.padding_y'),
-])
-
 @if(isset($step) && $step === 1)
     <form method="POST" action="{{ route('form.handle.step') }}">
         @csrf
         <div class="mb-4">
-            <h3 class="my-1 {{ $textTitle }} {{ $textSizeTitle }} {{ $fontWeightTitle }} {{ $paddingYTitle }}">{{ $title }}</h3>
+            <h3 class="my-1 text-gray-900 lg:text-2xl font-extrabold py-6">{{ $title }}</h3>
             <div class="flex space-x-2">
                 <div class="flex space-x-2 -ml-2">
                     <input type="text" name="isSpam" style="display:none"/>
                     <div>
-                        @include('laravel-forms::components.buttons.location-button', ['name' => 'inside'])
+                        @include('laravel-forms::components.buttons.location-button', ['location' => 'inside'])
                     </div>
                     <div>
-                        @include('laravel-forms::components.buttons.location-button', ['name' => 'outside'])
+                        @include('laravel-forms::components.buttons.location-button', ['location' => 'outside'])
                     </div>
                     <div>
-                        @include('laravel-forms::components.buttons.location-button', ['name' => 'cabinets'])
+                        @include('laravel-forms::components.buttons.location-button', ['location' => 'cabinets'])
                     </div>
                 </div>
             </div>

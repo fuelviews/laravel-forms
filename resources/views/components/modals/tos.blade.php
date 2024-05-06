@@ -3,7 +3,7 @@
     'content' => config('forms.modal_tos.content')
 ])
 
-@if (isset($enabled))
+@if ($enabled)
     <div class="mt-4 p-4 max-w-md rounded-lg text-xs">
         <p>{{ $content }}</p>
     </div>

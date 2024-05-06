@@ -1,8 +1,6 @@
-@props([
-    'formKey' => config('forms.modal.form_key'),
-])
-
-<input type="hidden" name="form_key" value="{{ $formKey }}">
+@if (isset($formKey))
+    <input type="hidden" name="form_key" value="{{ $formKey }}">
+@endif
 <input type="hidden" name="gclid" value="{{ request()->cookie('gclid') }}">
 <input type="hidden" name="utmSource" value="{{ request()->cookie('utm_source') }}">
 <input type="hidden" name="utmMedium" value="{{ request()->cookie('utm_medium') }}">

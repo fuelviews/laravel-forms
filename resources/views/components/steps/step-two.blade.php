@@ -1,20 +1,12 @@
-@props([
-    'titleStepTwo' => config('forms.modal_steps.step_two.title'),
-    'textTitle' => config('forms.theme.modal_steps.step_two_title.text'),
-    'textSizeTitle' => config('forms.theme.modal_steps.step_two_title.text_size'),
-    'fontWeightTitle' => config('forms.theme.modal_steps.step_two_title.font_weight'),
-    'paddingYTitle' => config('forms.theme.modal_steps.step_two_title.padding_y'),
-])
-
 @if(isset($step) && $step === 2)
     <form method="POST" action="{{ route('validate.form') }}">
         @csrf
         <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 py-6">
-            <div class="col-span-2">
-                @if (config('forms.modal_steps.step_two.title'))
-                    <h3 class="my-1 {{ $textTitle }} {{ $textSizeTitle }} {{ $fontWeightTitle }} {{ $paddingYTitle }}">{{ $titleStepTwo }}</h3>
-                @endif
-            </div>
+            @if (isset($title))
+                <div class="col-span-2">
+                    <h3 class="my-1 text-gray-900 lg:text-2xl font-extrabold">{{ $title }}</h3>
+                </div>
+            @endif
             <div>
                 <label for="first-name" class="block font-semibold leading-6 text-gray-900">
                     First name:
