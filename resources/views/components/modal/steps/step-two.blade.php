@@ -76,7 +76,7 @@
 
         <input type="text" name="gotcha" style="display:none"/>
         @include('laravel-form::components.meta')
-        <input type="hidden" name="form_key" value="{{ Form::getModalFormKey() }}">
+        <input type="hidden" name="form_key" value="{{ LaravelForm::getModalFormKey() }}">
 
         @include('laravel-form::components.modal.form.divider')
 
