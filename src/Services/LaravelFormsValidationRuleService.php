@@ -1,7 +1,8 @@
 <?php
 
 namespace Fuelviews\LaravelForms\Services;
-class ValidationRuleService
+
+class LaravelFormsValidationRuleService
 {
     /**
      * Returns a combined array of default rules and configuration-based additional rules.
@@ -32,6 +33,11 @@ class ValidationRuleService
         return array_merge($defaultRules, $additionalRules);
     }
 
+    /**
+     * Returns a combined array of default rules and configuration-based additional rules.
+     *
+     * @return array The merged rules
+     */
     public function getRulesForStep($step): array
     {
         $defaultRules = [

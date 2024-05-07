@@ -6,8 +6,6 @@ class LaravelForms
 {
     /**
      * Get the form key for the modal.
-     *
-     * @return string
      */
     public static function getModalFormKey(): string
     {
@@ -16,8 +14,6 @@ class LaravelForms
 
     /**
      * Check if the modal terms of service are enabled.
-     *
-     * @return bool
      */
     public static function isModalTosEnabled(): bool
     {
@@ -26,8 +22,6 @@ class LaravelForms
 
     /**
      * Get the content of the modal terms of service.
-     *
-     * @return string|null
      */
     public static function getModalTosContent(): ?string
     {
@@ -36,8 +30,6 @@ class LaravelForms
 
     /**
      * Check if the modal optional div is enabled.
-     *
-     * @return bool
      */
     public static function isModalOptionalDivEnabled(): bool
     {
@@ -46,8 +38,6 @@ class LaravelForms
 
     /**
      * Get the title of the modal optional div.
-     *
-     * @return string|null
      */
     public static function getModalOptionalDivTitle(): ?string
     {
@@ -56,8 +46,6 @@ class LaravelForms
 
     /**
      * Get the link text of the modal optional div.
-     *
-     * @return string|null
      */
     public static function getModalOptionalDivLinkText(): ?string
     {
@@ -66,8 +54,6 @@ class LaravelForms
 
     /**
      * Get the link route of the modal optional div.
-     *
-     * @return string|null
      */
     public static function getModalOptionalDivLinkRoute(): ?string
     {

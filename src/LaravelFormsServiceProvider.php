@@ -19,23 +19,26 @@ class LaravelFormsServiceProvider extends PackageServiceProvider
             ->hasViews('laravel-forms');
     }
 
-    public function PackageRegistered(): void
+    public function bootingPackage(): void
     {
         $this->app->bind(
             LaravelFormsHandlerService::class,
             LaravelFormsSubmitService::class,
         );
+    }
 
-        Route::post('/forms-submit', [LaravelFormsSubmitController::class, 'handle'])
-            ->name('validate.form');
-        Route::post('/forms-step', [LaravelFormsSubmitController::class, 'handleStep'])
-            ->middleware('web')
-            ->name('form.handle.step');
-        Route::get('/forms-modal', [LaravelFormsSubmitController::class, 'showForm'])
-            ->middleware('web')
-            ->name('form.show');
-        Route::get('/forms-back', [LaravelFormsSubmitController::class, 'backStep'])
-            ->name('form.back');
+    public function registeringPackage(): void
+    {
+        Route::prefix('forms')->middleware('web')->group(function () {
+            Route::post('/submit', [LaravelFormsSubmitController::class, 'handleSubmit'])
+                ->name('validate.form');
+            Route::post('/step', [LaravelFormsSubmitController::class, 'handleModalStep'])
+                ->name('form.handle.step');
+            Route::get('/modal', [LaravelFormsSubmitController::class, 'showModalForm'])
+                ->name('form.show');
+            Route::get('/back', [LaravelFormsSubmitController::class, 'backModalStep'])
+                ->name('form.back');
+        });
 
         Route::get('/thank-you', function () {
             return view('laravel-forms::thank-you');

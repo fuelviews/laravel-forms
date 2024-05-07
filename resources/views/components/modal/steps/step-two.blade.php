@@ -60,7 +60,7 @@
             </div>
 
             <div x-data="{ open: false }" class="sm:col-span-2">
-                @include('laravel-forms::components.modal.form.collapsible-textarea', [
+                @include('laravel-forms::components.modal.form.collapsible-text-area', [
                     'toggleText' => 'Add additional project info (optional)',
                     'label' => 'Message:',
                     'id' => 'message',
@@ -69,9 +69,12 @@
                     'hint' => 'Max 255 characters'
                 ])
             </div>
+            <div x-data="{ open: false }" class="sm:col-span-2">
+                @include('laravel-forms::components.modal.form.error', ['errorKey' => 'forms.submit.limit'])
+            </div>
         </div>
 
-        <input type="text" name="gotcha" style="display:none"/>
+        <input type="text" name="gotcha" style=""/>
         @include('laravel-forms::components.meta')
         <input type="hidden" name="form_key" value="{{ LaravelForms::getModalFormKey() }}">
 

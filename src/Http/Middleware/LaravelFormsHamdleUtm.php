@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
-class HamdleUtm
+class LaravelFormsHamdleUtm
 {
     public function handle(Request $request, Closure $next)
     {

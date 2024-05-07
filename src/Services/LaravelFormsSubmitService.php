@@ -11,7 +11,7 @@ class LaravelFormsSubmitService implements LaravelFormsHandlerService
     public function handle(array $data): array
     {
         try {
-            if (App::environment('production') && !config('app.debug')) {
+            if (App::environment('production') && ! config('app.debug')) {
                 $response = Http::asForm()->post($data['url'], $data['validatedData']);
             } else {
                 $response = Http::withOptions(['verify' => false])->asForm()->post($data['url'], $data['validatedData']);
@@ -19,7 +19,7 @@ class LaravelFormsSubmitService implements LaravelFormsHandlerService
 
             if ($response->successful()) {
                 session(['last_form_submit' => now()]);
-                session()->forget(['form_data', 'form_step', 'form_location']);
+                session()->forget(['form_data', 'form_step', 'location']);
 
                 return ['status' => 'success'];
             }

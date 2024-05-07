@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
-class HandleGclid
+class LaravelFormsHandleGclid
 {
     public function handle(Request $request, Closure $next)
     {
