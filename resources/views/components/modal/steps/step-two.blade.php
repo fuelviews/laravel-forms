@@ -10,7 +10,7 @@
             <input type="text" name="isSpam" style="display:none"/>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.modal.form.text-input', [
+                @include('laravel-form::components.modal.form.text-input', [
                     'label' => 'First Name:',
                     'type' => 'text',
                     'name' => 'firstName',
@@ -20,7 +20,7 @@
             </div>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.modal.form.text-input', [
+                @include('laravel-form::components.modal.form.text-input', [
                     'label' => 'Last Name:',
                     'type' => 'text',
                     'name' => 'lastName',
@@ -30,7 +30,7 @@
             </div>
 
             <div class="sm:col-span-2">
-                @include('laravel-forms::components.modal.form.text-input', [
+                @include('laravel-form::components.modal.form.text-input', [
                     'label' => 'Email Address:',
                     'type' => 'email',
                     'name' => 'email',
@@ -40,7 +40,7 @@
             </div>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.modal.form.text-input', [
+                @include('laravel-form::components.modal.form.text-input', [
                     'label' => 'Phone:',
                     'type' => 'phone',
                     'name' => 'phone',
@@ -50,7 +50,7 @@
             </div>
 
             <div class="sm:col-span-1">
-                @include('laravel-forms::components.modal.form.text-input', [
+                @include('laravel-form::components.modal.form.text-input', [
                     'label' => 'Zip Code:',
                     'type' => 'zipCode',
                     'name' => 'zipCode',
@@ -60,7 +60,7 @@
             </div>
 
             <div x-data="{ open: false }" class="sm:col-span-2">
-                @include('laravel-forms::components.modal.form.collapsible-text-area', [
+                @include('laravel-form::components.modal.form.collapsible-text-area', [
                     'toggleText' => 'Add additional project info (optional)',
                     'label' => 'Message:',
                     'id' => 'message',
@@ -69,25 +69,25 @@
                     'hint' => 'Max 255 characters'
                 ])
             </div>
-            <div x-data="{ open: false }" class="sm:col-span-2">
-                @include('laravel-forms::components.modal.form.error', ['errorKey' => 'forms.submit.limit'])
+            <div class="sm:col-span-2">
+                @include('laravel-form::components.modal.form.error', ['errorKey' => 'forms.submit.limit'])
             </div>
         </div>
 
-        <input type="text" name="gotcha" style=""/>
-        @include('laravel-forms::components.meta')
-        <input type="hidden" name="form_key" value="{{ LaravelForms::getModalFormKey() }}">
+        <input type="text" name="gotcha" style="display:none"/>
+        @include('laravel-form::components.meta')
+        <input type="hidden" name="form_key" value="{{ Form::getModalFormKey() }}">
 
-        @include('laravel-forms::components.modal.form.divider')
+        @include('laravel-form::components.modal.form.divider')
 
         <div class="flex justify-between items-center w-full">
             <div class="flex space-x-4 pr-4 md:pr-0">
-                @include('laravel-forms::components.modal.buttons.fake-button', ['buttonText' => 'Submit'])
-                @include('laravel-forms::components.modal.buttons.back-button', ['buttonText' => 'Back'])
-                @include('laravel-forms::components.modal.buttons.submit-button', ['buttonText' => 'Submit'])
+                @include('laravel-form::components.modal.buttons.fake-button', ['buttonText' => 'Submit'])
+                @include('laravel-form::components.modal.buttons.back-button', ['buttonText' => 'Back'])
+                @include('laravel-form::components.modal.buttons.submit-button', ['buttonText' => 'Submit'])
             </div>
 
-            @include('laravel-forms::components.modal.optional-div')
+            @include('laravel-form::components.modal.optional-div')
         </div>
     </form>
 @endif

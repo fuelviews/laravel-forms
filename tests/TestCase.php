@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\LaravelForms\Tests;
+namespace Fuelviews\LaravelForm\Tests;
 
-use Fuelviews\LaravelForms\LaravelFormsServiceProvider;
+use Fuelviews\LaravelForm\FormServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Fuelviews\\LaravelForms\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Fuelviews\\LaravelForm\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelFormsServiceProvider::class,
+            FormServiceProvider::class,
         ];
     }
 

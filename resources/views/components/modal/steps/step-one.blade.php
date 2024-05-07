@@ -7,24 +7,24 @@
                 <div class="flex space-x-2 -ml-2">
                     <input type="text" name="gotcha" style="display:none"/>
                     <div>
-                        @include('laravel-forms::components.modal.buttons.location-button', ['location' => 'inside'])
+                        @include('laravel-form::components.modal.buttons.location-button', ['location' => 'inside'])
                     </div>
                     <div>
-                        @include('laravel-forms::components.modal.buttons.location-button', ['location' => 'outside'])
+                        @include('laravel-form::components.modal.buttons.location-button', ['location' => 'outside'])
                     </div>
                     <div>
-                        @include('laravel-forms::components.modal.buttons.location-button', ['location' => 'cabinets'])
+                        @include('laravel-form::components.modal.buttons.location-button', ['location' => 'cabinets'])
                     </div>
                 </div>
             </div>
-            @include('laravel-forms::components.modal.form.error', ['errorKey' => 'location'])
+            @include('laravel-form::components.modal.form.error', ['errorKey' => 'location'])
         </div>
-        @include('laravel-forms::components.modal.form.divider')
+        @include('laravel-form::components.modal.form.divider')
 
         <div class="flex justify-between items-center text-center">
-            @include('laravel-forms::components.modal.buttons.fake-button', ['buttonText' => 'Next'])
-            @include('laravel-forms::components.modal.buttons.submit-button', ['buttonText' => 'Next'])
-            @include('laravel-forms::components.modal.optional-div')
+            @include('laravel-form::components.modal.buttons.fake-button', ['buttonText' => 'Next'])
+            @include('laravel-form::components.modal.buttons.submit-button', ['buttonText' => 'Next'])
+            @include('laravel-form::components.modal.optional-div')
         </div>
     </form>
 @endif

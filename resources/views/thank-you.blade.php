@@ -1,4 +1,4 @@
-@extends('laravel-forms::components.layouts.app')
+@extends('laravel-form::components.layouts.app')
 
 @section('content')
     <div>

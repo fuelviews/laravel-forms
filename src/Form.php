@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\LaravelForms;
+namespace Fuelviews\LaravelForm;
 
-class LaravelForms
+class Form
 {
     /**
      * Get the form key for the modal.

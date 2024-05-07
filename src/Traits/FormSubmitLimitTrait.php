@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\LaravelForms\Traits;
+namespace Fuelviews\LaravelForm\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;

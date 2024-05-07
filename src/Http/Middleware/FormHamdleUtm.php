@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Fuelviews\LaravelForm\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
-class LaravelFormsHamdleUtm
+class FormHamdleUtm
 {
     public function handle(Request $request, Closure $next)
     {

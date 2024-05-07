@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\LaravelForms\Traits;
+namespace Fuelviews\LaravelForm\Traits;
 
 trait FormRedirectTrait
 {

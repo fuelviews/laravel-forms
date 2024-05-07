@@ -1,12 +1,12 @@
 {
-    "name": "fuelviews/laravel-forms",
+    "name": "fuelviews/laravel-form",
     "description": "This is my package laravel-forms",
     "keywords": [
         "Fuelviews",
         "laravel",
         "laravel-forms"
     ],
-    "homepage": "https://github.com/fuelviews/laravel-forms",
+    "homepage": "https://github.com/fuelviews/laravel-form",
     "license": "MIT",
     "authors": [
         {
@@ -32,13 +32,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Fuelviews\\LaravelForms\\": "src/",
-            "Fuelviews\\LaravelForms\\Database\\Factories\\": "database/factories/"
+            "Fuelviews\\LaravelForm\\": "src/",
+            "Fuelviews\\LaravelForm\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fuelviews\\LaravelForms\\Tests\\": "tests/",
+            "Fuelviews\\LaravelForm\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -70,10 +70,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fuelviews\\LaravelForms\\LaravelFormsServiceProvider"
+                "Fuelviews\\LaravelForm\\FormServiceProvider"
             ],
             "aliases": {
-                "LaravelForms": "Fuelviews\\LaravelForms\\Facades\\LaravelForms"
+                "LaravelForm": "Fuelviews\\LaravelForm\\Facades\\Form"
             }
         }
     },

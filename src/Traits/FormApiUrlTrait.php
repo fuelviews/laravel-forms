@@ -1,6 +1,6 @@
 <?php
 
-namespace Fuelviews\LaravelForms\Traits;
+namespace Fuelviews\LaravelForm\Traits;
 
 use Illuminate\Support\Facades\App;
 
@@ -12,7 +12,7 @@ trait FormApiUrlTrait
      * @param string $formKey
      * @return string|false
      */
-    private function getFormApiUrl($formKey)
+    private function getFormApiUrl(string $formKey): false|string
     {
         $environment = App::environment('production') && ! config('app.debug') ? 'production_url' : 'development_url';
         return config("forms.{$formKey}.{$environment}", false);

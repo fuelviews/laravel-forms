@@ -1,8 +1,8 @@
 <?php
 
-namespace Fuelviews\LaravelForms\Services;
+namespace Fuelviews\LaravelForm\Services;
 
-class LaravelFormsValidationRuleService
+class FormValidationRuleService
 {
     /**
      * Returns a combined array of default rules and configuration-based additional rules.
