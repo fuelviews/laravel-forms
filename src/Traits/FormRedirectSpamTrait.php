@@ -2,7 +2,7 @@
 
 namespace Fuelviews\LaravelForm\Traits;
 
-trait FormRedirectTrait
+trait FormRedirectSpamTrait
 {
     /**
      * Redirect to a randomly chosen URL specified in configuration to handle potential spam.

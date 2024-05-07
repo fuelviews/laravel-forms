@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller;
 class FormModalController extends Controller
 {
     use FormModalStepValidationTrait;
+
     protected FormValidationRuleService $validationRuleService;
 
     public function __construct(

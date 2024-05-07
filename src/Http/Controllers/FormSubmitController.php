@@ -4,23 +4,24 @@ namespace Fuelviews\LaravelForm\Http\Controllers;
 
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
-use Fuelviews\LaravelForm\Traits\FormRedirectTrait;
+use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
+use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
 use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
 use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
-use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
 class FormSubmitController extends Controller
 {
-    use FormRedirectTrait, FormSpamDetectionTrait, FormSubmitLimitTrait, FormApiUrlTrait;
+    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait;
 
     protected FormHandlerService $formHandler;
+
     protected FormValidationRuleService $validationRuleService;
 
     public function __construct(
-        FormHandlerService        $formHandler,
+        FormHandlerService $formHandler,
         FormValidationRuleService $validationRuleService
     ) {
         $this->formHandler = $formHandler;
