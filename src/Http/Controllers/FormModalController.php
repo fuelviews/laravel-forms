@@ -12,11 +12,10 @@ use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
 use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Spatie\GoogleTagManager\GoogleTagManager;
 
 class FormModalController extends Controller
 {
-    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait, FormModalStepValidationTrait;
+    use FormApiUrlTrait, FormModalStepValidationTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait;
 
     protected FormProcessingService $formService;
 

@@ -2,18 +2,20 @@
 
 namespace Fuelviews\LaravelForm\Services;
 
-use Illuminate\Http\Request;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
-use Spatie\GoogleTagManager\GoogleTagManager;
 use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
 use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
 use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
+use Illuminate\Http\Request;
+use Spatie\GoogleTagManager\GoogleTagManager;
 
 class FormProcessingService
 {
     use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait;
+
     protected FormHandlerService $formHandler;
+
     protected FormValidationRuleService $validationRuleService;
 
     public function __construct(FormHandlerService $formHandler, FormValidationRuleService $validationRuleService)
@@ -56,5 +58,4 @@ class FormProcessingService
 
         return $result;
     }
-
 }

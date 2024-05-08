@@ -10,8 +10,6 @@ trait FormSubmitLimitTrait
 {
     /**
      * Check if the form submission limit has been exceeded.
-     *
-     * @return bool
      */
     public function formSubmitLimitExceeded(Request $request): bool
     {
