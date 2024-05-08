@@ -24,7 +24,7 @@ class FormProcessingService
         $this->validationRuleService = $validationRuleService;
     }
 
-    public function processForm(Request $request)
+    public function processForm(Request $request, array $validatedData)
     {
         if ($this->formSubmitLimitExceeded($request)) {
             return $this->handleExceededLimitResponse();
