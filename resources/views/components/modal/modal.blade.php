@@ -16,10 +16,10 @@
                 <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border" @click.stop>
                     <x-laravel-form::modal.title :title="'Your Project Info'" />
                     @if(isset($step) && $step === 1)
-                        <x-laravel-form::modal.steps.step-one :title="'Where do you need painting?'" />
+                        <x-laravel-form::steps.step-one :title="'Where do you need painting?'" />
                     @endif
                     @if(isset($step) && $step === 2)
-                        <x-laravel-form::modal.steps.step-two />
+                        <x-laravel-form::steps.step-two />
                     @endisset
                 </div>
 

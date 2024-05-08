@@ -42,7 +42,7 @@ class FormServiceProvider extends PackageServiceProvider
         });
 
         Route::get('/thank-you', function () {
-            return view('laravel-form::thank-you');
+            return view('laravel-form::components.thank-you');
         })->name('thank-you');
     }
 }

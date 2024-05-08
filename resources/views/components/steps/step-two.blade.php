@@ -1,6 +1,6 @@
 <form method="POST" action="{{ route('form.handle.step') }}">
     @csrf
-    <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6 pb-4">
         @isset($title))
             <div class="col-span-2">
                 <h3 class="my-1 text-gray-900 lg:text-2xl font-extrabold">{{ $title }}</h3>
@@ -9,7 +9,7 @@
         <input type="text" name="isSpam" style="display:none"/>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.modal.form.text-input', [
+            @include('laravel-form::components.text-input', [
                 'label' => 'First Name:',
                 'type' => 'text',
                 'name' => 'firstName',
@@ -19,7 +19,7 @@
         </div>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.modal.form.text-input', [
+            @include('laravel-form::components.text-input', [
                 'label' => 'Last Name:',
                 'type' => 'text',
                 'name' => 'lastName',
@@ -29,7 +29,7 @@
         </div>
 
         <div class="sm:col-span-2">
-            @include('laravel-form::components.modal.form.text-input', [
+            @include('laravel-form::components.text-input', [
                 'label' => 'Email Address:',
                 'type' => 'email',
                 'name' => 'email',
@@ -39,7 +39,7 @@
         </div>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.modal.form.text-input', [
+            @include('laravel-form::components.text-input', [
                 'label' => 'Phone:',
                 'type' => 'phone',
                 'name' => 'phone',
@@ -49,7 +49,7 @@
         </div>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.modal.form.text-input', [
+            @include('laravel-form::components.text-input', [
                 'label' => 'Zip Code:',
                 'type' => 'zipCode',
                 'name' => 'zipCode',
@@ -59,7 +59,7 @@
         </div>
 
         <div x-data="{ open: false }" class="sm:col-span-2">
-            @include('laravel-form::components.modal.form.collapsible-text-area', [
+            @include('laravel-form::components.collapsible-text-area', [
                 'toggleText' => 'Add additional project info (optional)',
                 'label' => 'Message:',
                 'id' => 'message',
@@ -68,8 +68,8 @@
                 'hint' => 'Max 255 characters'
             ])
         </div>
-        <div class="sm:col-span-2 pb-6">
-            <x-laravel-form::modal.form.error :errorKey="'form.submit.limit'" />
+        <div class="sm:col-span-2">
+            {{--<x-laravel-form::components.error :errorKey="'form.submit.limit'" />--}}
         </div>
     </div>
 
@@ -77,13 +77,13 @@
     <x-laravel-form::meta />
     <input type="hidden" name="form_key" value="{{ LaravelForm::getModalFormKey() }}">
 
-    @include('laravel-form::components.modal.form.divider')
+    <x-laravel-form::divider />
 
     <div class="flex justify-between items-center w-full">
         <div class="flex space-x-4 pr-4 md:pr-0">
-            <x-laravel-form::modal.buttons.fake-button :buttonText="'Submit'" />
-            <x-laravel-form::modal.buttons.back-button :buttonText="'Back'" />
-            <x-laravel-form::modal.buttons.submit-button :buttonText="'Submit'" />
+            <x-laravel-form::buttons.fake-button :buttonText="'Submit'" />
+            <x-laravel-form::buttons.back-button :buttonText="'Back'" />
+            <x-laravel-form::buttons.submit-button :buttonText="'Submit'" />
         </div>
 
         <x-laravel-form::modal.optional-div />

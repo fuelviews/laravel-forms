@@ -15,7 +15,6 @@ trait FormSubmitLimitTrait
     {
         if (App::environment('production') && ! config('app.debug')) {
             $lastSubmit = session('last_form_submit');
-            $request->session()->put('form_step', 2);
 
             return $lastSubmit && now()->diffInMinutes(Carbon::parse($lastSubmit)) < 60;
         }
