@@ -3,9 +3,9 @@
 namespace Fuelviews\LaravelForm;
 
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
+use Fuelviews\LaravelForm\Services\FormSubmitService;
 use Fuelviews\LaravelForm\Http\Controllers\FormModalController;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
-use Fuelviews\LaravelForm\Services\FormSubmitService;
 use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;

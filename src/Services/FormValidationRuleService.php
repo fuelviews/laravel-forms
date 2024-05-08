@@ -12,12 +12,6 @@ class FormValidationRuleService
     public static function getRulesForDefault(): array
     {
         $defaultRules = [
-            'firstName' => 'required|min:2|max:24',
-            'lastName' => 'required|min:2|max:24',
-            'email' => 'required|email',
-            'phone' => 'required|min:7|max:19',
-            'message' => 'nullable|max:255',
-            'location' => 'nullable|string',
             'gotcha' => 'nullable|string',
             'isSpam' => 'nullable|string',
             'gclid' => 'nullable|string',
@@ -43,10 +37,11 @@ class FormValidationRuleService
         $defaultRules = [
             'isSpam' => 'nullable|string',
             'gotcha' => 'nullable|string',
+            'submitClicked' => 'nullable',
         ];
 
         $additionalRules = config("forms.validation.steps.{$step}", []);
 
-        return array_merge($additionalRules, $defaultRules);
+        return array_merge($defaultRules, $additionalRules);
     }
 }

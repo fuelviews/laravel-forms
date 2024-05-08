@@ -13,10 +13,11 @@ trait FormSubmitLimitTrait
      *
      * @return bool
      */
-    public function formSubmitLimitExceeded(Request $request)
+    public function formSubmitLimitExceeded(Request $request): bool
     {
         if (App::environment('production') && ! config('app.debug')) {
             $lastSubmit = session('last_form_submit');
+            $request->session()->put('form_step', 2);
 
             return $lastSubmit && now()->diffInMinutes(Carbon::parse($lastSubmit)) < 60;
         }
@@ -29,6 +30,6 @@ trait FormSubmitLimitTrait
      */
     public function handleExceededLimitResponse(): \Illuminate\Http\RedirectResponse
     {
-        return back()->withInput()->withErrors(['forms.submit.limit' => 'Form submit limit exceeded'])->setStatusCode(429);
+        return back()->withInput()->withErrors(['form.submit.limit' => 'Form submit limit exceeded']);
     }
 }

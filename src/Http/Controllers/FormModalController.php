@@ -2,21 +2,36 @@
 
 namespace Fuelviews\LaravelForm\Http\Controllers;
 
+use Fuelviews\LaravelForm\Contracts\FormHandlerService;
+use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
+use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Fuelviews\LaravelForm\Traits\FormModalStepValidationTrait;
+use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
+use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
+use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Spatie\GoogleTagManager\GoogleTagManager;
 
 class FormModalController extends Controller
 {
-    use FormModalStepValidationTrait;
+    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait, FormModalStepValidationTrait;
+
+    protected FormProcessingService $formService;
+
+    protected FormHandlerService $formHandler;
 
     protected FormValidationRuleService $validationRuleService;
 
     public function __construct(
-        FormValidationRuleService $validationRuleService
+        FormHandlerService $formHandler,
+        FormValidationRuleService $validationRuleService,
+        FormProcessingService $formService
     ) {
+        $this->formHandler = $formHandler;
         $this->validationRuleService = $validationRuleService;
+        $this->formService = $formService;
     }
 
     public function showModalForm(Request $request): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
@@ -38,19 +53,39 @@ class FormModalController extends Controller
         $validatedData = $this->validateStepData($request, $step);
         $allData[$step] = $validatedData;
 
+        $validatedData['ip'] = $request->ip();
+
+        $location = $request->session()->get('location', $request->input('location'));
+        $validatedData['location'] = $location;
+
         if (isset($validatedData['location'])) {
             $request->session()->put('location', $validatedData['location']);
         }
 
         $request->session()->put('form_data', $allData);
 
-        if ($this->isLastStep($step)) {
-            $request->session()->forget(['form_data', 'form_step', 'modal_open']);
-
-            return redirect()->route('thank-you')->with('status', 'success');
-        }
-
         $request->session()->put('form_step', $step + 1);
+
+        if ($this->isLastStep($step)) {
+
+            $rules = $this->validationRuleService->getRulesForStep($step);
+
+            $validatedData = $request->validate($rules);
+
+            $result = $this->formService->processForm($request, $validatedData);
+
+            if ($result instanceof \Illuminate\Http\RedirectResponse) {
+                return $result;
+            }
+
+            if (is_array($result) && $result['status'] === 'failure') {
+                return back()->withInput()->withErrors(['error' => $result['message']]);
+            }
+
+            if ($result['status'] === 'success') {
+                return redirect()->route('thank-you')->with('status', 'success');
+            }
+        }
 
         return redirect()->route('form.show');
     }
