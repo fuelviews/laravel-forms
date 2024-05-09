@@ -25,7 +25,7 @@ class FormProcessingService
         $this->validationRuleService = $validationRuleService;
     }
 
-    public function processForm(Request $request, array $validatedData)
+    public function processForm(Request $request, array $validatedData): array|\Illuminate\Http\RedirectResponse
     {
         if ($this->formSubmitLimitExceeded($request)) {
             return $this->handleExceededLimitResponse();
@@ -62,7 +62,7 @@ class FormProcessingService
 
     public function formSubmitLimitExceeded(Request $request): bool
     {
-        if (App::environment('production') || ! config('app.debug')) {
+        if (App::environment('production') && ! config('app.debug')) {
             $lastSubmit = session('last_form_submit');
 
             return $lastSubmit && now()->diffInMinutes(Carbon::parse($lastSubmit)) < 60;
