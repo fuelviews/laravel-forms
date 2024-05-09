@@ -6,13 +6,14 @@ use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
 use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
-use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
 class FormProcessingService
 {
-    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait;
+    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
     protected FormHandlerService $formHandler;
 
@@ -57,5 +58,24 @@ class FormProcessingService
         }
 
         return $result;
+    }
+
+    public function formSubmitLimitExceeded(Request $request): bool
+    {
+        if (App::environment('production') || ! config('app.debug')) {
+            $lastSubmit = session('last_form_submit');
+
+            return $lastSubmit && now()->diffInMinutes(Carbon::parse($lastSubmit)) < 60;
+        }
+
+        return false;
+    }
+
+    /**
+     * Handle the response when form submission limit is exceeded.
+     */
+    public function handleExceededLimitResponse(): \Illuminate\Http\RedirectResponse
+    {
+        return back()->withInput()->withErrors(['form.submit.limit' => 'Form submit limit exceeded']);
     }
 }

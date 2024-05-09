@@ -69,13 +69,13 @@
             ])
         </div>
         <div class="sm:col-span-2">
-            {{--<x-laravel-form::components.error :errorKey="'form.submit.limit'" />--}}
+            <x-laravel-form::error :errorKey="'form.submit.limit'" />
         </div>
     </div>
 
     <input type="text" name="gotcha" style="display:none"/>
     <x-laravel-form::meta />
-    <input type="hidden" name="form_key" value="{{ LaravelForm::getModalFormKey() }}">
+    <input type="hidden" name="form_key" value="{{ Form::getModalFormKey() }}">
 
     <x-laravel-form::divider />
 

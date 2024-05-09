@@ -73,7 +73,7 @@
                 "Fuelviews\\LaravelForm\\FormServiceProvider"
             ],
             "aliases": {
-                "LaravelForm": "Fuelviews\\LaravelForm\\Facades\\Form"
+                "Form": "Fuelviews\\LaravelForm\\Facades\\Form"
             }
         }
     },

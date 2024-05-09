@@ -2,6 +2,8 @@
 
 namespace Fuelviews\LaravelForm\Services;
 
+use Fuelviews\LaravelForm\Form;
+
 class FormValidationRuleService
 {
     /**
@@ -12,8 +14,9 @@ class FormValidationRuleService
     public static function getRulesForDefault(): array
     {
         $defaultRules = [
-            'gotcha' => 'nullable|string',
             'isSpam' => 'nullable|string',
+            'gotcha' => 'nullable|string',
+            'submitClicked' => 'nullable',
             'gclid' => 'nullable|string',
             'utmSource' => 'nullable|string',
             'utmMedium' => 'nullable|string',
@@ -22,7 +25,7 @@ class FormValidationRuleService
             'utmContent' => 'nullable|string',
         ];
 
-        $additionalRules = config('forms.validation.default', []);
+        $additionalRules = Form::getAdditionalRulesForDefault();
 
         return array_merge($defaultRules, $additionalRules);
     }
@@ -40,7 +43,7 @@ class FormValidationRuleService
             'submitClicked' => 'nullable',
         ];
 
-        $additionalRules = config("forms.validation.steps.{$step}", []);
+        $additionalRules = Form::getAdditionalRulesForStep($step);
 
         return array_merge($defaultRules, $additionalRules);
     }

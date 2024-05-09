@@ -19,7 +19,7 @@ class FormSubmitService implements FormHandlerService
 
             if ($response->successful()) {
                 session(['last_form_submit' => now()]);
-                session()->forget(['form_data', 'oldData', 'form_step', 'location']);
+                /*session()->forget(['form_data', 'oldData', 'form_step', 'location']);*/
 
                 return ['status' => 'success'];
             }

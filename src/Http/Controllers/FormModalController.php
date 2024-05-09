@@ -3,19 +3,19 @@
 namespace Fuelviews\LaravelForm\Http\Controllers;
 
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
+use Fuelviews\LaravelForm\Form;
 use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Fuelviews\LaravelForm\Traits\FormModalStepValidationTrait;
 use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
 use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
-use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class FormModalController extends Controller
 {
-    use FormApiUrlTrait, FormModalStepValidationTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait;
+    use FormApiUrlTrait, FormModalStepValidationTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
     protected FormProcessingService $formService;
 
@@ -63,14 +63,13 @@ class FormModalController extends Controller
 
         $request->session()->put('form_data', $allData);
 
-        $request->session()->put('form_step', $step + 1);
+        if (! $this->isLastStep($step)) {
+            $request->session()->put('form_step', $step + 1);
+        }
 
         if ($this->isLastStep($step)) {
-
             $rules = $this->validationRuleService->getRulesForStep($step);
-
             $validatedData = $request->validate($rules);
-
             $result = $this->formService->processForm($request, $validatedData);
 
             if ($result instanceof \Illuminate\Http\RedirectResponse) {
@@ -104,6 +103,6 @@ class FormModalController extends Controller
 
     protected function isLastStep($step): bool
     {
-        return $step >= 2;
+        return $step >= Form::getLastStep();
     }
 }

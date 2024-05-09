@@ -59,4 +59,32 @@ class Form
     {
         return config('forms.modal_optional_div.link_route');
     }
+
+    public static function getAdditionalRulesForDefault(): ?array
+    {
+        return config('forms.validation.default', []);
+    }
+
+    public static function getAdditionalRulesForStep($step): ?array
+    {
+        return config("forms.validation.steps.{$step}", []);
+    }
+
+    public static function getLastStep(): ?int
+    {
+        $steps = config('forms.validation.steps');
+        if (! $steps) {
+            return null;
+        }
+
+        return max(array_keys($steps));
+    }
+
+    /**
+     * Get spam redirects configuration.
+     */
+    public static function getSpamRedirects(): array
+    {
+        return config('forms.spam_redirects', []);
+    }
 }
