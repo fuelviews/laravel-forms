@@ -26,12 +26,12 @@ return [
         'form_key' => 'free_estimate',
     ],
 
-    'modal_tos' => [
+    'Form::' => [
         'enabled' => true,
         'content' => 'By clicking "Submit" above, I expressly consent to...',
     ],
 
-    'modal_optional_div' => [
+    'modal.optional_div' => [
         'enabled' => true,
         'title' => 'Looking to work with us?',
         'link_text' => 'Apply Here',

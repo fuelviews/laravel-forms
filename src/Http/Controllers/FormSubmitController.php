@@ -33,11 +33,9 @@ class FormSubmitController extends Controller
 
     public function handleSubmit(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $rules = $this->validationRuleService->getRulesForDefault();
-
-        $validatedData = $request->validate($rules);
-
-        $result = $this->formService->processForm($request, $validatedData);
+        $formKey = request()->input('form_key', 'default');
+        $rules = FormValidationRuleService::getRulesForDefault($formKey);
+        $result = $this->formService->processForm($request, $request->validate($rules));
 
         if ($result instanceof \Illuminate\Http\RedirectResponse) {
             return $result;

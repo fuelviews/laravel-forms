@@ -42,8 +42,8 @@ class FormProcessingService
 
         $gclid = $request->input('gclid') ?? $request->cookie('gclid');
 
-        $gtmEventGclid = config("forms.{$formKey}.gtm_event_gclid");
-        $gtmEventName = $gclid && $gtmEventGclid ? $gtmEventGclid : config("forms.{$formKey}.gtm_event");
+        $gtmEventGclid = config("forms.forms.{$formKey}.gtm_event_gclid");
+        $gtmEventName = $gclid && $gtmEventGclid ? $gtmEventGclid : config("forms.forms.{$formKey}.gtm_event");
 
         $result = $this->formHandler->handle([
             'url' => $this->getFormApiUrl($formKey),

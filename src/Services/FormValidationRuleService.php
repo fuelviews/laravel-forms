@@ -11,7 +11,7 @@ class FormValidationRuleService
      *
      * @return array The merged rules
      */
-    public static function getRulesForDefault(): array
+    public static function getRulesForDefault($formKey): array
     {
         $defaultRules = [
             'isSpam' => 'nullable|string',
@@ -25,7 +25,7 @@ class FormValidationRuleService
             'utmContent' => 'nullable|string',
         ];
 
-        $additionalRules = Form::getAdditionalRulesForDefault();
+        $additionalRules = Form::getAdditionalRulesForForm($formKey);
 
         return array_merge($defaultRules, $additionalRules);
     }

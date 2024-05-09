@@ -27,7 +27,7 @@ class Form
      */
     public static function isModalTosEnabled(): bool
     {
-        return config('forms.modal_tos.enabled', false);
+        return config('forms.modal.tos.enabled', false);
     }
 
     /**
@@ -35,7 +35,7 @@ class Form
      */
     public static function getModalTosContent(): ?string
     {
-        return config('forms.modal_tos.content');
+        return config('forms.modal.tos.content');
     }
 
     /**
@@ -43,7 +43,7 @@ class Form
      */
     public static function isModalOptionalDivEnabled(): bool
     {
-        return config('forms.modal_optional_div.enabled', false);
+        return config('forms.modal.optional_div.enabled', false);
     }
 
     /**
@@ -51,7 +51,7 @@ class Form
      */
     public static function getModalOptionalDivTitle(): ?string
     {
-        return config('forms.modal_optional_div.title');
+        return config('forms.modal.optional_div.title');
     }
 
     /**
@@ -59,7 +59,7 @@ class Form
      */
     public static function getModalOptionalDivLinkText(): ?string
     {
-        return config('forms.modal_optional_div.link_text');
+        return config('forms.modal.optional_div.link_text');
     }
 
     /**
@@ -67,10 +67,24 @@ class Form
      */
     public static function getModalOptionalDivLinkRoute(): ?string
     {
-        return config('forms.modal_optional_div.link_route');
+        return config('forms.modal.optional_div.link_route');
     }
 
-    public static function getAdditionalRulesForDefault(): ?array
+    public static function getAdditionalRulesForForm($formKey): ?array
+    {
+        // Attempt to fetch the configuration for the provided formKey.
+        $rules = config("forms.validation.{$formKey}");
+
+        // If the configuration does not exist for the provided formKey,
+        // fall back to the default formKey rules.
+        if (is_null($rules)) {
+            $rules = config('forms.validation.default', []);
+        }
+
+        return $rules;
+    }
+
+    public static function getAdditionalRulesForDefault($formKey): ?array
     {
         return config('forms.validation.default', []);
     }
