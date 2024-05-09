@@ -1,11 +1,8 @@
 <form method="POST" action="{{ route('form.handle.step') }}">
     @csrf
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6 pb-4">
-        @isset($title))
-            <div class="col-span-2">
-                <h3 class="my-1 text-gray-900 lg:text-2xl font-extrabold">{{ $title }}</h3>
-            </div>
-        @endisset
+        <x-laravel-form::steps.title :title="$title" />
+
         <input type="text" name="isSpam" style="display:none"/>
 
         <div class="sm:col-span-1">

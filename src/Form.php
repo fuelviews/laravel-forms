@@ -12,6 +12,16 @@ class Form
         return config('forms.modal.form_key');
     }
 
+    public static function getModalTitle(): ?string
+    {
+        return config('forms.modal.title');
+    }
+
+    public static function getModalStepTitle($step)
+    {
+        return config("forms.modal.steps.{$step}.heading");
+    }
+
     /**
      * Check if the modal terms of service are enabled.
      */
