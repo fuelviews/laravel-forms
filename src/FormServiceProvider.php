@@ -32,13 +32,13 @@ class FormServiceProvider extends PackageServiceProvider
     {
         Route::prefix('forms')->middleware('web')->group(function () {
             Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])
-                ->name('validate.form');
+                ->name('form.validate');
             Route::post('/step', [FormModalController::class, 'handleModalStep'])
-                ->name('form.handle.step');
+                ->name('form.modal.step.handle');
             Route::get('/modal', [FormModalController::class, 'showModalForm'])
-                ->name('form.show');
+                ->name('form.modal.step.show');
             Route::get('/back', [FormModalController::class, 'backModalStep'])
-                ->name('form.back');
+                ->name('form.modal.step.back');
         });
 
         Route::get('/thank-you', function () {

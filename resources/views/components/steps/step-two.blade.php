@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('form.handle.step') }}">
+<form method="POST" action="{{ route('form.modal.step.handle') }}">
     @csrf
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6 pb-4">
         <x-laravel-form::steps.title :title="$title" />
@@ -6,64 +6,58 @@
         <input type="text" name="isSpam" style="display:none"/>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.text-input', [
-                'label' => 'First Name:',
-                'type' => 'text',
-                'name' => 'firstName',
-            'id' => 'firstName',
-                'autocomplete' => 'given-name'
-            ])
+            <x-laravel-form::text-input
+                label="First Name:"
+                type="text"
+                name="firstName"
+                id="firstName"
+                autocomplete="given-name" />
         </div>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.text-input', [
-                'label' => 'Last Name:',
-                'type' => 'text',
-                'name' => 'lastName',
-                'id' => 'lastName',
-                'autocomplete' => 'family-name'
-            ])
+            <x-laravel-form::text-input
+                label="Last Name:"
+                type="text"
+                name="lastName"
+                id="lastName"
+                autocomplete="family-name" />
         </div>
 
         <div class="sm:col-span-2">
-            @include('laravel-form::components.text-input', [
-                'label' => 'Email Address:',
-                'type' => 'email',
-                'name' => 'email',
-                'id' => 'email',
-                'autocomplete' => 'email'
-            ])
+            <x-laravel-form::text-input
+                label="Email Address:"
+                type="email"
+                name="email"
+                id="email"
+                autocomplete="email" />
         </div>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.text-input', [
-                'label' => 'Phone:',
-                'type' => 'phone',
-                'name' => 'phone',
-                'id' => 'phone',
-                'autocomplete' => 'phone'
-            ])
+            <x-laravel-form::text-input
+                label="Phone:"
+                type="phone"
+                name="phone"
+                id="phone"
+                autocomplete="phone" />
         </div>
 
         <div class="sm:col-span-1">
-            @include('laravel-form::components.text-input', [
-                'label' => 'Zip Code:',
-                'type' => 'zipCode',
-                'name' => 'zipCode',
-                'id' => 'zipCode',
-                'autocomplete' => 'postal-code'
-            ])
+            <x-laravel-form::text-input
+                label="Zip Code:"
+                type="zipCode"
+                name="zipCode"
+                id="zipCode"
+                autocomplete="postal-code" />
         </div>
 
         <div x-data="{ open: false }" class="sm:col-span-2">
-            @include('laravel-form::components.collapsible-text-area', [
-                'toggleText' => 'Add additional project info (optional)',
-                'label' => 'Message:',
-                'id' => 'message',
-                'name' => 'message',
-                'rows' => '4',
-                'hint' => 'Max 255 characters'
-            ])
+            <x-laravel-form::collapsible-text-area
+                toggleText="Add additional project info (optional)"
+                label="Message:"
+                id="message"
+                name="message"
+                rows="4"
+                hint="Max 255 characters" />
         </div>
         <div class="sm:col-span-2">
             <x-laravel-form::error :errorKey="'form.submit.limit'" />
@@ -86,4 +80,3 @@
         <x-laravel-form::modal.optional-div />
     </div>
 </form>
-

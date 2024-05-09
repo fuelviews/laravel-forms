@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('form.handle.step') }}">
+<form method="POST" action="{{ route('form.modal.step.handle') }}">
     @csrf
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 py-6">
         <x-laravel-form::steps.title :title="$title" />
@@ -7,15 +7,11 @@
 
         <div class="sm:col-span-1">
             <div class="flex space-x-2 pt-4">
-                <div>
-                    <x-laravel-form::buttons.location-button :location="'inside'" />
-                </div>
-                <div>
-                    <x-laravel-form::buttons.location-button :location="'outside'" />
-                </div>
-                <div>
-                    <x-laravel-form::buttons.location-button :location="'cabinets'" />
-                </div>
+                @foreach (config('forms.modal.steps.1.locations') as $location)
+                    <div>
+                        <x-laravel-form::buttons.location-button :location="$location" />
+                    </div>
+                @endforeach
             </div>
         </div>
 

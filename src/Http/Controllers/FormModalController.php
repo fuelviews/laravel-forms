@@ -85,7 +85,7 @@ class FormModalController extends Controller
             }
         }
 
-        return redirect()->route('form.show');
+        return redirect()->route('form.modal.step.show');
     }
 
     public function backModalStep(Request $request): \Illuminate\Http\RedirectResponse
@@ -98,7 +98,7 @@ class FormModalController extends Controller
 
         $formData = $request->session()->get('form_data', []);
 
-        return redirect()->route('form.show')->withInput($formData[$step - 1] ?? []);
+        return redirect()->route('form.modal.step.show')->withInput($formData[$step - 1] ?? []);
     }
 
     protected function isLastStep($step): bool

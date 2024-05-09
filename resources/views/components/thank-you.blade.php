@@ -7,8 +7,6 @@
                     <h2 class="text-white">Take care.</h2>
                 @elseif(session('status') === 'failure')
                     <h1 class="text-white">There was a problem with your submission, please try again later.</h1>
-                @else
-                    <h1 class="text-white">Hmmmmm...</h1>
                 @endif
             </div>
         </div>
