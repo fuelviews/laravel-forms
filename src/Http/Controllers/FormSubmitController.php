@@ -8,13 +8,12 @@ use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
 use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
-use Fuelviews\LaravelForm\Traits\FormSubmitLimitTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class FormSubmitController extends Controller
 {
-    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait, FormSubmitLimitTrait;
+    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
     protected FormProcessingService $formService;
 
