@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('form.modal.step.handle') }}">
+<form wire:submit.prevent="nextStep">
     @csrf
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 py-6">
         <x-laravel-form::steps.title :title="$title" />
@@ -21,9 +21,4 @@
     </div>
 
     <x-laravel-form::divider />
-
-    <div class="flex justify-between items-center text-center">
-        <x-laravel-form::buttons.submit-button :buttonText="'Next'" />
-        <x-laravel-form::modal.optional-div />
-    </div>
 </form>

@@ -9,10 +9,10 @@
     @livewireStyles
 </head>
 <body class="bg-gray-400">
-<a href="{{ route('welcome') }}" class="bg-gray-200 p-2">Welcome</a>
-<a href="{{ route('form.modal.step.show') }}" class="bg-gray-200 p-2">Show Modal</a>
+    <a href="{{ route('welcome') }}" class="bg-gray-200 p-2">Welcome</a>
     @livewire('form-modal')
-    <button onclick="Livewire.dispatch('openModal')" class="py-6">Open Modal</button>
+    <button onclick="Livewire.dispatch('openModal')" class="bg-gray-200 p-y">Show Modal</button>
+
     {{ $slot }}
 
     @include('googletagmanager::body')

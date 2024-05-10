@@ -5,6 +5,7 @@ namespace Fuelviews\LaravelForm\Livewire;
 use AllowDynamicProperties;
 use Fuelviews\LaravelForm\Form;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Services\FormProcessingService;
@@ -17,11 +18,6 @@ use Illuminate\Support\Facades\Redirect;
     public $step = 1;
     public $totalSteps = 2;
     public $formData = [];
-    public $oldData = [];
-
-    public $formKey;
-
-    public $form_key;
     private $formProcessingService;
     private $formHandler;
     private $validationRuleService;
@@ -41,7 +37,6 @@ use Illuminate\Support\Facades\Redirect;
         $this->formProcessingService = $formProcessingService;
     }
 
-
     public function mount()
     {
         $this->gclid = request('gclid', request()->cookie('gclid'));
@@ -57,31 +52,28 @@ use Illuminate\Support\Facades\Redirect;
         $this->isOpen = true;
         $this->step = 1;
         $this->formData = session()->get('form_data', []);
-        $this->oldData = $this->formData[$this->step] ?? [];
     }
 
+    /**
+     * @throws \Exception
+     */
     public function nextStep()
     {
         $validatedData = $this->validateStepData();
-        // Ensure new data is merged into existing formData to preserve all step data.
         $this->formData = array_merge($validatedData, $this->formData);
-        \Log::info('Step form data:', ['data' => $this->formData]);
 
         if ($this->step < $this->totalSteps) {
             $this->step++;
-            // Update session data to include new step data and increment step count.
             session()->put([
                 'location' => $validatedData['location'] ?? null,
                 'form_data' => $this->formData,
                 'form_step' => $this->step
             ]);
         } else if ($this->isLastStep($this->step)) {
-            // Before final submission, ensure all form data is in session.
             session()->put([
                 'form_data' => $this->formData,
                 'form_step' => $this->step
             ]);
-            \Log::info('Final step form data:', ['data' => $this->formData]);
             $this->handleFormSubmission();
         }
     }
@@ -95,12 +87,9 @@ use Illuminate\Support\Facades\Redirect;
         }
     }
 
-    private function validateStepData()
+    private function validateStepData(): array
     {
         $this->validationRuleService = new \Fuelviews\LaravelForm\Services\FormValidationRuleService();
-        if (!$this->validationRuleService) {
-            throw new \Exception("ValidationRuleService is not initialized");
-        }
         $rules = $this->validationRuleService->getRulesForStep($this->step);
         return $this->validate($rules);
     }
@@ -117,12 +106,18 @@ use Illuminate\Support\Facades\Redirect;
         $validatedData = session()->get('form_data', []);
         $result = $this->formProcessingService->processForm($request, $validatedData);
 
-        if ($result['status'] === 'success') {
+        if ($result instanceof \Illuminate\Http\RedirectResponse) {
+            return $result;
+        }
+
+        if (is_array($result) && $result['status'] === 'success') {
             return redirect()->route('thank-you')->with('status', 'success');
         } else {
-            return back()->withInput()->withErrors(['error' => $result['message']]);
+            Log::error('Error processing form: ' . ($result['message'] ?? 'Unknown error'));
+            return back()->withInput()->withErrors(['error' => $result['message'] ?? 'An unknown error occurred']);
         }
     }
+
 
     public function closeModal()
     {

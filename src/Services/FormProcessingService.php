@@ -10,6 +10,7 @@ use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
 class FormProcessingService
@@ -39,7 +40,6 @@ class FormProcessingService
         $formKey = $request->input('form_key') ?? Form::getModalFormKey();
 
         $validatedData['ip'] = $request->ip();
-        /*$validatedData['location'] = $request->session()->get('location');*/
 
         $gclid = $request->input('gclid') ?? $request->cookie('gclid');
 
@@ -75,7 +75,7 @@ class FormProcessingService
     /**
      * Handle the response when form submission limit is exceeded.
      */
-    public function handleExceededLimitResponse(): \Illuminate\Http\RedirectResponse
+    public function handleExceededLimitResponse()
     {
         return back()->withInput()->withErrors(['form.submit.limit' => 'Form submit limit exceeded']);
     }
