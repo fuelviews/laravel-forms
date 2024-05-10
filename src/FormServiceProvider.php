@@ -2,11 +2,13 @@
 
 namespace Fuelviews\LaravelForm;
 
+use Fuelviews\LaravelForm\Livewire\FormModal;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Http\Controllers\FormModalController;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
 use Fuelviews\LaravelForm\Services\FormSubmitService;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -26,8 +28,9 @@ class FormServiceProvider extends PackageServiceProvider
             FormHandlerService::class,
             FormSubmitService::class,
         );
-    }
 
+        Livewire::component('form-modal', FormModal::class);
+    }
     public function registeringPackage(): void
     {
         Route::prefix('forms')->middleware('web')->group(function () {

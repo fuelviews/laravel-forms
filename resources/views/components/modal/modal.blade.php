@@ -1,5 +1,7 @@
 <x-layouts.app>
     <x-slot name="slot">
+        <a href="{{ route('welcome') }}" class="bg-gray-200 p-2">Welcome</a>
+        <a href="{{ route('form.modal.step.show') }}" class="bg-gray-200 p-2">Show Modal</a>
         <div x-data="{ open: {{ $openModal ? 'true' : 'false' }} }">
 
             <div x-show="open"

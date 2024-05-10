@@ -9,6 +9,7 @@
             <x-laravel-form::text-input
                 label="First Name:"
                 type="text"
+                wire:model="firstName"
                 name="firstName"
                 id="firstName"
                 autocomplete="given-name" />
