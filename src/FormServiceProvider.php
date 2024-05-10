@@ -7,6 +7,7 @@ use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Http\Controllers\FormModalController;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
 use Fuelviews\LaravelForm\Services\FormSubmitService;
+use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
@@ -28,6 +29,10 @@ class FormServiceProvider extends PackageServiceProvider
             FormHandlerService::class,
             FormSubmitService::class,
         );
+
+        $this->app->singleton(FormValidationRuleService::class, function ($app) {
+            return new FormValidationRuleService();
+        });
 
         Livewire::component('form-modal', FormModal::class);
     }

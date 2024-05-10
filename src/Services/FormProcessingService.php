@@ -3,6 +3,7 @@
 namespace Fuelviews\LaravelForm\Services;
 
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
+use Fuelviews\LaravelForm\Form;
 use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
 use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
 use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
@@ -35,10 +36,10 @@ class FormProcessingService
             return $this->formRedirectSpam();
         }
 
-        $formKey = $request->input('form_key');
+        $formKey = $request->input('form_key') ?? Form::getModalFormKey();
 
         $validatedData['ip'] = $request->ip();
-        $validatedData['location'] = $request->session()->get('location', '');
+        /*$validatedData['location'] = $request->session()->get('location');*/
 
         $gclid = $request->input('gclid') ?? $request->cookie('gclid');
 

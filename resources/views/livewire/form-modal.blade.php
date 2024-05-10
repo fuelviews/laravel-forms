@@ -1,8 +1,8 @@
 <div>
     @if($isOpen)
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col">
+        <div wire:click="closeModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col">
             <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border" @click.stop>
-                <x-laravel-form::modal.title :title="Form::getModalTitle()" />
+                <x-laravel-form::modal.title-livewire :title="Form::getModalTitle()" />
 
                 @if($step === 1)
                     <x-laravel-form::steps.step-one-livewire :title="Form::getModalStepTitle($step)" />

@@ -18,6 +18,7 @@
         </div>
         <textarea
             id="{{ $id }}"
+            wire:model="{{ $name }}"
             name="{{ $name }}"
             rows="{{ $rows }}"
             aria-describedby="{{ $id }}-description"

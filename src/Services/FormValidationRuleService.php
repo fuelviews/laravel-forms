@@ -27,7 +27,7 @@ class FormValidationRuleService
 
         $additionalRules = Form::getAdditionalRulesForForm($formKey);
 
-        return array_merge($defaultRules, $additionalRules);
+        return array_merge($additionalRules, $defaultRules);
     }
 
     /**
@@ -41,10 +41,16 @@ class FormValidationRuleService
             'isSpam' => 'nullable|string',
             'gotcha' => 'nullable|string',
             'submitClicked' => 'nullable',
+            'gclid' => 'nullable',
+            'utmSource' => 'nullable|string',
+            'utmMedium' => 'nullable|string',
+            'utmCampaign' => 'nullable|string',
+            'utmTerm' => 'nullable|string',
+            'utmContent' => 'nullable|string',
         ];
 
         $additionalRules = Form::getAdditionalRulesForStep($step);
 
-        return array_merge($defaultRules, $additionalRules);
+        return array_merge($additionalRules, $defaultRules);
     }
 }

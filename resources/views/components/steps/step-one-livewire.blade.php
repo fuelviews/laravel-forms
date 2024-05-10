@@ -1,4 +1,5 @@
-
+<form wire:submit.prevent="nextStep">
+    @csrf
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 py-6">
         <x-laravel-form::steps.title :title="$title" />
 
@@ -20,3 +21,4 @@
     </div>
 
     <x-laravel-form::divider />
+</form>
