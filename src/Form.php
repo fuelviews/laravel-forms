@@ -104,6 +104,11 @@ class Form
         return max(array_keys($steps));
     }
 
+    public static function getLayout(): ?string
+    {
+        return config('forms.layout');
+    }
+
     /**
      * Get spam redirects configuration.
      */

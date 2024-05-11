@@ -3,29 +3,61 @@
 namespace Fuelviews\LaravelForm\Livewire;
 
 use AllowDynamicProperties;
-use Illuminate\Support\Facades\Log;
-use Livewire\Component;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
+use Illuminate\Support\Facades\Log;
+use Livewire\Component;
 
 #[AllowDynamicProperties] class FormModal extends Component
 {
     public $isOpen = false;
+
     public $step = 1;
+
     public $totalSteps = 2;
+
     public $formData = [];
+
     private $formProcessingService;
+
     private $formHandler;
+
     private $validationRuleService;
 
     protected $listeners = ['openModal' => 'openModal'];
 
-    public $isSpam, $gotcha, $submitClicked;
+    public $isSpam;
 
-    public $gclid, $utmCampaign, $utmSource, $utmMedium, $utmTerm, $utmContent;
+    public $gotcha;
 
-    public $firstName, $lastName, $email, $phone, $zipCode, $message, $location;
+    public $submitClicked;
+
+    public $gclid;
+
+    public $utmCampaign;
+
+    public $utmSource;
+
+    public $utmMedium;
+
+    public $utmTerm;
+
+    public $utmContent;
+
+    public $firstName;
+
+    public $lastName;
+
+    public $email;
+
+    public $phone;
+
+    public $zipCode;
+
+    public $message;
+
+    public $location;
 
     public function boot(FormHandlerService $formHandler, FormProcessingService $formProcessingService, FormValidationRuleService $validationRuleService)
     {
@@ -42,7 +74,7 @@ use Fuelviews\LaravelForm\Services\FormValidationRuleService;
             'utmMedium' => 'utm_medium',
             'utmCampaign' => 'utm_campaign',
             'utmTerm' => 'utm_term',
-            'utmContent' => 'utm_content'
+            'utmContent' => 'utm_content',
         ]);
     }
 
@@ -66,17 +98,16 @@ use Fuelviews\LaravelForm\Services\FormValidationRuleService;
             session()->put([
                 'location' => $validatedData['location'] ?? null,
                 'form_data' => $this->formData,
-                'form_step' => $this->step
+                'form_step' => $this->step,
             ]);
-        } else if ($this->isLastStep($this->step)) {
+        } elseif ($this->isLastStep($this->step)) {
             session()->put([
                 'form_data' => $this->formData,
-                'form_step' => $this->step
+                'form_step' => $this->step,
             ]);
             $this->handleFormSubmission();
         }
     }
-
 
     public function backStep()
     {
@@ -89,9 +120,9 @@ use Fuelviews\LaravelForm\Services\FormValidationRuleService;
     private function validateStepData(): array
     {
         $rules = $this->validationRuleService->getRulesForStep($this->step);
+
         return $this->validate($rules);
     }
-
 
     private function isLastStep($step)
     {
@@ -107,13 +138,15 @@ use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 
         if ($result instanceof \Illuminate\Http\RedirectResponse) {
             $this->addError('form.submit.limit', 'Form submit limit exceeded');
-        return;
+
+            return;
         }
 
         if (is_array($result) && $result['status'] === 'success') {
             return redirect()->route('thank-you')->with('status', 'success');
         } else {
-            Log::error('Error processing form: ' . ($result['message'] ?? 'Unknown error'));
+            Log::error('Error processing form: '.($result['message'] ?? 'Unknown error'));
+
             return back()->withInput()->withErrors(['error' => $result['message'] ?? 'An unknown error occurred']);
         }
     }
@@ -129,7 +162,6 @@ use Fuelviews\LaravelForm\Services\FormValidationRuleService;
         }
 
     }
-
 
     public function closeModal()
     {

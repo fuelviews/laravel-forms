@@ -11,7 +11,6 @@ use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Log;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
 #[AllowDynamicProperties] class FormProcessingService
@@ -22,7 +21,7 @@ use Spatie\GoogleTagManager\GoogleTagManager;
 
     protected FormValidationRuleService $validationRuleService;
 
-    public function __construct(FormHandlerService $formHandlerService,  FormValidationRuleService $validationRuleService)
+    public function __construct(FormHandlerService $formHandlerService, FormValidationRuleService $validationRuleService)
     {
         $this->formHandlerService = $formHandlerService;
         $this->validationRuleService = $validationRuleService;

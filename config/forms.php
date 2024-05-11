@@ -1,6 +1,5 @@
 <?php
 
-
 return [
     'forms' => [
         'free_estimate' => [
@@ -34,7 +33,7 @@ return [
                 'locations' => [
                     'inside',
                     'outside',
-                    'cabinets'
+                    'cabinets',
                 ],
             ],
         ],
@@ -48,7 +47,7 @@ return [
             'enabled' => true,
             'title' => 'Looking to work with us?',
             'link_text' => 'Apply Here',
-            'link_route' => 'welcome'
+            'link_route' => 'welcome',
         ],
     ],
 
@@ -89,9 +88,11 @@ return [
                 'zipCode' => 'required|min:4|max:9',
                 'message' => 'nullable|max:255',
                 'location' => 'required|in:inside,outside,cabinets',
-            ]
-        ]
+            ],
+        ],
     ],
+
+    'layout' => 'laravel-form::layouts.app',
 
     'spam_redirects' => [
         'yelp' => 'https://yelp.com',

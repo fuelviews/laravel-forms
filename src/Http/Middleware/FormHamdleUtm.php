@@ -16,14 +16,13 @@ class FormHamdleUtm
 
         foreach ($utmParameters as $param) {
             if ($value = $request->query($param)) {
-                if (!$request->cookies->has($param)) {
+                if (! $request->cookies->has($param)) {
                     Cookie::queue($param, $value, 43200);
                 }
 
                 $request->session()->put($param, $value);
             }
         }
-
 
         return $response;
     }

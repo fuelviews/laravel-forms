@@ -2,11 +2,11 @@
 
 namespace Fuelviews\LaravelForm;
 
+use Fuelviews\LaravelForm\Contracts\FormHandlerService;
+use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
 use Fuelviews\LaravelForm\Http\Middleware\FormHamdleUtm;
 use Fuelviews\LaravelForm\Http\Middleware\FormHandleGclid;
 use Fuelviews\LaravelForm\Livewire\FormModal;
-use Fuelviews\LaravelForm\Contracts\FormHandlerService;
-use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
 use Fuelviews\LaravelForm\Services\FormSubmitService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 use Illuminate\Support\Facades\Route;
@@ -33,11 +33,11 @@ class FormServiceProvider extends PackageServiceProvider
             return new FormValidationRuleService();
         });
 
-        if (!$this->app->getProvider(GoogleTagManagerServiceProvider::class)) {
+        if (! $this->app->getProvider(GoogleTagManagerServiceProvider::class)) {
             $this->app->register(GoogleTagManagerServiceProvider::class);
         }
 
-        if (!$this->app->bound('GoogleTagManager')) {
+        if (! $this->app->bound('GoogleTagManager')) {
             $this->app->alias('GoogleTagManager', \Spatie\GoogleTagManager\GoogleTagManagerFacade::class);
         }
 
@@ -58,9 +58,9 @@ class FormServiceProvider extends PackageServiceProvider
         Route::prefix('forms')->middleware('web')->group(function () {
             Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])->name('form.validate');
             Route::get('/thank-you', function () {
-                $layout = file_exists(resource_path('views/components/layouts/app.blade.php')) ? true : false;
+                $layoutsApp = Form::getLayout();
 
-                return view('laravel-form::components.thank-you', compact('layout'));
+                return view('laravel-form::components.thank-you', compact('layoutsApp'));
             })->name('thank-you');
         });
     }
