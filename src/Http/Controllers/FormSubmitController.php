@@ -16,18 +16,18 @@ use Illuminate\Routing\Controller;
 {
     use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
-    protected FormProcessingService $formService;
+    protected FormProcessingService $formProcessingService;
 
-    protected FormHandlerService $formHandler;
+    protected FormHandlerService $formHandlerService;
 
     protected FormValidationRuleService $validationRuleService;
 
     public function __construct(
-        FormHandlerService $formHandler,
+        FormHandlerService $formHandlerService,
         FormValidationRuleService $validationRuleService,
         FormProcessingService $formProcessingService
     ) {
-        $this->formHandler = $formHandler;
+        $this->formHandlerService = $formHandlerService;
         $this->validationRuleService = $validationRuleService;
         $this->formProcessingService = $formProcessingService;
     }

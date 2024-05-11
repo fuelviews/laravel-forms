@@ -6,6 +6,7 @@ use Fuelviews\LaravelForm\Livewire\FormModal;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Http\Controllers\FormModalController;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
+use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormSubmitService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,11 @@ class FormServiceProvider extends PackageServiceProvider
 
     public function registeringPackage(): void
     {
+
+        Route::get('/test', function () {
+            $formModal = app(FormValidationRuleService::class);
+            dd($formModal); // Dump and die to check the object's state
+        });
         Route::prefix('forms')->middleware('web')->group(function () {
             Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])->name('form.validate');
             Route::get('/thank-you', function () {

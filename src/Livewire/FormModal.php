@@ -12,7 +12,6 @@ use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
 use Illuminate\Support\Facades\App;
 Use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Redirect;
 
 #[AllowDynamicProperties] class FormModal extends Component
 {
@@ -39,7 +38,7 @@ use Illuminate\Support\Facades\Redirect;
         $this->formProcessingService = $formProcessingService;
     }
 
-    public function mount()
+    public function mount(FormHandlerService $formHandler, FormProcessingService $formProcessingService, FormValidationRuleService $validationRuleService)
     {
         $this->loadInitialData(['gclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']);
     }
@@ -101,12 +100,12 @@ use Illuminate\Support\Facades\Redirect;
         $request = request();
         $validatedData = session()->get('form_data', []);
 
-        if ($this->formSubmitLimitExceeded($request)) {
-            $this->addError('form.submit.limit', 'Form submit limit exceeded');
-            return;
-        }
-
         $result = $this->formProcessingService->processForm($request, $validatedData);
+
+        if ($result instanceof \Illuminate\Http\RedirectResponse) {
+            $this->addError('form.submit.limit', 'Form submit limit exceeded');
+        return;
+        }
 
         if (is_array($result) && $result['status'] === 'success') {
             return redirect()->route('thank-you')->with('status', 'success');

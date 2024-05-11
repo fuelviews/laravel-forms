@@ -18,11 +18,13 @@ use Spatie\GoogleTagManager\GoogleTagManager;
 {
     use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
-    protected FormHandlerService $formHandler;
+    protected FormHandlerService $formHandlerService;
 
-    public function __construct(FormHandlerService $formHandler,  FormValidationRuleService $validationRuleService)
+    protected FormValidationRuleService $validationRuleService;
+
+    public function __construct(FormHandlerService $formHandlerService,  FormValidationRuleService $validationRuleService)
     {
-        $this->formHandler = $formHandler;
+        $this->formHandlerService = $formHandlerService;
         $this->validationRuleService = $validationRuleService;
     }
 
@@ -45,7 +47,7 @@ use Spatie\GoogleTagManager\GoogleTagManager;
         $gtmEventGclid = config("forms.forms.{$formKey}.gtm_event_gclid");
         $gtmEventName = $gclid && $gtmEventGclid ? $gtmEventGclid : config("forms.forms.{$formKey}.gtm_event");
 
-        $result = $this->formHandler->handle([
+        $result = $this->formHandlerService->handle([
             'url' => $this->getFormApiUrl($formKey),
             'validatedData' => $validatedData,
             'gtmEventName' => $gtmEventName,
