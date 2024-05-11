@@ -15,8 +15,6 @@ class FormSubmitService implements FormHandlerService
                 $response = Http::asForm()->post($data['url'], $data['validatedData']);
             } else {
                 $response = Http::withOptions(['verify' => false])->asForm()->post($data['url'], $data['validatedData']);
-
-                \Log::info($data);
             }
 
             if ($response->successful()) {

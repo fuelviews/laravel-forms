@@ -2,6 +2,7 @@
 
 namespace Fuelviews\LaravelForm\Services;
 
+use AllowDynamicProperties;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Form;
 use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
@@ -13,15 +14,13 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
-class FormProcessingService
+#[AllowDynamicProperties] class FormProcessingService
 {
     use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
     protected FormHandlerService $formHandler;
 
-    protected FormValidationRuleService $validationRuleService;
-
-    public function __construct(FormHandlerService $formHandler, FormValidationRuleService $validationRuleService)
+    public function __construct(FormHandlerService $formHandler,  FormValidationRuleService $validationRuleService)
     {
         $this->formHandler = $formHandler;
         $this->validationRuleService = $validationRuleService;

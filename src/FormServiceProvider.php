@@ -25,26 +25,25 @@ class FormServiceProvider extends PackageServiceProvider
 
     public function bootingPackage(): void
     {
-        $this->app->bind(
-            FormHandlerService::class,
-            FormSubmitService::class,
-        );
+        $this->app->singleton(FormHandlerService::class, FormSubmitService::class);
 
         $this->app->singleton(FormValidationRuleService::class, function ($app) {
             return new FormValidationRuleService();
         });
+    }
 
+    public function packageBooted()
+    {
         Livewire::component('form-modal', FormModal::class);
     }
+
     public function registeringPackage(): void
     {
         Route::prefix('forms')->middleware('web')->group(function () {
-            Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])
-                ->name('form.validate');
+            Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])->name('form.validate');
+            Route::get('/thank-you', function () {
+                return view('laravel-form::components.thank-you');
+            })->name('thank-you');
         });
-
-        Route::get('/thank-you', function () {
-            return view('laravel-form::components.thank-you');
-        })->name('thank-you');
     }
 }

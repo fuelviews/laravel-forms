@@ -65,6 +65,7 @@ return [
             'firstName' => 'required|min:2|max:24',
             'lastName' => 'required|min:2|max:24',
             'email' => 'required|email',
+            'phone' => 'required|min:7|max:19',
             'message' => 'nullable|max:255',
         ],
 
@@ -72,6 +73,7 @@ return [
             'firstName' => 'required|min:2|max:24',
             'lastName' => 'required|min:2|max:24',
             'email' => 'required|email',
+            'phone' => 'required|min:7|max:19',
             'message' => 'nullable|max:255',
         ],
 
@@ -86,6 +88,7 @@ return [
                 'phone' => 'required|min:7|max:19',
                 'zipCode' => 'required|min:4|max:9',
                 'message' => 'nullable|max:255',
+                'location' => 'required|in:inside,outside,cabinets',
             ]
         ]
     ],

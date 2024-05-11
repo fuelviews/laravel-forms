@@ -15,6 +15,11 @@
                     @endif
                     @if($step < $totalSteps)
                         <x-laravel-form::buttons.next-button :buttonText="'Next'" />
+                            @if($errors->has('form.submit.limit'))
+                                <div class="sm:col-span-2">
+                                    <x-laravel-form::error :errorKey="'form.submit.limit'" />
+                                </div>
+                            @endif
                     @else
                         <div class="flex justify-start items-center text-center pr-0 lg:pr-20">
                             <x-laravel-form::buttons.fake-button :buttonText="'Submit'" />

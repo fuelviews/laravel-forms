@@ -2,6 +2,7 @@
 
 namespace Fuelviews\LaravelForm\Http\Controllers;
 
+use AllowDynamicProperties;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
@@ -11,7 +12,7 @@ use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class FormSubmitController extends Controller
+#[AllowDynamicProperties] class FormSubmitController extends Controller
 {
     use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
 
@@ -24,18 +25,18 @@ class FormSubmitController extends Controller
     public function __construct(
         FormHandlerService $formHandler,
         FormValidationRuleService $validationRuleService,
-        FormProcessingService $formService
+        FormProcessingService $formProcessingService
     ) {
         $this->formHandler = $formHandler;
         $this->validationRuleService = $validationRuleService;
-        $this->formService = $formService;
+        $this->formProcessingService = $formProcessingService;
     }
 
     public function handleSubmit(Request $request): \Illuminate\Http\RedirectResponse
     {
         $formKey = request()->input('form_key', 'default');
         $rules = FormValidationRuleService::getRulesForDefault($formKey);
-        $result = $this->formService->processForm($request, $request->validate($rules));
+        $result = $this->formProcessingService->processForm($request, $request->validate($rules));
 
         if ($result instanceof \Illuminate\Http\RedirectResponse) {
             return $result;
