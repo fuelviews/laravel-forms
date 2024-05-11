@@ -15,6 +15,8 @@ class FormHandleGclid
         if ($gclid = $request->query('gclid')) {
             $cookie = Cookie::make('gclid', $gclid, 60 * 24 * 30);
             $response->cookie($cookie);
+
+            $request->session()->put('gclid', $gclid);
         }
 
         return $response;

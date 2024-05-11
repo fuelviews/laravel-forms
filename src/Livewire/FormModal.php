@@ -3,15 +3,11 @@
 namespace Fuelviews\LaravelForm\Livewire;
 
 use AllowDynamicProperties;
-use Fuelviews\LaravelForm\Form;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Services\FormProcessingService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
-use Illuminate\Support\Facades\App;
-Use Illuminate\Support\Carbon;
 
 #[AllowDynamicProperties] class FormModal extends Component
 {
@@ -38,9 +34,16 @@ Use Illuminate\Support\Carbon;
         $this->formProcessingService = $formProcessingService;
     }
 
-    public function mount(FormHandlerService $formHandler, FormProcessingService $formProcessingService, FormValidationRuleService $validationRuleService)
+    public function mount()
     {
-        $this->loadInitialData(['gclid', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']);
+        $this->loadInitialData([
+            'gclid',
+            'utmSource' => 'utm_source',
+            'utmMedium' => 'utm_medium',
+            'utmCampaign' => 'utm_campaign',
+            'utmTerm' => 'utm_term',
+            'utmContent' => 'utm_content'
+        ]);
     }
 
     public function openModal()
@@ -117,25 +120,20 @@ Use Illuminate\Support\Carbon;
 
     private function loadInitialData(array $keys)
     {
-        foreach ($keys as $key) {
-            $this->$key = request($key, request()->cookie($key));
+        foreach ($keys as $propertyName => $requestKey) {
+            if (is_numeric($propertyName)) {
+                $propertyName = $requestKey;
+            }
+
+            $this->$propertyName = request()->query($requestKey, request()->cookie($requestKey, session($requestKey)));
         }
+
     }
+
 
     public function closeModal()
     {
         $this->isOpen = false;
-    }
-
-    public function formSubmitLimitExceeded(Request $request): bool
-    {
-        if (App::environment('production') && ! config('app.debug')) {
-            $lastSubmit = session('last_form_submit');
-
-            return $lastSubmit && now()->diffInMinutes(Carbon::parse($lastSubmit)) < 60;
-        }
-
-        return false;
     }
 
     public function render()
