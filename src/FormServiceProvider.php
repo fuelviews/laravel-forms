@@ -58,7 +58,9 @@ class FormServiceProvider extends PackageServiceProvider
         Route::prefix('forms')->middleware('web')->group(function () {
             Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])->name('form.validate');
             Route::get('/thank-you', function () {
-                return view('laravel-form::components.thank-you');
+                $layout = file_exists(resource_path('views/components/layouts/app.blade.php')) ? true : false;
+
+                return view('laravel-form::components.thank-you', compact('layout'));
             })->name('thank-you');
         });
     }

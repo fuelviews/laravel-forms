@@ -8,7 +8,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="bg-gray-400">
+<body class="bg-white">
     <button onclick="Livewire.dispatch('openModal')" class="bg-gray-200 p-y">Show Modal</button>
 
     {{ $slot }}
