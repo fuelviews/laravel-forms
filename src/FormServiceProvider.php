@@ -2,6 +2,8 @@
 
 namespace Fuelviews\LaravelForm;
 
+use Fuelviews\LaravelForm\Http\Middleware\FormHamdleUtm;
+use Fuelviews\LaravelForm\Http\Middleware\FormHandleGclid;
 use Fuelviews\LaravelForm\Livewire\FormModal;
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
@@ -38,6 +40,11 @@ class FormServiceProvider extends PackageServiceProvider
         if (!$this->app->bound('GoogleTagManager')) {
             $this->app->alias('GoogleTagManager', \Spatie\GoogleTagManager\GoogleTagManagerFacade::class);
         }
+
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', FormHamdleUtm::class);
+        $router->pushMiddlewareToGroup('web', FormHandleGclid::class);
+
     }
 
     public function packageBooted()
