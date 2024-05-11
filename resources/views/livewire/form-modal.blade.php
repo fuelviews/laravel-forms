@@ -1,6 +1,8 @@
 <div>
     @if($isOpen)
-        <div wire:click="closeModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col">
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col">
+        </div>
+        <div wire:click="closeModal" class="absolute md:inset-0 p-4 flex justify-center items-center flex-col">
             <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border" @click.stop>
                 <x-laravel-form::modal.title :title="Form::getModalTitle()" />
 
@@ -11,7 +13,9 @@
                 @endif
                 <div class="flex justify-between">
                     @if($step > 1)
+                        <div class="flex justify-start items-center text-center pr-2 lg:pr-20">
                         <x-laravel-form::buttons.back-button :buttonText="'Back'" />
+                        </div>
                     @endif
                     @if($step < $totalSteps)
                         <x-laravel-form::buttons.next-button :buttonText="'Next'" />
@@ -21,7 +25,7 @@
                                 </div>
                             @endif
                     @else
-                        <div class="flex justify-start items-center text-center pr-0 lg:pr-20">
+                        <div class="flex justify-start items-center text-center pr-2 lg:pr-20">
                             <x-laravel-form::buttons.fake-button :buttonText="'Submit'" />
                             <x-laravel-form::buttons.submit-button :buttonText="'Submit'" />
                         </div>

@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-laravel-form::layouts.app>
     <x-slot name="slot">
         <div>
             <div class="prose text-center justify-center mx-auto text-white py-12 md:py-24 lg:py-48">
@@ -11,4 +11,4 @@
             </div>
         </div>
     </x-slot>
-</x-layouts.app>
+</x-laravel-form::layouts.app>
