@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6 pb-4">
         <x-laravel-form::steps.title :title="$title" />
 
-        <input type="text" name="isSpam" style="display:none"/>
+        <input type="text" name="isSpam" style="display:none" />
 
         <div class="sm:col-span-1">
             <x-laravel-form::text-input
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <input type="text" name="gotcha" class="hidden"/>
+    <input type="text" name="gotcha" class="hidden" />
     <x-laravel-form::meta />
 
     <x-laravel-form::divider />

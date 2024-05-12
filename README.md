@@ -137,8 +137,8 @@ Include form method type, form method route, spam strap in the start and end of 
     <input type="text" name="isSpam" style="display:none" /> // Near the start
     
     <x-laravel-form::meta /> // Near the end
-    <input type="hidden" name="form_key" value="free_estimate">
-    <input type="text" name="gotcha" class="hidden"/>
+    <input type="hidden" name="form_key" value="free_estimate" />
+    <input type="text" name="gotcha" class="hidden" />
     <x-laravel-form::buttons.fake-button :buttonText="'Submit'" />
     <x-laravel-form::buttons.submit-button :buttonText="'Submit'" />
 </form

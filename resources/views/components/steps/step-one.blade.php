@@ -3,7 +3,7 @@
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 grid-cols-2 py-6">
         <x-laravel-form::steps.title :title="$title" />
 
-        <input type="text" name="gotcha" style="display:none"/>
+        <input type="text" name="gotcha" style="display:none" />
 
         <div class="col-span-2">
             <div class="flex space-x-2 pt-4">
