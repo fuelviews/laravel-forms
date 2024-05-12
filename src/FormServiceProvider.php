@@ -4,7 +4,7 @@ namespace Fuelviews\LaravelForm;
 
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
-use Fuelviews\LaravelForm\Http\Middleware\FormHamdleUtm;
+use Fuelviews\LaravelForm\Http\Middleware\FormHandleUtm;
 use Fuelviews\LaravelForm\Http\Middleware\FormHandleGclid;
 use Fuelviews\LaravelForm\Livewire\FormModal;
 use Fuelviews\LaravelForm\Services\FormSubmitService;
@@ -42,7 +42,7 @@ class FormServiceProvider extends PackageServiceProvider
         }
 
         $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', FormHamdleUtm::class);
+        $router->pushMiddlewareToGroup('web', FormHandleUtm::class);
         $router->pushMiddlewareToGroup('web', FormHandleGclid::class);
 
     }
