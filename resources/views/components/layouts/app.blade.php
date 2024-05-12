@@ -9,7 +9,7 @@
     @livewireStyles
 </head>
 <body class="bg-white">
-    <button onclick="Livewire.dispatch('openModal')" class="bg-gray-200 p-y">Show Modal</button>
+    <button onclick="Livewire.dispatch('openModal')" class="bg-gray-200">Show Modal</button>
 
     {{ $slot }}
 

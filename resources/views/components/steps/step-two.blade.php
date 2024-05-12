@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <input type="text" name="gotcha" style="display:none"/>
+    <input type="text" name="gotcha" class="hidden"/>
     <x-laravel-form::meta />
 
     <x-laravel-form::divider />

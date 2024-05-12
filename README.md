@@ -131,11 +131,41 @@ Optionally, you can publish the views using
 php artisan vendor:publish --tag="laravel-form-views"
 ```
 
-## Usage
+## Form Usage (basic)
+
+Include form method type, form method route, spam strap in the start and end of the form, form key, fake submit button, and a real submit button.
 
 ```php
-$laravelForm = new Fuelviews\LaravelForm();
-echo $laravelForm->echoPhrase('Hello, Fuelviews!');
+<form method="POST" action="{{ route('form.validate') }}"
+    <input type="text" name="isSpam" style="display:none" /> // Near the start
+    
+    <x-laravel-form::meta /> // Near the end
+    <input type="hidden" name="form_key" value="free_estimate">
+    <input type="text" name="gotcha" class="hidden"/>
+    <x-laravel-form::buttons.fake-button :buttonText="'Submit'" />
+    <x-laravel-form::buttons.submit-button :buttonText="'Submit'" />
+</form
+```
+
+
+## Form Modal Usage (basic)
+
+Include form-modal into your layouts.app.blade.php, trigger with a button.
+You can customize which layout blade file is used in the config/forms.php file
+
+```php
+<button onclick="Livewire.dispatch('openModal')">Show Modal</button>
+@livewire('form-modal')
+```
+
+## Tailwindcss classes
+
+Add laravel-form to your tailwind.config.js file.
+
+```javascript
+    content: [
+        './vendor/fuelviews/laravel-form/resources/**/*.{js,vue,php}',
+    ]
 ```
 
 ## Testing
