@@ -3,22 +3,22 @@
 return [
     'forms' => [
         'free_estimate' => [
-            'production_url' => '',
-            'development_url' => '',
+            'production_url' => 'https://fuelforms.com/api/f/',
+            'development_url' => 'https://development.fuelforms.com/api/f/',
             'gtm_event' => 'Form_Submit',
             'gtm_event_gclid' => 'Form_Submit_Gclid',
         ],
 
         'contact_us' => [
-            'production_url' => '',
-            'development_url' => '',
+            'production_url' => 'https://fuelforms.com/api/f/',
+            'development_url' => 'https://development.fuelforms.com/api/f/',
             'gtm_event' => 'Form_Submit',
             'gtm_event_gclid' => 'Form_Submit_Gclid',
         ],
 
         'careers' => [
-            'production_url' => '',
-            'development_url' => '',
+            'production_url' => 'https://fuelforms.com/api/f/',
+            'development_url' => 'https://development.fuelforms.com/api/f/',
             'gtm_event' => 'Form_Submit_Applicant',
         ],
     ],
