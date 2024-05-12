@@ -2,9 +2,10 @@
     "name": "fuelviews/laravel-form",
     "description": "This is my package laravel-forms",
     "keywords": [
-        "Fuelviews",
+        "fuelviews",
         "laravel",
-        "laravel-forms"
+        "laravel-forms",
+        "forms"
     ],
     "homepage": "https://github.com/fuelviews/laravel-form",
     "license": "MIT",
