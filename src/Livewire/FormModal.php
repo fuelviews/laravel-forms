@@ -160,7 +160,6 @@ use Livewire\Component;
 
             $this->$propertyName = request()->query($requestKey, request()->cookie($requestKey, session($requestKey)));
         }
-
     }
 
     public function closeModal()

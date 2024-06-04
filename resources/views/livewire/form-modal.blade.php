@@ -1,9 +1,9 @@
-<div>
+<div class="flex justify-center mx-auto h-screen items-center z-50">
     @if($isOpen)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col">
         </div>
         <div wire:click="closeModal" class="absolute md:inset-0 p-4 flex justify-center items-center flex-col">
-            <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border" @click.stop>
+            <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border mx-auto" @click.stop>
                 <x-laravel-form::modal.title :title="Form::getModalTitle()" />
 
                 @if($step === 1)

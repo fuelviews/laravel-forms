@@ -4,8 +4,6 @@ namespace Fuelviews\LaravelForm;
 
 use Fuelviews\LaravelForm\Contracts\FormHandlerService;
 use Fuelviews\LaravelForm\Http\Controllers\FormSubmitController;
-use Fuelviews\LaravelForm\Http\Middleware\FormHandleUtm;
-use Fuelviews\LaravelForm\Http\Middleware\FormHandleGclid;
 use Fuelviews\LaravelForm\Livewire\FormModal;
 use Fuelviews\LaravelForm\Services\FormSubmitService;
 use Fuelviews\LaravelForm\Services\FormValidationRuleService;
@@ -40,11 +38,6 @@ class FormServiceProvider extends PackageServiceProvider
         if (! $this->app->bound('GoogleTagManager')) {
             $this->app->alias('GoogleTagManager', \Spatie\GoogleTagManager\GoogleTagManagerFacade::class);
         }
-
-        $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', FormHandleUtm::class);
-        $router->pushMiddlewareToGroup('web', FormHandleGclid::class);
-
     }
 
     public function packageBooted()
@@ -54,7 +47,6 @@ class FormServiceProvider extends PackageServiceProvider
 
     public function registeringPackage(): void
     {
-
         Route::prefix('forms')->middleware('web')->group(function () {
             Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])->name('form.validate');
             Route::get('/thank-you', function () {

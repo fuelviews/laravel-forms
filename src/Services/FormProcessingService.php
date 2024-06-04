@@ -41,7 +41,7 @@ use Spatie\GoogleTagManager\GoogleTagManager;
 
         $validatedData['ip'] = $request->ip();
 
-        $gclid = $request->input('gclid') ?? $request->cookie('gclid');
+        $gclid = $request->input('gclid') ?? $request->cookie('gclid') ?? $request->session()->get('gclid');
 
         $gtmEventGclid = config("forms.forms.{$formKey}.gtm_event_gclid");
         $gtmEventName = $gclid && $gtmEventGclid ? $gtmEventGclid : config("forms.forms.{$formKey}.gtm_event");
