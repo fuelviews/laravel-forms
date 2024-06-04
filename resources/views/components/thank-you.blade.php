@@ -1,7 +1,7 @@
 <x-dynamic-component :component="$layoutsApp">
         <x-slot name="slot">
-            <div>
-                <div class="prose text-center justify-center mx-auto text-black py-12 md:py-24 lg:py-48">
+            <div class="flex h-screen justify-center items-center">
+                <div class="prose text-center justify-center mx-auto text-black">
                     @if(session('status') === 'success')
                         <h1>Someone will be in touch with you soon.</h1>
                         <h2 >Take care.</h2>

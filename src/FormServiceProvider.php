@@ -47,7 +47,7 @@ class FormServiceProvider extends PackageServiceProvider
 
     public function registeringPackage(): void
     {
-        Route::prefix('forms')->middleware('web')->group(function () {
+        Route::prefix('forms')->group(function () {
             Route::post('/submit', [FormSubmitController::class, 'handleSubmit'])->name('form.validate');
             Route::get('/thank-you', function () {
                 $layoutsApp = Form::getLayout();
