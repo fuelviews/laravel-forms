@@ -28,7 +28,7 @@
         "livewire/livewire": "^3.4",
         "spatie/laravel-googletagmanager": "^2.7",
         "spatie/laravel-package-tools": "^1.16",
-        "fuelviews/laravel-middleware":  "dev-main"
+        "fuelviews/laravel-middleware":  "^0.0.1"
 
     },
     "require-dev": {
