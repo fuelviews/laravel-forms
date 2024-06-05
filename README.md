@@ -161,7 +161,7 @@ Add laravel-form to your tailwind.config.js file.
 
 ```javascript
     content: [
-        './vendor/fuelviews/laravel-form/resources/**/*.{js,vue,php}',
+        './vendor/fuelviews/laravel-form/resources/**/*.{js,vue,blade.php}',
     ]
 ```
 
