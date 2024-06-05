@@ -1,6 +1,6 @@
 {
     "name": "fuelviews/laravel-form",
-    "description": "This is my package laravel-forms",
+    "description": "Laravel Form package",
     "keywords": [
         "fuelviews",
         "laravel",
@@ -18,8 +18,8 @@
     ],
     "repositories": [
     {
-        "type": "path",
-        "url": "../laravel-middleware"
+        "type": "vcs",
+        "url": "git@github.com:fuelviews/laravel-middleware.git"
     }
 ],
     "require": {
@@ -29,6 +29,7 @@
         "spatie/laravel-googletagmanager": "^2.7",
         "spatie/laravel-package-tools": "^1.16",
         "fuelviews/laravel-middleware":  "dev-main"
+
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -85,6 +86,6 @@
             }
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
