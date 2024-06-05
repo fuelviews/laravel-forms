@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.3 - 2024-06-05
+
+**Full Changelog**: https://github.com/fuelviews/laravel-form/compare/v0.0.2...v0.0.3
+
 ## v0.0.2 - 2024-05-12
 
 ### What's Changed
