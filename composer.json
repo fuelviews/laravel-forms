@@ -22,7 +22,7 @@
         "livewire/livewire": "^3.4",
         "spatie/laravel-googletagmanager": "^2.7",
         "spatie/laravel-package-tools": "^1.16",
-        "fuelviews/laravel-parameter-tagging":  "^0.0.3"
+        "fuelviews/laravel-parameter-tagging":  "^0.0.4"
 
     },
     "require-dev": {
