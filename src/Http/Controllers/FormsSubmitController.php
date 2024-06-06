@@ -23,9 +23,9 @@ use Illuminate\Routing\Controller;
     protected FormsValidationRuleService $validationRuleService;
 
     public function __construct(
-        FormsHandlerService        $formHandlerService,
+        FormsHandlerService $formHandlerService,
         FormsValidationRuleService $validationRuleService,
-        FormsProcessingService     $formProcessingService
+        FormsProcessingService $formProcessingService
     ) {
         $this->formHandlerService = $formHandlerService;
         $this->validationRuleService = $validationRuleService;
