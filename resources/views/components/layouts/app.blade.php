@@ -9,11 +9,10 @@
     @livewireStyles
 </head>
 <body class="bg-white">
-    <button onclick="Livewire.dispatch('openModal')" class="bg-gray-200">Show Modal</button>
 
     {{ $slot }}
 
-    @livewire('form-modal')
+    @livewire('forms-modal')
 
     @include('googletagmanager::body')
     @livewireScripts

@@ -214,7 +214,7 @@ Include form method type, form method route, spam strap in the start and end of 
 
 ## Form Modal Usage (basic)
 
-Include form-modal into your layouts.app.blade.php, trigger with a button.
+Include forms-modal into your layouts.app.blade.php, trigger with a button.
 You can customize which layout blade file is used in the config/forms.php file
 
 ```php
