@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.5 - 2024-06-06
+
+### What's Changed
+
+* Rename form-modal to forms-modal in various files and code references to maintain consistency and avoid confusion. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/7
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.4...v0.0.5
+
 ## v0.0.4 - 2024-06-06
 
 ### What's Changed
