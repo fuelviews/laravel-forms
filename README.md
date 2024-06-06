@@ -1,6 +1,6 @@
-# This is my package laravel-form
+# Fuelviews Laravel Forms
 
-Laravel form package for feulviews websites.
+Laravel forms package for Feulviews websites.
 
 ## Installation
 
@@ -13,7 +13,7 @@ composer require fuelviews/laravel-forms
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-form-config"
+php artisan vendor:publish --tag="laravel-forms-config"
 ```
 
 This is the contents of the published config file:
@@ -113,7 +113,7 @@ return [
         ],
     ],
 
-    'layout' => 'laravel-form::layouts.app',
+    'layout' => 'laravel-forms::layouts.app',
 
     'spam_redirects' => [
         'yelp' => 'https://yelp.com',
@@ -125,7 +125,74 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="laravel-form-views"
+php artisan vendor:publish --tag="laravel-forms-views"
+```
+
+### Register Middleware
+
+Register middleware in your app/Http/Kernel.php file.
+
+```php
+    // GTM tracking...
+    protected $middleware = [
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Spatie\GoogleTagManager\GoogleTagManagerMiddleware::class,
+    ];
+
+    // Query params tracking...
+    protected $middlewareGroups = [
+        'web' => [
+            \Fuelviews\ParametersTaggging\Http\Middleware\HandleGclid::class,
+            \Fuelviews\ParametersTaggging\Http\Middleware\HandleUtm::class,
+        ],
+    ];
+```
+
+### Configure spatie google tag manager package
+
+Publish spatie google tag manager config file:
+
+```bash
+php artisan vendor:publish --provider="Spatie\GoogleTagManager\GoogleTagManagerServiceProvider" --tag="config"
+```
+
+Edit app/googletagmanager.php
+
+```php
+<?php
+
+return [
+
+    /*
+     * The Google Tag Manager id, should be a code that looks something like "gtm-xxxx".
+     */
+    'id' => env('GOOGLE_TAG_MANAGER_ID', 'GTM-XXXXXX'),
+
+    /*
+     * Enable or disable script rendering. Useful for local development.
+     */
+    'enabled' => env('GOOGLE_TAG_MANAGER_ENABLED', true),
+
+    /*
+     * If you want to use some macro's you 'll probably store them
+     * in a dedicated file. You can optionally define the path
+     * to that file here and we will load it for you.
+     */
+    'macroPath' => env('GOOGLE_TAG_MANAGER_MACRO_PATH', ''),
+
+    /*
+     * The key under which data is saved to the session with flash.
+     */
+    'sessionKey' => env('GOOGLE_TAG_MANAGER_SESSION_KEY', '_googleTagManager'),
+
+    /*
+     * Configures the Google Tag Manager script domain.
+     * Modify this value only if you're using "Google Tag Manage: Web Container" client
+     * to serve gtm.js for your web container. Else, keep the default value.
+     */
+    'domain' => env('GOOGLE_TAG_MANAGER_DOMAIN', 'www.googletagmanager.com'),
+];
+
 ```
 
 ## Form Usage (basic)
@@ -136,11 +203,11 @@ Include form method type, form method route, spam strap in the start and end of 
 <form method="POST" action="{{ route('form.validate') }}"
     <input type="text" name="isSpam" style="display:none" /> // Near the start
     
-    <x-laravel-form::meta /> // Near the end
+    <x-laravel-forms::meta /> // Near the end
     <input type="hidden" name="form_key" value="free_estimate" />
     <input type="text" name="gotcha" class="hidden" />
-    <x-laravel-form::buttons.fake-button :buttonText="'Submit'" />
-    <x-laravel-form::buttons.submit-button :buttonText="'Submit'" />
+    <x-laravel-forms::buttons.fake-button :buttonText="'Submit'" />
+    <x-laravel-forms::buttons.submit-button :buttonText="'Submit'" />
 </form
 ```
 
@@ -152,16 +219,16 @@ You can customize which layout blade file is used in the config/forms.php file
 
 ```php
 <button onclick="Livewire.dispatch('openModal')">Show Modal</button>
-@livewire('form-modal')
+@livewire('forms-modal')
 ```
 
 ## Tailwindcss classes
 
-Add laravel-form to your tailwind.config.js file.
+Add laravel-forms to your tailwind.config.js file.
 
 ```javascript
     content: [
-        './vendor/fuelviews/laravel-form/resources/**/*.{js,vue,blade.php}',
+        './vendor/fuelviews/laravel-forms/resources/**/*.{js,vue,blade.php}',
     ]
 ```
 

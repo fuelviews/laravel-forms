@@ -1,15 +1,15 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Livewire;
+namespace Fuelviews\Forms\Livewire;
 
 use AllowDynamicProperties;
-use Fuelviews\LaravelForm\Contracts\FormHandlerService;
-use Fuelviews\LaravelForm\Services\FormProcessingService;
-use Fuelviews\LaravelForm\Services\FormValidationRuleService;
+use Fuelviews\Forms\Contracts\FormsHandlerService;
+use Fuelviews\Forms\Services\FormsProcessingService;
+use Fuelviews\Forms\Services\FormsValidationRuleService;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
-#[AllowDynamicProperties] class FormModal extends Component
+#[AllowDynamicProperties] class FormsModal extends Component
 {
     public $isOpen = false;
 
@@ -59,7 +59,7 @@ use Livewire\Component;
 
     public $location;
 
-    public function boot(FormHandlerService $formHandler, FormProcessingService $formProcessingService, FormValidationRuleService $validationRuleService)
+    public function boot(FormsHandlerService $formHandler, FormsProcessingService $formProcessingService, FormsValidationRuleService $validationRuleService)
     {
         $this->formHandler = $formHandler;
         $this->validationRuleService = $validationRuleService;
@@ -169,6 +169,6 @@ use Livewire\Component;
 
     public function render()
     {
-        return view('laravel-form::livewire.form-modal');
+        return view('laravel-forms::livewire.form-modal');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Services;
+namespace Fuelviews\Forms\Services;
 
-use Fuelviews\LaravelForm\Form;
+use Fuelviews\Forms\Forms;
 
-class FormValidationRuleService
+class FormsValidationRuleService
 {
     /**
      * Returns a combined array of default rules and configuration-based additional rules.
@@ -25,7 +25,7 @@ class FormValidationRuleService
             'utmContent' => 'nullable|string',
         ];
 
-        $additionalRules = Form::getAdditionalRulesForForm($formKey);
+        $additionalRules = Forms::getAdditionalRulesForForm($formKey);
 
         return array_merge($additionalRules, $defaultRules);
     }
@@ -49,7 +49,7 @@ class FormValidationRuleService
             'utmContent' => 'nullable|string',
         ];
 
-        $additionalRules = Form::getAdditionalRulesForStep($step);
+        $additionalRules = Forms::getAdditionalRulesForStep($step);
 
         return array_merge($additionalRules, $defaultRules);
     }

@@ -1,27 +1,27 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Services;
+namespace Fuelviews\Forms\Services;
 
 use AllowDynamicProperties;
-use Fuelviews\LaravelForm\Contracts\FormHandlerService;
-use Fuelviews\LaravelForm\Form;
-use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
-use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
-use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
+use Fuelviews\Forms\Contracts\FormsHandlerService;
+use Fuelviews\Forms\Forms;
+use Fuelviews\Forms\Traits\FormsApiUrlTrait;
+use Fuelviews\Forms\Traits\FormsRedirectSpamTrait;
+use Fuelviews\Forms\Traits\FormsSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Spatie\GoogleTagManager\GoogleTagManager;
 
-#[AllowDynamicProperties] class FormProcessingService
+#[AllowDynamicProperties] class FormsProcessingService
 {
-    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
+    use FormsApiUrlTrait, FormsRedirectSpamTrait, FormsSpamDetectionTrait;
 
-    protected FormHandlerService $formHandlerService;
+    protected FormsHandlerService $formHandlerService;
 
-    protected FormValidationRuleService $validationRuleService;
+    protected FormsValidationRuleService $validationRuleService;
 
-    public function __construct(FormHandlerService $formHandlerService, FormValidationRuleService $validationRuleService)
+    public function __construct(FormsHandlerService $formHandlerService, FormsValidationRuleService $validationRuleService)
     {
         $this->formHandlerService = $formHandlerService;
         $this->validationRuleService = $validationRuleService;
@@ -37,7 +37,7 @@ use Spatie\GoogleTagManager\GoogleTagManager;
             return $this->formRedirectSpam();
         }
 
-        $formKey = $request->input('form_key') ?? Form::getModalFormKey();
+        $formKey = $request->input('form_key') ?? Forms::getModalFormKey();
 
         $validatedData['ip'] = $request->ip();
 
