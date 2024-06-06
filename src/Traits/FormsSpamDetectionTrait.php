@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Traits;
+namespace Fuelviews\Forms\Traits;
 
 use Illuminate\Http\Request;
 
-trait FormSpamDetectionTrait
+trait FormsSpamDetectionTrait
 {
     /**
      * Check if the request is potentially spam.

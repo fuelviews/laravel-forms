@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Traits;
+namespace Fuelviews\Forms\Traits;
 
 use Illuminate\Http\Request;
 
-trait FormModalStepValidationTrait
+trait FormsModalStepValidationTrait
 {
     /**
      * Validate the data for a specific step of a form.

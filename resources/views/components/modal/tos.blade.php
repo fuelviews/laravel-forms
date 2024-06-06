@@ -1,5 +1,5 @@
-@if (Form::isModalTosEnabled())
+@if (Forms::isModalTosEnabled())
     <div class="mt-4 p-4 max-w-md rounded-lg text-xs">
-        <p>{{ Form::getModalTosContent() }}</p>
+        <p>{{ Forms::getModalTosContent() }}</p>
     </div>
 @endif

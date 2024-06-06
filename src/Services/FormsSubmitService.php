@@ -1,12 +1,12 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Services;
+namespace Fuelviews\Forms\Services;
 
-use Fuelviews\LaravelForm\Contracts\FormHandlerService;
+use Fuelviews\Forms\Contracts\FormsHandlerService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Http;
 
-class FormSubmitService implements FormHandlerService
+class FormsSubmitService implements FormsHandlerService
 {
     public function handle(array $data): array
     {

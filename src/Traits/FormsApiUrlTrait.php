@@ -1,10 +1,10 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Traits;
+namespace Fuelviews\Forms\Traits;
 
 use Illuminate\Support\Facades\App;
 
-trait FormApiUrlTrait
+trait FormsApiUrlTrait
 {
     /**
      * Retrieve the API URL based on the application environment and form key.

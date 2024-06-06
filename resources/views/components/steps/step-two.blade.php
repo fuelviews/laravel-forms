@@ -1,12 +1,12 @@
 <form wire:submit.prevent="nextStep">
     @csrf
     <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6 pb-4">
-        <x-laravel-form::steps.title :title="$title" />
+        <x-laravel-forms::steps.title :title="$title" />
 
         <input type="text" name="isSpam" style="display:none" />
 
         <div class="sm:col-span-1">
-            <x-laravel-form::text-input
+            <x-laravel-forms::text-input
                 label="First Name:"
                 type="text"
                 wire:model="firstName"
@@ -16,7 +16,7 @@
         </div>
 
         <div class="sm:col-span-1">
-            <x-laravel-form::text-input
+            <x-laravel-forms::text-input
                 label="Last Name:"
                 type="text"
                 wire:model="lastName"
@@ -26,7 +26,7 @@
         </div>
 
         <div class="sm:col-span-2">
-            <x-laravel-form::text-input
+            <x-laravel-forms::text-input
                 label="Email Address:"
                 type="email"
                 wire:model="email"
@@ -36,7 +36,7 @@
         </div>
 
         <div class="sm:col-span-1">
-            <x-laravel-form::text-input
+            <x-laravel-forms::text-input
                 label="Phone:"
                 type="phone"
                 wire:model="phone"
@@ -46,7 +46,7 @@
         </div>
 
         <div class="sm:col-span-1">
-            <x-laravel-form::text-input
+            <x-laravel-forms::text-input
                 label="Zip Code:"
                 type="zipCode"
                 wire:model="zipCode"
@@ -56,7 +56,7 @@
         </div>
 
         <div x-data="{ open: false }" class="sm:col-span-2">
-            <x-laravel-form::collapsible-text-area
+            <x-laravel-forms::collapsible-text-area
                 toggleText="Add additional project info (optional)"
                 label="Message:"
                 id="message"
@@ -66,12 +66,12 @@
                 hint="Max 255 characters" />
         </div>
         <div class="sm:col-span-2">
-            <x-laravel-form::error :errorKey="'form.submit.limit'" />
+            <x-laravel-forms::error :errorKey="'form.submit.limit'" />
         </div>
     </div>
 
     <input type="text" name="gotcha" class="hidden" />
-    <x-laravel-form::meta />
+    <x-laravel-forms::meta />
 
-    <x-laravel-form::divider />
+    <x-laravel-forms::divider />
 </form>

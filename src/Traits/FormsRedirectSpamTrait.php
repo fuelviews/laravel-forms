@@ -1,17 +1,17 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Traits;
+namespace Fuelviews\Forms\Traits;
 
-use Fuelviews\LaravelForm\Form;
+use Fuelviews\Forms\Forms;
 
-trait FormRedirectSpamTrait
+trait FormsRedirectSpamTrait
 {
     /**
      * Redirect to a randomly chosen URL specified in configuration to handle potential spam.
      */
     protected function formRedirectSpam(): \Illuminate\Http\RedirectResponse
     {
-        $redirects = Form::getSpamRedirects();
+        $redirects = Forms::getSpamRedirects();
         $randomRedirect = array_rand($redirects);
 
         return redirect()->to($redirects[$randomRedirect]);

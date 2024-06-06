@@ -1,31 +1,31 @@
 <?php
 
-namespace Fuelviews\LaravelForm\Http\Controllers;
+namespace Fuelviews\Forms\Http\Controllers;
 
 use AllowDynamicProperties;
-use Fuelviews\LaravelForm\Contracts\FormHandlerService;
-use Fuelviews\LaravelForm\Services\FormProcessingService;
-use Fuelviews\LaravelForm\Services\FormValidationRuleService;
-use Fuelviews\LaravelForm\Traits\FormApiUrlTrait;
-use Fuelviews\LaravelForm\Traits\FormRedirectSpamTrait;
-use Fuelviews\LaravelForm\Traits\FormSpamDetectionTrait;
+use Fuelviews\Forms\Contracts\FormsHandlerService;
+use Fuelviews\Forms\Services\FormsProcessingService;
+use Fuelviews\Forms\Services\FormsValidationRuleService;
+use Fuelviews\Forms\Traits\FormsApiUrlTrait;
+use Fuelviews\Forms\Traits\FormsRedirectSpamTrait;
+use Fuelviews\Forms\Traits\FormsSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-#[AllowDynamicProperties] class FormSubmitController extends Controller
+#[AllowDynamicProperties] class FormsSubmitController extends Controller
 {
-    use FormApiUrlTrait, FormRedirectSpamTrait, FormSpamDetectionTrait;
+    use FormsApiUrlTrait, FormsRedirectSpamTrait, FormsSpamDetectionTrait;
 
-    protected FormProcessingService $formProcessingService;
+    protected FormsProcessingService $formProcessingService;
 
-    protected FormHandlerService $formHandlerService;
+    protected FormsHandlerService $formHandlerService;
 
-    protected FormValidationRuleService $validationRuleService;
+    protected FormsValidationRuleService $validationRuleService;
 
     public function __construct(
-        FormHandlerService $formHandlerService,
-        FormValidationRuleService $validationRuleService,
-        FormProcessingService $formProcessingService
+        FormsHandlerService        $formHandlerService,
+        FormsValidationRuleService $validationRuleService,
+        FormsProcessingService     $formProcessingService
     ) {
         $this->formHandlerService = $formHandlerService;
         $this->validationRuleService = $validationRuleService;
@@ -35,7 +35,7 @@ use Illuminate\Routing\Controller;
     public function handleSubmit(Request $request): \Illuminate\Http\RedirectResponse
     {
         $formKey = request()->input('form_key', 'default');
-        $rules = FormValidationRuleService::getRulesForDefault($formKey);
+        $rules = FormsValidationRuleService::getRulesForDefault($formKey);
         $result = $this->formProcessingService->processForm($request, $request->validate($rules));
 
         if ($result instanceof \Illuminate\Http\RedirectResponse) {

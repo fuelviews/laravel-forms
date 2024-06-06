@@ -1,13 +1,13 @@
 {
-    "name": "fuelviews/laravel-form",
-    "description": "Laravel Form package",
+    "name": "fuelviews/laravel-forms",
+    "description": "Fuelviews laravel forms package",
     "keywords": [
         "fuelviews",
         "laravel",
         "laravel-forms",
         "forms"
     ],
-    "homepage": "https://github.com/fuelviews/laravel-form",
+    "homepage": "https://github.com/fuelviews/laravel-forms",
     "license": "MIT",
     "authors": [
         {
@@ -16,19 +16,13 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-    {
-        "type": "vcs",
-        "url": "git@github.com:fuelviews/laravel-middleware.git"
-    }
-],
     "require": {
         "php": "^8.2",
         "illuminate/contracts": "^10.0||^11.0",
         "livewire/livewire": "^3.4",
         "spatie/laravel-googletagmanager": "^2.7",
         "spatie/laravel-package-tools": "^1.16",
-        "fuelviews/laravel-middleware":  "^0.0.2"
+        "fuelviews/laravel-parameter-tagging":  "^0.0.2"
 
     },
     "require-dev": {
@@ -41,13 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Fuelviews\\LaravelForm\\": "src/",
-            "Fuelviews\\LaravelForm\\Database\\Factories\\": "database/factories/"
+            "Fuelviews\\Forms\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Fuelviews\\LaravelForm\\Tests\\": "tests/",
+            "Fuelviews\\Forms\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -79,10 +72,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Fuelviews\\LaravelForm\\FormServiceProvider"
+                "Fuelviews\\Forms\\FormsServiceProvider"
             ],
             "aliases": {
-                "Form": "Fuelviews\\LaravelForm\\Facades\\Form"
+                "Forms": "Fuelviews\\Forms\\Facades\\Forms"
             }
         }
     },
