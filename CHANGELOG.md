@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.4 - 2024-06-06
+
+### What's Changed
+
+* Update composer deps, rename package and files by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/6
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.3...v0.0.4
+
 ## v0.0.3 - 2024-06-05
 
 **Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.2...v0.0.3
