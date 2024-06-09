@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.7 - 2024-06-09
+
+### What's Changed
+
+* Update references to the Laravel Forms package to the new Forms package. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/9
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.6...v0.0.7
+
 ## v0.0.6 - 2024-06-09
 
 ### What's Changed
