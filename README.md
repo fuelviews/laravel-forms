@@ -13,7 +13,7 @@ composer require fuelviews/laravel-forms
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-forms-config"
+php artisan vendor:publish --tag="forms-config"
 ```
 
 This is the contents of the published config file:
@@ -125,7 +125,7 @@ return [
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag="laravel-forms-views"
+php artisan vendor:publish --tag="forms-views"
 ```
 
 ### Register Middleware
