@@ -169,6 +169,6 @@ use Livewire\Component;
 
     public function render()
     {
-        return view('laravel-forms::livewire.forms-modal');
+        return view('forms::livewire.forms-modal');
     }
 }

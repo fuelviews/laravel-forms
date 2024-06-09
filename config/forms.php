@@ -92,7 +92,7 @@ return [
         ],
     ],
 
-    'layout' => 'laravel-forms::layouts.app',
+    'layout' => 'forms::layouts.app',
 
     'spam_redirects' => [
         'yelp' => 'https://yelp.com',
