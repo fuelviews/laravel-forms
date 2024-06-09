@@ -53,7 +53,7 @@ class FormsServiceProvider extends PackageServiceProvider
             Route::get('/thank-you', function () {
                 $layoutsApp = Forms::getLayout();
 
-                return view('laravel-forms::components.thank-you', compact('layoutsApp'));
+                return view('forms::components.thank-you', compact('layoutsApp'));
             })->name('thank-you');
         });
     }
