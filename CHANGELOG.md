@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.6 - 2024-06-09
+
+### What's Changed
+
+* Changed the tag name for publishing the config and views files from laravel-forms-config and laravel-forms-views to forms-config and forms-views respectively. Also changed the package name from laravel-forms to forms. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/8
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.5...v0.0.6
+
 ## v0.0.5 - 2024-06-06
 
 ### What's Changed
