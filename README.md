@@ -4,10 +4,16 @@ Laravel forms package for Feulviews websites.
 
 ## Installation
 
-You can install the package via composer:
+You can require the package via composer:
 
 ```bash
 composer require fuelviews/laravel-forms
+```
+
+You can install the package with:
+
+```bash
+php artisan forms:install
 ```
 
 You can publish the config file with:
