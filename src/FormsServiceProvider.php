@@ -2,6 +2,7 @@
 
 namespace Fuelviews\Forms;
 
+use Fuelviews\Forms\Commands\FormsInstallCommand;
 use Fuelviews\Forms\Contracts\FormsHandlerService;
 use Fuelviews\Forms\Http\Controllers\FormsSubmitController;
 use Fuelviews\Forms\Livewire\FormsModal;
@@ -21,7 +22,8 @@ class FormsServiceProvider extends PackageServiceProvider
         $package
             ->name('forms')
             ->hasConfigFile('forms')
-            ->hasViews('forms');
+            ->hasViews('forms')
+            ->hasCommand(FormsInstallCommand::class);
     }
 
     public function bootingPackage(): void
@@ -32,12 +34,21 @@ class FormsServiceProvider extends PackageServiceProvider
             return new FormsValidationRuleService();
         });
 
-        if (! $this->app->getProvider(GoogleTagManagerServiceProvider::class)) {
-            $this->app->register(GoogleTagManagerServiceProvider::class);
+        if (! function_exists('providerIsLoaded')) {
+            function providerIsLoaded($app, $providerClass)
+            {
+                return collect($app->getLoadedProviders())->has($providerClass);
+            }
         }
 
-        if (! $this->app->bound('GoogleTagManager')) {
-            $this->app->alias('GoogleTagManager', GoogleTagManagerFacade::class);
+        if (class_exists(GoogleTagManagerServiceProvider::class)) {
+            if (! providerIsLoaded($this->app, GoogleTagManagerServiceProvider::class)) {
+                $this->app->register(GoogleTagManagerServiceProvider::class);
+            }
+
+            if (! $this->app->bound('GoogleTagManager')) {
+                $this->app->alias('GoogleTagManager', GoogleTagManagerFacade::class);
+            }
         }
     }
 
