@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.8 - 2024-06-11
+
+### What's Changed
+
+* Added installation instructions to the README.md file, updated compos… by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/10
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.7...v0.0.8
+
 ## v0.0.7 - 2024-06-09
 
 ### What's Changed
