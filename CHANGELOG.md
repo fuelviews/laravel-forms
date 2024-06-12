@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.10 - 2024-06-12
+
+### What's Changed
+
+* Refactor forms-modal.blade.php to improve readability and maintainability. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/12
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.9...v0.0.10
+
 ## v0.0.9 - 2024-06-12
 
 ### What's Changed
