@@ -27,9 +27,9 @@
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-arch": "^2.7",
         "pestphp/pest-plugin-laravel": "^2.3",
-        "livewire/livewire": "^3.0",
+        "livewire/livewire": "^3.5",
         "fuelviews/laravel-parameter-tagging":  "^0.0",
-        "spatie/laravel-googletagmanager": "^2.0"
+        "spatie/laravel-googletagmanager": "^2.7"
     },
     "autoload": {
         "psr-4": {
