@@ -54,7 +54,9 @@ class FormsServiceProvider extends PackageServiceProvider
 
     public function packageBooted(): void
     {
-        Livewire::component('forms-modal', FormsModal::class);
+        if (class_exists(\Livewire\Livewire::class)) {
+            Livewire::component('forms-modal', FormsModal::class);
+        }
     }
 
     public function registeringPackage(): void
