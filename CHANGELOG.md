@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.11 - 2024-06-12
+
+### What's Changed
+
+* Add conditional check before registering Livewire component in FormsServiceProvider to prevent error if Livewire package is not installed. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/13
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.10...v0.0.11
+
 ## v0.0.10 - 2024-06-12
 
 ### What's Changed
