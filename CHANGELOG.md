@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.9 - 2024-06-12
+
+### What's Changed
+
+* Update composer.json dependencies for livewire/livewire and spatie/laravel-googletagmanager to their latest versions. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/11
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.8...v0.0.9
+
 ## v0.0.8 - 2024-06-11
 
 ### What's Changed
