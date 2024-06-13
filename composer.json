@@ -1,6 +1,6 @@
 {
     "name": "fuelviews/laravel-forms",
-    "description": "Fuelviews laravel forms package",
+    "description": "Laravel forms package",
     "keywords": [
         "fuelviews",
         "laravel",
@@ -13,6 +13,7 @@
         {
             "name": "Joshua Mitchener",
             "email": "support@fuelviews.com",
+            "homepage": "https://fuelviews.com",
             "role": "Developer"
         }
     ],
@@ -29,7 +30,8 @@
         "pestphp/pest-plugin-laravel": "^2.3",
         "livewire/livewire": "^3.5",
         "fuelviews/laravel-parameter-tagging":  "^0.0",
-        "spatie/laravel-googletagmanager": "^2.7"
+        "spatie/laravel-googletagmanager": "^2.7",
+        "fuelviews/laravel-layout-wrapper": "^0.0"
     },
     "autoload": {
         "psr-4": {

@@ -64,9 +64,7 @@ class FormsServiceProvider extends PackageServiceProvider
         Route::prefix('forms')->group(function () {
             Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])->name('form.validate');
             Route::get('/thank-you', function () {
-                $layoutsApp = Forms::getLayout();
-
-                return view('forms::components.thank-you', compact('layoutsApp'));
+                return view('forms::components.thank-you');
             })->name('thank-you');
         });
     }

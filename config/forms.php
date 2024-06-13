@@ -92,8 +92,6 @@ return [
         ],
     ],
 
-    'layout' => 'forms::layouts.app',
-
     'spam_redirects' => [
         'yelp' => 'https://yelp.com',
         'bbb' => 'https://bbb.org',
