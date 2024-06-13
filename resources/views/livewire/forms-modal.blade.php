@@ -5,7 +5,6 @@
             <div wire:click="closeModal" class="absolute top-32 md:inset-0 p-4 flex justify-center items-center flex-col">
                 <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border mx-auto" @click.stop>
                     <x-forms::modal.title :title="Forms::getModalTitle()" />
-
                     @if($step === 1)
                         <x-forms::steps.step-one :title="Forms::getModalStepTitle($step)" />
                     @elseif($step === 2)

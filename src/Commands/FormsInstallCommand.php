@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 
 class FormsInstallCommand extends Command
 {
-    protected $signature = 'forms:install';
+    protected $signature = 'forms:install {--force : Force the publishing of config files}';
 
     protected $description = 'Install packages and dependencies';
 
@@ -23,6 +23,7 @@ class FormsInstallCommand extends Command
             'livewire/livewire' => '^3.5',
             'fuelviews/laravel-parameter-tagging' => '^0.0',
             'spatie/laravel-googletagmanager' => '^2.7',
+            'fuelviews/laravel-layout-wrapper' => '^0.0',
         ];
 
         $requireCommand = 'composer require';
@@ -31,10 +32,14 @@ class FormsInstallCommand extends Command
         }
 
         $this->info('Installing packages...');
-
         $this->runShellCommand($requireCommand);
 
-        $this->runShellCommand("php artisan vendor:publish --'provider=Spatie\GoogleTagManager\GoogleTagManagerServiceProvider' --tag='config'");
+        $publishCommand = "php artisan vendor:publish --provider='Spatie\GoogleTagManager\GoogleTagManagerServiceProvider' --tag='config'";
+        if ($this->option('force')) {
+            $publishCommand .= ' --force';
+        }
+
+        $this->runShellCommand($publishCommand);
 
         $this->info('Packages installed successfully.');
     }
@@ -43,10 +48,8 @@ class FormsInstallCommand extends Command
     {
         $process = Process::fromShellCommandline($command);
 
-        // Set the input to the process's standard input, allowing for interaction
         $process->setTty(Process::isTtySupported());
 
-        // Run the process
         $process->run(function ($type, $buffer) {
             $this->output->write($buffer);
         });

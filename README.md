@@ -1,6 +1,6 @@
-# Fuelviews Laravel Forms
+# Laravel forms package
 
-Laravel forms package for Feulviews websites.
+Laravel forms package
 
 ## Installation
 
@@ -119,8 +119,6 @@ return [
         ],
     ],
 
-    'layout' => 'laravel-forms::layouts.app',
-
     'spam_redirects' => [
         'yelp' => 'https://yelp.com',
         'bbb' => 'https://bbb.org',
@@ -206,7 +204,7 @@ return [
 Include form method type, form method route, spam strap in the start and end of the form, form key, fake submit button, and a real submit button.
 
 ```php
-<form method="POST" action="{{ route('form.validate') }}"
+<form method="POST" action="{{ route('forms.validate') }}"
     <input type="text" name="isSpam" style="display:none" /> // Near the start
     
     <x-laravel-forms::meta /> // Near the end
