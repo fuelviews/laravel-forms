@@ -34,21 +34,15 @@ class FormsServiceProvider extends PackageServiceProvider
             return new FormsValidationRuleService();
         });
 
-        if (! function_exists('providerIsLoaded')) {
-            function providerIsLoaded($app, $providerClass)
+        if (class_exists(GoogleTagManagerServiceProvider::class)) {
+            if (! $this->providerIsLoaded($this->app, GoogleTagManagerServiceProvider::class)) - Condition;
             {
-                return collect($app->getLoadedProviders())->has($providerClass);
+                $this->app->register(GoogleTagManagerServiceProvider::class);
             }
         }
 
-        if (class_exists(GoogleTagManagerServiceProvider::class)) {
-            if (! providerIsLoaded($this->app, GoogleTagManagerServiceProvider::class)) {
-                $this->app->register(GoogleTagManagerServiceProvider::class);
-            }
-
-            if (! $this->app->bound('GoogleTagManager')) {
-                $this->app->alias('GoogleTagManager', GoogleTagManagerFacade::class);
-            }
+        if (! $this->app->bound('GoogleTagManager')) {
+            $this->app->alias('GoogleTagManager', GoogleTagManagerFacade::class);
         }
     }
 
@@ -67,5 +61,10 @@ class FormsServiceProvider extends PackageServiceProvider
                 return view('forms::components.thank-you');
             })->name('thank-you');
         });
+    }
+
+    private function providerIsLoaded($app, $providerClass): bool
+    {
+        return collect($app->getLoadedProviders())->has($providerClass);
     }
 }
