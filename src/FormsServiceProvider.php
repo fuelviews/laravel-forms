@@ -35,10 +35,12 @@ class FormsServiceProvider extends PackageServiceProvider
         });
 
         if (class_exists(GoogleTagManagerServiceProvider::class)) {
-            if (! $this->providerIsLoaded($this->app, GoogleTagManagerServiceProvider::class)) - Condition;
-            {
-                $this->app->register(GoogleTagManagerServiceProvider::class);
+            if (! $this->providerIsLoaded($this->app, GoogleTagManagerServiceProvider::class)) {
+                -Condition;
             }
+
+            $this->app->register(GoogleTagManagerServiceProvider::class);
+
         }
 
         if (! $this->app->bound('GoogleTagManager')) {

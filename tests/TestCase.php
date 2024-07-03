@@ -2,7 +2,6 @@
 
 namespace Fuelviews\Forms\Tests;
 
-use Fuelviews\Forms\FormsServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -20,7 +19,5 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
-    {
-    }
+    public function getEnvironmentSetUp($app) {}
 }
