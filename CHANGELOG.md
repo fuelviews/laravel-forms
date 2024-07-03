@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.13 - 2024-07-03
+
+### What's Changed
+
+* Refactor FormsServiceProvider and TestCase classes to remove unnecessary code and improve code readability. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/15
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.12...v0.0.13
+
 ## v0.0.12 - 2024-06-13
 
 ### What's Changed
