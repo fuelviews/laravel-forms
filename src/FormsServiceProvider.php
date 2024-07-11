@@ -58,7 +58,7 @@ class FormsServiceProvider extends PackageServiceProvider
     public function registeringPackage(): void
     {
         Route::prefix('forms')->group(function () {
-            Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])->name('form.validate');
+            Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])->name('forms.validate');
             Route::get('/thank-you', function () {
                 return view('forms::components.thank-you');
             })->name('thank-you');
