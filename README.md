@@ -200,10 +200,12 @@ return [
 Include form method type, form method route, spam strap in the start and end of the form, form key, fake submit button, and a real submit button.
 
 ```php
-<form method="POST" action="{{ route('forms.validate') }}"
-    <input type="text" name="isSpam" style="display:none" /> // Near the start
+<form method="POST" action="{{ route('forms.validate') }}">
+    // Near the start
+    <input type="text" name="isSpam" style="display:none" /> 
     
-    <x-forms::meta /> // Near the end
+    // Near the end
+    <x-forms::meta />
     <input type="hidden" name="form_key" value="free_estimate" />
     <input type="text" name="gotcha" class="hidden" />
     <x-forms::buttons.fake-button :buttonText="'Submit'" />

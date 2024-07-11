@@ -1,4 +1,4 @@
-<x-layout-wrapper::layouts.app>
+<x-layouts-wrapper::layouts.app>
         <x-slot name="slot">
             <div class="flex h-screen justify-center items-center">
                 <div class="prose text-center justify-center mx-auto text-black">
@@ -11,4 +11,4 @@
                 </div>
             </div>
         </x-slot>
-</x-layout-wrapper::layouts.app>
+</x-layouts-wrapper::layouts.app>
