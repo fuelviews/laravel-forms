@@ -2,6 +2,22 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.13 - 2024-07-03
+
+### What's Changed
+
+* Refactor FormsServiceProvider and TestCase classes to remove unnecessary code and improve code readability. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/15
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.12...v0.0.13
+
+## v0.0.12 - 2024-06-13
+
+### What's Changed
+
+* Refactor Laravel forms package for Fuelviews websites, including changes to the README, composer.json, config files, views, and tests. The changes were made to improve the package's functionality, update dependencies, and fix bugs. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/14
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.11...v0.0.12
+
 ## v0.0.11 - 2024-06-12
 
 ### What's Changed
