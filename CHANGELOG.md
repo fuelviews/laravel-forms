@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.14 - 2024-07-11
+
+### What's Changed
+
+* Refactor config file, update Google Tag Manager provider, and modify form components and buttons. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/16
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.13...v0.0.14
+
 ## v0.0.13 - 2024-07-03
 
 ### What's Changed
