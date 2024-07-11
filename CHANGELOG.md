@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.17 - 2024-07-11
+
+### What's Changed
+
+* Update readme and install dep by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/19
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.16...v0.0.17
+
 ## v0.0.16 - 2024-07-11
 
 ### What's Changed
