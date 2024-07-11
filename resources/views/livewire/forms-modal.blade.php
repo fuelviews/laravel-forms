@@ -1,8 +1,7 @@
 <div>
     @if($isOpen)
-        <div class="flex justify-center mx-auto items-center z-50 my-0">
-            <div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center flex-col"></div>
-            <div wire:click="closeModal" class="absolute top-32 md:inset-0 p-4 flex justify-center items-center flex-col">
+        <div class="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50">
+            <div wire:click="closeModal" class="relative p-4 flex justify-center items-center flex-col w-full">
                 <div class="bg-white rounded-lg p-4 shadow-lg max-w-lg w-full border mx-auto" @click.stop>
                     <x-forms::modal.title :title="Forms::getModalTitle()" />
                     @if($step === 1)
