@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.15 - 2024-07-11
+
+### What's Changed
+
+* Changed the route name from 'form.validate' to 'forms.validate' in the FormsServiceProvider.php file to maintain consistency with the route prefix. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/17
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.14...v0.0.15
+
 ## v0.0.14 - 2024-07-11
 
 ### What's Changed
