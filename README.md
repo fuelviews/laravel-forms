@@ -25,8 +25,6 @@ php artisan vendor:publish --tag="forms-config"
 This is the contents of the published config file:
 
 ```php
-<?php
-
 return [
     'forms' => [
         'free_estimate' => [
@@ -163,8 +161,6 @@ php artisan vendor:publish --provider="Spatie\GoogleTagManager\GoogleTagManagerS
 Edit app/googletagmanager.php
 
 ```php
-<?php
-
 return [
 
     /*
@@ -207,11 +203,11 @@ Include form method type, form method route, spam strap in the start and end of 
 <form method="POST" action="{{ route('forms.validate') }}"
     <input type="text" name="isSpam" style="display:none" /> // Near the start
     
-    <x-laravel-forms::meta /> // Near the end
+    <x-forms::meta /> // Near the end
     <input type="hidden" name="form_key" value="free_estimate" />
     <input type="text" name="gotcha" class="hidden" />
-    <x-laravel-forms::buttons.fake-button :buttonText="'Submit'" />
-    <x-laravel-forms::buttons.submit-button :buttonText="'Submit'" />
+    <x-forms::buttons.fake-button :buttonText="'Submit'" />
+    <x-forms::buttons.submit-button :buttonText="'Submit'" />
 </form
 ```
 
@@ -232,7 +228,7 @@ Add laravel-forms to your tailwind.config.js file.
 
 ```javascript
     content: [
-        './vendor/fuelviews/laravel-forms/resources/**/*.{js,vue,blade.php}',
+        './vendor/fuelviews/laravel-*/resources/**/*.{js,vue,blade.php}',
     ]
 ```
 
