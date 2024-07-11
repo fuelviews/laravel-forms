@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.18 - 2024-07-11
+
+### What's Changed
+
+* form stickiness by @sweatybreeze in https://github.com/fuelviews/laravel-forms/pull/20
+
+### New Contributors
+
+* @sweatybreeze made their first contribution in https://github.com/fuelviews/laravel-forms/pull/20
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.17...v0.0.18
+
 ## v0.0.17 - 2024-07-11
 
 ### What's Changed
