@@ -23,7 +23,7 @@ class FormsInstallCommand extends Command
             'livewire/livewire' => '^3.5',
             'fuelviews/laravel-parameter-tagging' => '^0.0',
             'spatie/laravel-googletagmanager' => '^2.7',
-            'fuelviews/laravel-layout-wrapper' => '^0.0',
+            'fuelviews/laravel-layouts-wrapper' => '^0.0',
         ];
 
         $requireCommand = 'composer require';
