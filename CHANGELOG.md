@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.16 - 2024-07-11
+
+### What's Changed
+
+* Refactor form method type, form method route, and component name in t… by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/18
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.15...v0.0.16
+
 ## v0.0.15 - 2024-07-11
 
 ### What's Changed
