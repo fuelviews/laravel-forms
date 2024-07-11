@@ -144,8 +144,8 @@ Register middleware in your app/Http/Kernel.php file.
     // Query params tracking...
     protected $middlewareGroups = [
         'web' => [
-            \Fuelviews\ParametersTaggging\Http\Middleware\HandleGclid::class,
-            \Fuelviews\ParametersTaggging\Http\Middleware\HandleUtm::class,
+            \Fuelviews\ParameterTagging\Http\Middleware\HandleGclid::class,
+            \Fuelviews\ParameterTagging\Http\Middleware\HandleUtm::class,
         ],
     ];
 ```
@@ -201,16 +201,132 @@ Include form method type, form method route, spam strap in the start and end of 
 
 ```php
 <form method="POST" action="{{ route('forms.validate') }}">
-    // Near the start
-    <input type="text" name="isSpam" style="display:none" /> 
+    <input type="text" name="isSpam" style="display:none" />
     
-    // Near the end
+    /* Form fields here */
+    
     <x-forms::meta />
-    <input type="hidden" name="form_key" value="free_estimate" />
+    <input type="hidden" name="form_key" value="contact_us" />
     <input type="text" name="gotcha" class="hidden" />
+    
     <x-forms::buttons.fake-button :buttonText="'Submit'" />
     <x-forms::buttons.submit-button :buttonText="'Submit'" />
-</form
+</form>
+```
+
+## Form usage example
+
+```bladehtml
+    <form method="POST" action="{{ route('forms.validate') }}" class="mt-16">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+        <input type="text" name="_gotcha" style="display:none" />
+        <div>
+            <label for="firstName" class="block text-sm font-semibold leading-6 text-gray-900">
+                First name
+            </label>
+            <div class="mt-1">
+                <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    wire:model="firstName"
+                    autocomplete="given-name"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    pattern="[A-Za-z]{2,}"
+                    title="First name must be at least 2 letters and only contain letters." />
+                @error('firstName')
+                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div>
+            <label for="lastName" class="block text-sm font-semibold leading-6 text-gray-900">
+                Last name
+            </label>
+            <div class="mt-1">
+                <input
+                    type="text"
+                    name="first-name"
+                    id="lastName"
+                    wire:model="lastName"
+                    autocomplete="family-name"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    pattern=".{2,}"
+                    title="Last name must be at least 2 characters." />
+                @error('lastName')
+                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="sm:col-span-2">
+            <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">
+                Email
+            </label>
+            <div class="mt-1">
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    wire:model="email"
+                    autocomplete="email"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                @error('email')
+                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="sm:col-span-2">
+            <div class="flex justify-between text-sm leading-6">
+                <label for="phone" class="block font-semibold text-gray-900">Phone</label>
+            </div>
+            <div class="mt-1">
+                <input
+                    type="tel"
+                    name="phone"
+                    id="phone"
+                    wire:model="phone"
+                    autocomplete="tel"
+                    aria-describedby="phone-description"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    pattern="[\s\d\-\(\)]*?(\d[\s\d\-\(\)]*?){7,11}"
+                    title="Phone number must have 7 to 11 digits and may include parentheses, spaces, and hyphens."
+                    />
+                @error('phone')
+                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="sm:col-span-2">
+            <div class="flex justify-between text-sm leading-6">
+                <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">
+                    How can we help you?
+                </label>
+                <p id="message-description" class="text-gray-400">Max 255 characters</p>
+            </div>
+            <div class="mt-1">
+                <textarea
+                    id="message"
+                    name="message"
+                    wire:model="message"
+                    rows="4"
+                    aria-describedby="message-description"
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                @error('message')
+                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+    </div>
+
+    <x-forms::meta />
+    <input type="hidden" name="form_key" value="contact_us" />
+    <input type="text" name="gotcha" class="hidden" />
+
+    <div class="mt-10 flex justify-end border-t border-gray-900/10 pt-8">
+        <x-forms::buttons.fake-button :buttonText="'Submit'" />
+        <x-forms::buttons.submit-button :buttonText="'Submit'" />
+    </div>
+</form>
 ```
 
 
