@@ -1,6 +1,6 @@
 <form wire:submit.prevent="nextStep">
     @csrf
-    <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 pt-6 pb-4">
+    <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2 py-2">
         <x-forms::steps.title :title="$title" />
 
         <input type="text" name="isSpam" style="display:none" />
@@ -65,6 +65,7 @@
                 rows="4"
                 hint="Max 255 characters" />
         </div>
+
         <div class="sm:col-span-2">
             <x-forms::error :errorKey="'form.submit.limit'" />
         </div>
