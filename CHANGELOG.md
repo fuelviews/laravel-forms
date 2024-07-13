@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.20 - 2024-07-13
+
+### What's Changed
+
+* Ignore /vendor directories in gitignore, update thank-you.blade.php by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/22
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.19...v0.0.20
+
 ## v0.0.19 - 2024-07-12
 
 ### What's Changed
