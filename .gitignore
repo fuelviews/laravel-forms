@@ -7,7 +7,6 @@ docs
 phpunit.xml
 phpstan.neon
 testbench.yaml
-vendor
 node_modules
 /.phpunit.cache
 /node_modules
@@ -19,6 +18,7 @@ node_modules
 .env.backup
 .env.production
 .phpunit.result.cache
+.editorconfig
 Homestead.json
 Homestead.yaml
 auth.json

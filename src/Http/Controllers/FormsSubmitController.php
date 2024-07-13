@@ -47,7 +47,7 @@ use Illuminate\Routing\Controller;
         }
 
         if ($result['status'] === 'success') {
-            return redirect()->route('thank-you')->with('status', 'success');
+            return redirect()->route('forms.thank-you')->with('status', 'success');
         }
 
         return back()->withInput();
