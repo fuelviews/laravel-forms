@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.19 - 2024-07-12
+
+### What's Changed
+
+* Refactored modal optional div and modal tos components, and made styling adjustments to step two form. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/21
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.18...v0.0.19
+
 ## v0.0.18 - 2024-07-11
 
 ### What's Changed

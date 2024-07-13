@@ -1,5 +1,5 @@
 @if (Forms::isModalTosEnabled())
-    <div class="mt-4 p-4 max-w-md rounded-lg text-white">
+    <div class="hidden md:flex mt-4 p-1 max-w-lg text-white text-xs text-justify">
         <p>{{ Forms::getModalTosContent() }}</p>
     </div>
 @endif
