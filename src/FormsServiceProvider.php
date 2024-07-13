@@ -40,12 +40,19 @@ class FormsServiceProvider extends PackageServiceProvider
             }
 
             $this->app->register(GoogleTagManagerServiceProvider::class);
-
         }
 
         if (! $this->app->bound('GoogleTagManager')) {
             $this->app->alias('GoogleTagManager', GoogleTagManagerFacade::class);
         }
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/forms'),
+        ], 'forms-views');
+
+        $this->publishes([
+            __DIR__.'/../resources/views/components/thank-you.blade.php' => resource_path('views/vendor/forms/components/thank-you.blade.php'),
+        ], 'forms-thank-you');
     }
 
     public function packageBooted(): void
@@ -58,11 +65,13 @@ class FormsServiceProvider extends PackageServiceProvider
     public function registeringPackage(): void
     {
         Route::prefix('forms')->group(function () {
-            Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])->name('forms.validate');
-            Route::get('/thank-you', function () {
-                return view('forms::components.thank-you');
-            })->name('thank-you');
+            Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])
+                ->name('forms.validate');
         });
+
+        Route::get('/thank-you', function () {
+            return view('forms::components.thank-you');
+        })->name('forms.thank-you');
     }
 
     private function providerIsLoaded($app, $providerClass): bool
