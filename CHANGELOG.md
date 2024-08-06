@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.21 - 2024-08-06
+
+### What's Changed
+
+* Refactor redirect route in FormsModal.php to use the correct route for the thank-you page by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/25
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.20...v0.0.21
+
 ## v0.0.20 - 2024-07-13
 
 ### What's Changed
