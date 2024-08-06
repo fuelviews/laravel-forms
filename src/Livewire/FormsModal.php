@@ -143,7 +143,7 @@ use Livewire\Component;
         }
 
         if (is_array($result) && $result['status'] === 'success') {
-            return redirect()->route('thank-you')->with('status', 'success');
+            return redirect()->route('forms.thank-you')->with('status', 'success');
         } else {
             Log::error('Error processing form: '.($result['message'] ?? 'Unknown error'));
 
