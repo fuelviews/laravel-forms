@@ -14,7 +14,9 @@ use Illuminate\Routing\Controller;
 
 #[AllowDynamicProperties] class FormsSubmitController extends Controller
 {
-    use FormsApiUrlTrait, FormsRedirectSpamTrait, FormsSpamDetectionTrait;
+    use FormsApiUrlTrait;
+    use FormsRedirectSpamTrait;
+    use FormsSpamDetectionTrait;
 
     protected FormsProcessingService $formProcessingService;
 

@@ -31,7 +31,7 @@ class FormsServiceProvider extends PackageServiceProvider
         $this->app->singleton(FormsHandlerService::class, FormsSubmitService::class);
 
         $this->app->singleton(FormsValidationRuleService::class, function ($app) {
-            return new FormsValidationRuleService;
+            return new FormsValidationRuleService();
         });
 
         if (class_exists(GoogleTagManagerServiceProvider::class)) {
