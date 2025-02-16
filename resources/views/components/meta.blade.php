@@ -1,3 +1,4 @@
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <input type="hidden" name="gclid" wire:model="gclid" value="{{ request()->query('gclid', request()->cookie('gclid', session('gclid'))) }}">
 <input type="hidden" name="utmSource" wire:model="utmSource" value="{{ request()->query('utm_source', request()->cookie('utm_source', session('utm_source'))) }}">
 <input type="hidden" name="utmMedium" wire:model="utmMedium" value="{{ request()->query('utm_medium', request()->cookie('utm_medium', session('utm_medium'))) }}">

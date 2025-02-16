@@ -6,12 +6,15 @@ use Fuelviews\Forms\Commands\FormsInstallCommand;
 use Fuelviews\Forms\Contracts\FormsHandlerService;
 use Fuelviews\Forms\Http\Controllers\FormsSubmitController;
 use Fuelviews\Forms\Livewire\FormsModal;
+use Fuelviews\Forms\Middleware\HandleGclid;
+use Fuelviews\Forms\Middleware\HandleUtm;
 use Fuelviews\Forms\Services\FormsSubmitService;
 use Fuelviews\Forms\Services\FormsValidationRuleService;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Foundation\Configuration\Middleware;
 use Livewire\Livewire;
-use Spatie\GoogleTagManager\GoogleTagManagerFacade;
-use Spatie\GoogleTagManager\GoogleTagManagerServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -33,46 +36,53 @@ class FormsServiceProvider extends PackageServiceProvider
         $this->app->singleton(FormsValidationRuleService::class, function ($app) {
             return new FormsValidationRuleService;
         });
-
-        if (class_exists(GoogleTagManagerServiceProvider::class)) {
-            if (! $this->providerIsLoaded($this->app, GoogleTagManagerServiceProvider::class)) {
-                -Condition;
-            }
-
-            $this->app->register(GoogleTagManagerServiceProvider::class);
-        }
-
-        if (! $this->app->bound('GoogleTagManager')) {
-            $this->app->alias('GoogleTagManager', GoogleTagManagerFacade::class);
-        }
-
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/forms'),
-        ], 'forms-views');
-
-        $this->publishes([
-            __DIR__.'/../resources/views/components/thank-you.blade.php' => resource_path('views/vendor/forms/components/thank-you.blade.php'),
-        ], 'forms-thank-you');
     }
 
     public function packageBooted(): void
     {
-        if (class_exists(\Livewire\Livewire::class)) {
+        if (class_exists(Livewire::class)) {
             Livewire::component('forms-modal', FormsModal::class);
         }
+
+        $this->app->extend(Application::class, function (Application $app) {
+            if (method_exists($app, 'configureMiddleware')) {
+                $app->configureMiddleware(function (Middleware $middleware) {
+                    $middleware->appendToGroup('web', [
+                        HandleGclid::class,
+                        HandleUtm::class,
+                    ]);
+                });
+            } else {
+                $this->app->booting(function () {
+                    $kernel = $this->app->make(Kernel::class);
+
+                    foreach ([
+                        HandleGclid::class,
+                        HandleUtm::class,
+                    ] as $middleware) {
+                        $kernel->appendMiddlewareToGroup('web', $middleware);
+                    }
+                });
+            }
+
+            return $app;
+        });
     }
 
     public function registeringPackage(): void
     {
-        Route::prefix('forms')->group(function () {
-            Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])
-                ->name('forms.validate');
-        });
+        Route::middleware(['web'])->group(function () {
+            Route::prefix('forms')->group(function () {
+                Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])
+                    ->name('forms.validate');
+            });
 
-        Route::get('/thank-you', function () {
-            return view('forms::components.thank-you');
-        })->name('forms.thank-you');
+            Route::get('/forms-thank-you', function () {
+                return view('forms::components.thank-you');
+            })->name('forms.thank-you');
+        });
     }
+
 
     private function providerIsLoaded($app, $providerClass): bool
     {

@@ -5,50 +5,50 @@ namespace Fuelviews\Forms\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class FormsInstallCommand extends Command
 {
-    protected $signature = 'forms:install {--force : Force the publishing of config files}';
+    protected $signature = 'forms:install';
 
-    protected $description = 'Install packages and dependencies';
+    protected $description = 'Install required packages and dependencies';
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    public function handle()
+    public function handle(): int
     {
         $packages = [
-            'livewire/livewire' => '^3.5',
-            'fuelviews/laravel-parameter-tagging' => '^0.0',
-            'spatie/laravel-googletagmanager' => '^2.7',
-            'fuelviews/laravel-layouts-wrapper' => '^0.0',
+            'livewire/livewire' => '>=3.5',
+            'fuelviews/laravel-sabhero-wrapper' => '>=0.0',
         ];
 
         $requireCommand = 'composer require';
         foreach ($packages as $package => $version) {
-            $requireCommand .= " {$package}:{$version}";
+            $requireCommand .= " {$package}:\"{$version}\"";
+
         }
 
-        $this->info('Installing packages...');
-        $this->runShellCommand($requireCommand);
+        $this->info('Installing required packages...');
 
-        $publishCommand = "php artisan vendor:publish --provider='Spatie\GoogleTagManager\GoogleTagManagerServiceProvider' --tag='config'";
-        if ($this->option('force')) {
-            $publishCommand .= ' --force';
+        try {
+            $this->runShellCommand($requireCommand);
+            $this->info('✅ Packages installed successfully.');
+        } catch (ProcessFailedException $e) {
+            $this->error('❌ Failed to install packages: ' . $e->getMessage());
+            return self::FAILURE;
         }
 
-        $this->runShellCommand($publishCommand);
+        $this->call('vendor:publish', ['--tag' => 'forms-config']);
+        $this->info('✅ Forms package setup complete.');
 
-        $this->info('Packages installed successfully.');
+        return self::SUCCESS;
     }
 
-    private function runShellCommand($command)
+    private function runShellCommand($command): void
     {
         $process = Process::fromShellCommandline($command);
 
-        $process->setTty(Process::isTtySupported());
+        if (Process::isTtySupported() && $this->getOutput()) {
+            $process->setTty(true);
+        }
 
         $process->run(function ($type, $buffer) {
             $this->output->write($buffer);
