@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\App;
 
 #[AllowDynamicProperties] class FormsProcessingService
 {
-    use FormsApiUrlTrait, FormsRedirectSpamTrait, FormsSpamDetectionTrait;
+    use FormsApiUrlTrait;
+    use FormsRedirectSpamTrait;
+    use FormsSpamDetectionTrait;
 
     protected FormsHandlerService $formHandlerService;
 
