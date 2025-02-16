@@ -16,7 +16,7 @@ You can install the package with:
 php artisan forms:install
 ```
 
-You can publish the config file with:
+You can manually publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="forms-config"
@@ -29,22 +29,17 @@ return [
     'forms' => [
         'free_estimate' => [
             'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://development.fuelforms.com/api/f/',
-            'gtm_event' => 'Form_Submit',
-            'gtm_event_gclid' => 'Form_Submit_Gclid',
+            'development_url' => 'https://dev.fuelforms.com/api/f/',
         ],
 
         'contact_us' => [
             'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://development.fuelforms.com/api/f/',
-            'gtm_event' => 'Form_Submit',
-            'gtm_event_gclid' => 'Form_Submit_Gclid',
+            'development_url' => 'https://dev.fuelforms.com/api/f/',
         ],
 
         'careers' => [
             'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://development.fuelforms.com/api/f/',
-            'gtm_event' => 'Form_Submit_Applicant',
+            'development_url' => 'https://dev.fuelforms.com/api/f/',
         ],
     ],
 
@@ -124,75 +119,10 @@ return [
 ];
 ```
 
-Optionally, you can publish the views using
+You can publish the view files with:
 
 ```bash
 php artisan vendor:publish --tag="forms-views"
-```
-
-### Register Middleware
-
-Register middleware in your app/Http/Kernel.php file.
-
-```php
-    // GTM tracking...
-    protected $middleware = [
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Spatie\GoogleTagManager\GoogleTagManagerMiddleware::class,
-    ];
-
-    // Query params tracking...
-    protected $middlewareGroups = [
-        'web' => [
-            \Fuelviews\ParameterTagging\Http\Middleware\HandleGclid::class,
-            \Fuelviews\ParameterTagging\Http\Middleware\HandleUtm::class,
-        ],
-    ];
-```
-
-### Configure spatie google tag manager package
-
-Publish spatie google tag manager config file:
-
-```bash
-php artisan vendor:publish --provider="Spatie\GoogleTagManager\GoogleTagManagerServiceProvider" --tag="config"
-```
-
-Edit app/googletagmanager.php
-
-```php
-return [
-
-    /*
-     * The Google Tag Manager id, should be a code that looks something like "gtm-xxxx".
-     */
-    'id' => env('GOOGLE_TAG_MANAGER_ID', 'GTM-XXXXXX'),
-
-    /*
-     * Enable or disable script rendering. Useful for local development.
-     */
-    'enabled' => env('GOOGLE_TAG_MANAGER_ENABLED', true),
-
-    /*
-     * If you want to use some macro's you 'll probably store them
-     * in a dedicated file. You can optionally define the path
-     * to that file here and we will load it for you.
-     */
-    'macroPath' => env('GOOGLE_TAG_MANAGER_MACRO_PATH', ''),
-
-    /*
-     * The key under which data is saved to the session with flash.
-     */
-    'sessionKey' => env('GOOGLE_TAG_MANAGER_SESSION_KEY', '_googleTagManager'),
-
-    /*
-     * Configures the Google Tag Manager script domain.
-     * Modify this value only if you're using "Google Tag Manage: Web Container" client
-     * to serve gtm.js for your web container. Else, keep the default value.
-     */
-    'domain' => env('GOOGLE_TAG_MANAGER_DOMAIN', 'www.googletagmanager.com'),
-];
-
 ```
 
 ## Form Usage (basic)
@@ -214,7 +144,7 @@ Include form method type, form method route, spam strap in the start and end of 
 </form>
 ```
 
-## Form usage example
+## Form Usage (advanced)
 
 ```bladehtml
 <form method="POST" action="{{ route('forms.validate') }}" class="mt-16">
@@ -329,11 +259,10 @@ Include form method type, form method route, spam strap in the start and end of 
 </form>
 ```
 
+## Form Modal Usage
 
-## Form Modal Usage (basic)
-
-Include forms-modal into your layouts.app.blade.php, trigger with a button.
-You can customize which layout blade file is used in the config/forms.php file
+Include ```forms-modal``` into your ```layouts.app.blade.php``` file, trigger with a button.
+You can customize which layout blade file is used in the ```config/forms.php``` file
 
 ```php
 <button onclick="Livewire.dispatch('openModal')">Show Modal</button>
@@ -345,9 +274,9 @@ You can customize which layout blade file is used in the config/forms.php file
 Add laravel-forms to your tailwind.config.js file.
 
 ```javascript
-    content: [
-        './vendor/fuelviews/laravel-*/resources/**/*.{js,vue,blade.php}',
-    ]
+content: [
+    './vendor/fuelviews/laravel-forms/resources/**/*.php'
+]
 ```
 
 ## Testing

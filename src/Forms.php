@@ -72,11 +72,8 @@ class Forms
 
     public static function getAdditionalRulesForForm($formKey): ?array
     {
-        // Attempt to fetch the configuration for the provided formKey.
         $rules = config("forms.validation.{$formKey}");
 
-        // If the configuration does not exist for the provided formKey,
-        // fall back to the default formKey rules.
         if (is_null($rules)) {
             $rules = config('forms.validation.default', []);
         }

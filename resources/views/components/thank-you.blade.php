@@ -1,10 +1,19 @@
-<x-layouts-wrapper::layouts.app>
+<x-sabhero-wrapper::layouts.app>
     <div class="flex h-screen prose text-center justify-center mx-auto text-black items-center">
         @if(session('status') === 'success')
-            <h1>Someone will be in touch with you soon.</h1>
-            <h2 >Take care.</h2>
-        @elseif(session('status') === 'failure')
-            <h1>There was a problem with your submission, please try again later.</h1>
+            <div class="alert alert-success">
+                <h1>🎉🏠<br /><br />
+                    {{ session('message', 'Form submitted successfully!') }}
+                </h1>
+            </div>
+        @endif
+
+        @if(session('status') === 'failure')
+            <div class="alert alert-danger">
+                <h1>❌🚫<br /><br />
+                    {{ session('message', 'There was an issue submitting the form.') }}
+                </h1>
+            </div>
         @endif
     </div>
-</x-layouts-wrapper::layouts.app>
+</x-sabhero-wrapper::layouts.app>

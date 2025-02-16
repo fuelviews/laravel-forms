@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.22 - 2025-02-16
+
+### What's Changed
+
+* Bump poseidon/wait-for-status-checks from 0.5.0 to 0.6.0 by @dependabot in https://github.com/fuelviews/laravel-forms/pull/27
+* Bump poseidon/wait-for-status-checks from 0.5.0 to 0.6.0 by @dependabot in https://github.com/fuelviews/laravel-forms/pull/28
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/fuelviews/laravel-forms/pull/29
+* Remove GTM-related features and refactor forms handling. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/31
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.21...v0.0.22
+
 ## v0.0.21 - 2024-08-06
 
 ### What's Changed
