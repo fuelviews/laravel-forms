@@ -11,11 +11,12 @@ use Fuelviews\Forms\Traits\FormsSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
-use Spatie\GoogleTagManager\GoogleTagManager;
 
 #[AllowDynamicProperties] class FormsProcessingService
 {
-    use FormsApiUrlTrait, FormsRedirectSpamTrait, FormsSpamDetectionTrait;
+    use FormsApiUrlTrait;
+    use FormsRedirectSpamTrait;
+    use FormsSpamDetectionTrait;
 
     protected FormsHandlerService $formHandlerService;
 
@@ -39,26 +40,10 @@ use Spatie\GoogleTagManager\GoogleTagManager;
 
         $formKey = $request->input('form_key') ?? Forms::getModalFormKey();
 
-        $validatedData['ip'] = $request->ip();
-
-        $gclid = $request->input('gclid') ?? $request->cookie('gclid') ?? $request->session()->get('gclid');
-
-        $gtmEventGclid = config("forms.forms.{$formKey}.gtm_event_gclid");
-        $gtmEventName = $gclid && $gtmEventGclid ? $gtmEventGclid : config("forms.forms.{$formKey}.gtm_event");
-
-        $result = $this->formHandlerService->handle([
+        return $this->formHandlerService->handle([
             'url' => $this->getFormApiUrl($formKey),
             'validatedData' => $validatedData,
-            'gtmEventName' => $gtmEventName,
         ]);
-
-        if ($result['status'] === 'success') {
-            app(GoogleTagManager::class)->flash('event', $gtmEventName, [
-                'event_label' => $gtmEventName,
-            ]);
-        }
-
-        return $result;
     }
 
     public function formSubmitLimitExceeded(Request $request): bool

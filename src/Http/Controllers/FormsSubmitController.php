@@ -2,7 +2,6 @@
 
 namespace Fuelviews\Forms\Http\Controllers;
 
-use AllowDynamicProperties;
 use Fuelviews\Forms\Contracts\FormsHandlerService;
 use Fuelviews\Forms\Services\FormsProcessingService;
 use Fuelviews\Forms\Services\FormsValidationRuleService;
@@ -12,14 +11,14 @@ use Fuelviews\Forms\Traits\FormsSpamDetectionTrait;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-#[AllowDynamicProperties] class FormsSubmitController extends Controller
+class FormsSubmitController extends Controller
 {
-    use FormsApiUrlTrait, FormsRedirectSpamTrait, FormsSpamDetectionTrait;
+    use FormsApiUrlTrait;
+    use FormsRedirectSpamTrait;
+    use FormsSpamDetectionTrait;
 
     protected FormsProcessingService $formProcessingService;
-
     protected FormsHandlerService $formHandlerService;
-
     protected FormsValidationRuleService $validationRuleService;
 
     public function __construct(
@@ -32,7 +31,7 @@ use Illuminate\Routing\Controller;
         $this->formProcessingService = $formProcessingService;
     }
 
-    public function handleSubmit(Request $request): \Illuminate\Http\RedirectResponse
+    public function handleSubmit(Request $request)
     {
         $formKey = request()->input('form_key', 'default');
         $rules = FormsValidationRuleService::getRulesForDefault($formKey);
@@ -43,13 +42,19 @@ use Illuminate\Routing\Controller;
         }
 
         if (is_array($result) && $result['status'] === 'failure') {
-            return back()->withInput()->withErrors(['error' => $result['message']]);
+            session()->flash('status', 'failure');
+            session()->flash('message', $result['message'] ?? 'There was an issue submitting the form.');
+            return back()->withInput();
         }
 
         if ($result['status'] === 'success') {
-            return redirect()->route('forms.thank-you')->with('status', 'success');
+            session()->flash('status', 'success');
+            session()->flash('message', 'Form submitted successfully!');
+            \Illuminate\Support\Facades\Log::info('Flashed session data:', [
+                'status' => session('status'),
+                'message' => session('message'),
+            ]);
+            return redirect()->route('forms.thank-you');
         }
-
-        return back()->withInput();
     }
 }

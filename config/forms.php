@@ -3,23 +3,18 @@
 return [
     'forms' => [
         'free_estimate' => [
-            'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://development.fuelforms.com/api/f/',
-            'gtm_event' => 'Form_Submit',
-            'gtm_event_gclid' => 'Form_Submit_Gclid',
+            'production_url' => 'https://fuelforms.com/api/f/7is0rmx4ar3aarmyagsa',
+            'development_url' => 'https://dev.fuelforms.com/api/f/7is0rmx4ar3aarmyagsa',
         ],
 
         'contact_us' => [
-            'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://development.fuelforms.com/api/f/',
-            'gtm_event' => 'Form_Submit',
-            'gtm_event_gclid' => 'Form_Submit_Gclid',
+            'production_url' => 'https://fuelforms.com/api/f/nqh4t4rmfybhxo49ac2l',
+            'development_url' => 'https://dev.fuelforms.com/api/f/nqh4t4rmfybhxo49ac2l',
         ],
 
         'careers' => [
-            'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://development.fuelforms.com/api/f/',
-            'gtm_event' => 'Form_Submit_Applicant',
+            'production_url' => 'https://fuelforms.com/api/f/c9jxczhka5e5snnnbe9s',
+            'development_url' => 'https://dev.fuelforms.com/api/f/c9jxczhka5e5snnnbe9s',
         ],
     ],
 
@@ -34,17 +29,18 @@ return [
                     'inside',
                     'outside',
                     'cabinets',
+                    'remodeling',
                 ],
             ],
         ],
 
         'tos' => [
             'enabled' => true,
-            'content' => 'By clicking "Submit" above, I expressly consent to...',
+            'content' => 'By clicking "Submit" above, I expressly consent to Innovation General Contracting dba Innovation Painting & Remodeling to send marketing/promotional, transactional, and informational messages via text, phone calls, pre-recorded or artificial voice message, from our phone system or with our CRM or Automatic Telephone Dialing System (ATDS) for the related marketing services I am inquiring about to the number I own and provided above. Accepting this consent is not required to obtain any good or service. You may opt out of receiving messages at any time by replying with "Remove" or "Stop." This consent applies even if previously registered on any Federal, State, and/or Internal Do Not Call (DC) list or Registries. You confirm that you are at least 18 years old and have read and accepted the website\'s Privacy & Terms of Service. Data rates may apply.',
         ],
 
         'optional_div' => [
-            'enabled' => true,
+            'enabled' => false,
             'title' => 'Looking to work with us?',
             'link_text' => 'Apply Here',
             'link_route' => 'welcome',
@@ -78,7 +74,7 @@ return [
 
         'steps' => [
             1 => [
-                'location' => 'required|in:inside,outside,cabinets',
+                'location' => 'required|in:inside,outside,cabinets,remodeling',
             ],
             2 => [
                 'firstName' => 'required|min:2|max:24',
@@ -87,7 +83,7 @@ return [
                 'phone' => 'required|min:7|max:19',
                 'zipCode' => 'required|min:4|max:9',
                 'message' => 'nullable|max:255',
-                'location' => 'required|in:inside,outside,cabinets',
+                'location' => 'required|in:inside,outside,cabinets,remodeling',
             ],
         ],
     ],
