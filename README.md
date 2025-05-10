@@ -22,103 +22,6 @@ You can manually publish the config file with:
 php artisan vendor:publish --tag="forms-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-    'forms' => [
-        'free_estimate' => [
-            'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://dev.fuelforms.com/api/f/',
-        ],
-
-        'contact_us' => [
-            'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://dev.fuelforms.com/api/f/',
-        ],
-
-        'careers' => [
-            'production_url' => 'https://fuelforms.com/api/f/',
-            'development_url' => 'https://dev.fuelforms.com/api/f/',
-        ],
-    ],
-
-    'modal' => [
-        'title' => 'Your Project Info',
-        'form_key' => 'free_estimate',
-
-        'steps' => [
-            1 => [
-                'heading' => 'Where do you need painting?',
-                'locations' => [
-                    'inside',
-                    'outside',
-                    'cabinets',
-                ],
-            ],
-        ],
-
-        'tos' => [
-            'enabled' => true,
-            'content' => 'By clicking "Submit" above, I expressly consent to...',
-        ],
-
-        'optional_div' => [
-            'enabled' => true,
-            'title' => 'Looking to work with us?',
-            'link_text' => 'Apply Here',
-            'link_route' => 'welcome',
-        ],
-    ],
-
-    'validation' => [
-        'default' => [
-            'firstName' => 'required|min:2|max:24',
-            'lastName' => 'required|min:2|max:24',
-            'email' => 'required|email',
-            'phone' => 'required|min:7|max:19',
-            'message' => 'nullable|max:255',
-        ],
-
-        'free_estimate' => [
-            'firstName' => 'required|min:2|max:24',
-            'lastName' => 'required|min:2|max:24',
-            'email' => 'required|email',
-            'phone' => 'required|min:7|max:19',
-            'message' => 'nullable|max:255',
-        ],
-
-        'contact_us' => [
-            'firstName' => 'required|min:2|max:24',
-            'lastName' => 'required|min:2|max:24',
-            'email' => 'required|email',
-            'phone' => 'required|min:7|max:19',
-            'message' => 'nullable|max:255',
-        ],
-
-        'steps' => [
-            1 => [
-                'location' => 'required|in:inside,outside,cabinets',
-            ],
-            2 => [
-                'firstName' => 'required|min:2|max:24',
-                'lastName' => 'required|min:2|max:24',
-                'email' => 'required|email',
-                'phone' => 'required|min:7|max:19',
-                'zipCode' => 'required|min:4|max:9',
-                'message' => 'nullable|max:255',
-                'location' => 'required|in:inside,outside,cabinets',
-            ],
-        ],
-    ],
-
-    'spam_redirects' => [
-        'yelp' => 'https://yelp.com',
-        'bbb' => 'https://bbb.org',
-    ],
-];
-```
-
 You can publish the view files with:
 
 ```bash
@@ -299,7 +202,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Thejmitchener](https://github.com/thejmitchener)
+- [Joshua Mitchener](https://github.com/thejmitchener)
+- [Daniel Clark](https://github.com/sweatybreeze)
 - [Fuelviews](https://github.com/fuelviews)
 - [All Contributors](../../contributors)
 
