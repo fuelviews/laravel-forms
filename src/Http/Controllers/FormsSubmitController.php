@@ -44,6 +44,7 @@ class FormsSubmitController extends Controller
         if (is_array($result) && $result['status'] === 'failure') {
             session()->flash('status', 'failure');
             session()->flash('message', $result['message'] ?? 'There was an issue submitting the form.');
+
             return back()->withInput();
         }
 
@@ -54,6 +55,7 @@ class FormsSubmitController extends Controller
                 'status' => session('status'),
                 'message' => session('message'),
             ]);
+
             return redirect()->route('forms.thank-you');
         }
     }

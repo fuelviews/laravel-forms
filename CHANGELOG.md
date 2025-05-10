@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.23 - 2025-05-10
+
+### What's Changed
+
+* Bump poseidon/wait-for-status-checks from 0.5.0 to 0.6.0 by @dependabot in https://github.com/fuelviews/laravel-forms/pull/27
+* Bump poseidon/wait-for-status-checks from 0.5.0 to 0.6.0 by @dependabot in https://github.com/fuelviews/laravel-forms/pull/28
+* Bump stefanzweifel/git-auto-commit-action from 4 to 5 by @dependabot in https://github.com/fuelviews/laravel-forms/pull/29
+* Add PHP CS Fixer configuration file for code style enforcement and update README for clarity. Adjust composer dependencies to support PHP 8.3 and improve modal optional div link handling in the view. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/32
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.21...v0.0.23
+
 ## v0.0.22 - 2025-02-16
 
 ### What's Changed

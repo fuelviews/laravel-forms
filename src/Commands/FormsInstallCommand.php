@@ -5,7 +5,6 @@ namespace Fuelviews\Forms\Commands;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
-use Spatie\LaravelPackageTools\Commands\InstallCommand;
 
 class FormsInstallCommand extends Command
 {
@@ -33,6 +32,7 @@ class FormsInstallCommand extends Command
             $this->info('✅ Packages installed successfully.');
         } catch (ProcessFailedException $e) {
             $this->error('❌ Failed to install packages: ' . $e->getMessage());
+
             return self::FAILURE;
         }
 
