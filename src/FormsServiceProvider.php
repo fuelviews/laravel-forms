@@ -10,10 +10,10 @@ use Fuelviews\Forms\Middleware\HandleGclid;
 use Fuelviews\Forms\Middleware\HandleUtm;
 use Fuelviews\Forms\Services\FormsSubmitService;
 use Fuelviews\Forms\Services\FormsValidationRuleService;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -82,7 +82,6 @@ class FormsServiceProvider extends PackageServiceProvider
             })->name('forms.thank-you');
         });
     }
-
 
     private function providerIsLoaded($app, $providerClass): bool
     {
