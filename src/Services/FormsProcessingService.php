@@ -8,6 +8,7 @@ use Fuelviews\Forms\Forms;
 use Fuelviews\Forms\Traits\FormsApiUrlTrait;
 use Fuelviews\Forms\Traits\FormsRedirectSpamTrait;
 use Fuelviews\Forms\Traits\FormsSpamDetectionTrait;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
@@ -22,10 +23,10 @@ use Illuminate\Support\Facades\App;
 
     protected FormsValidationRuleService $validationRuleService;
 
-    public function __construct(FormsHandlerService $formHandlerService, FormsValidationRuleService $validationRuleService)
+    public function __construct(FormsHandlerService $formsHandlerService, FormsValidationRuleService $formsValidationRuleService)
     {
-        $this->formHandlerService = $formHandlerService;
-        $this->validationRuleService = $validationRuleService;
+        $this->formHandlerService = $formsHandlerService;
+        $this->validationRuleService = $formsValidationRuleService;
     }
 
     public function processForm(Request $request, array $validatedData): array|\Illuminate\Http\RedirectResponse
@@ -58,9 +59,9 @@ use Illuminate\Support\Facades\App;
     }
 
     /**
-     * Handle the response when form submission limit is exceeded.
+     * Handle the response when the form submission limit is exceeded.
      */
-    public function handleExceededLimitResponse()
+    public function handleExceededLimitResponse(): RedirectResponse
     {
         return back()->withInput()->withErrors(['form.submit.limit' => 'Form submit limit exceeded']);
     }

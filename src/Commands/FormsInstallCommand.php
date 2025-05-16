@@ -21,7 +21,7 @@ class FormsInstallCommand extends Command
 
         $requireCommand = 'composer require';
         foreach ($packages as $package => $version) {
-            $requireCommand .= " {$package}:\"{$version}\"";
+            $requireCommand .= sprintf(' %s:"%s"', $package, $version);
 
         }
 
@@ -30,8 +30,8 @@ class FormsInstallCommand extends Command
         try {
             $this->runShellCommand($requireCommand);
             $this->info('✅ Packages installed successfully.');
-        } catch (ProcessFailedException $e) {
-            $this->error('❌ Failed to install packages: ' . $e->getMessage());
+        } catch (ProcessFailedException $processFailedException) {
+            $this->error('❌ Failed to install packages: ' . $processFailedException->getMessage());
 
             return self::FAILURE;
         }
@@ -42,7 +42,7 @@ class FormsInstallCommand extends Command
         return self::SUCCESS;
     }
 
-    private function runShellCommand($command): void
+    private function runShellCommand(string $command): void
     {
         $process = Process::fromShellCommandline($command);
 
@@ -50,7 +50,7 @@ class FormsInstallCommand extends Command
             $process->setTty(true);
         }
 
-        $process->run(function ($type, $buffer) {
+        $process->run(function ($type, $buffer): void {
             $this->output->write($buffer);
         });
 

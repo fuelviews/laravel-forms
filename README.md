@@ -72,84 +72,6 @@ Include form method type, form method route, spam strap in the start and end of 
                 @enderror
             </div>
         </div>
-        <div>
-            <label for="lastName" class="block text-sm font-semibold leading-6 text-gray-900">
-                Last name
-            </label>
-            <div class="mt-1">
-                <input
-                    type="text"
-                    name="first-name"
-                    id="lastName"
-                    wire:model="lastName"
-                    autocomplete="family-name"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    pattern=".{2,}"
-                    title="Last name must be at least 2 characters." />
-                @error('lastName')
-                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        <div class="sm:col-span-2">
-            <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">
-                Email
-            </label>
-            <div class="mt-1">
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    wire:model="email"
-                    autocomplete="email"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                @error('email')
-                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        <div class="sm:col-span-2">
-            <div class="flex justify-between text-sm leading-6">
-                <label for="phone" class="block font-semibold text-gray-900">Phone</label>
-            </div>
-            <div class="mt-1">
-                <input
-                    type="tel"
-                    name="phone"
-                    id="phone"
-                    wire:model="phone"
-                    autocomplete="tel"
-                    aria-describedby="phone-description"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    pattern="[\s\d\-\(\)]*?(\d[\s\d\-\(\)]*?){7,11}"
-                    title="Phone number must have 7 to 11 digits and may include parentheses, spaces, and hyphens."
-                    />
-                @error('phone')
-                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-        <div class="sm:col-span-2">
-            <div class="flex justify-between text-sm leading-6">
-                <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">
-                    How can we help you?
-                </label>
-                <p id="message-description" class="text-gray-400">Max 255 characters</p>
-            </div>
-            <div class="mt-1">
-                <textarea
-                    id="message"
-                    name="message"
-                    wire:model="message"
-                    rows="4"
-                    aria-describedby="message-description"
-                    class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
-                @error('message')
-                    <span class="flex pl-1 pt-2 text-sm text-red-600">{{ $message }}</span>
-                @enderror
-            </div>
-        </div>
-    </div>
 
     <x-forms::meta />
     <input type="hidden" name="form_key" value="contact_us" />
@@ -202,8 +124,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Joshua Mitchener](https://github.com/thejmitchener)
-- [Daniel Clark](https://github.com/sweatybreeze)
+- [Thejmitchener](https://github.com/thejmitchener)
+- [Sweatybreeze](https://github.com/sweatybreeze)
 - [Fuelviews](https://github.com/fuelviews)
 - [All Contributors](../../contributors)
 

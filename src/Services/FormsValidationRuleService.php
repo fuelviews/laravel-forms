@@ -11,7 +11,7 @@ class FormsValidationRuleService
      *
      * @return array The merged rules
      */
-    public static function getRulesForDefault($formKey): array
+    public static function getRulesForDefault(string $formKey): array
     {
         $defaultRules = [
             'isSpam' => 'nullable|string',
@@ -35,7 +35,7 @@ class FormsValidationRuleService
      *
      * @return array The merged rules
      */
-    public function getRulesForStep($step): array
+    public function getRulesForStep(string $step): array
     {
         $defaultRules = [
             'isSpam' => 'nullable|string',

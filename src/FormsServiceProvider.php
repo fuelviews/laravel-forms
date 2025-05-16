@@ -33,7 +33,7 @@ class FormsServiceProvider extends PackageServiceProvider
     {
         $this->app->singleton(FormsHandlerService::class, FormsSubmitService::class);
 
-        $this->app->singleton(FormsValidationRuleService::class, function ($app) {
+        $this->app->singleton(function ($app): \Fuelviews\Forms\Services\FormsValidationRuleService {
             return new FormsValidationRuleService();
         });
     }
@@ -44,16 +44,16 @@ class FormsServiceProvider extends PackageServiceProvider
             Livewire::component('forms-modal', FormsModal::class);
         }
 
-        $this->app->extend(Application::class, function (Application $app) {
-            if (method_exists($app, 'configureMiddleware')) {
-                $app->configureMiddleware(function (Middleware $middleware) {
+        $this->app->extend(Application::class, function (Application $application): \Illuminate\Foundation\Application {
+            if (method_exists($application, 'configureMiddleware')) {
+                $application->configureMiddleware(function (Middleware $middleware): void {
                     $middleware->appendToGroup('web', [
                         HandleGclid::class,
                         HandleUtm::class,
                     ]);
                 });
             } else {
-                $this->app->booting(function () {
+                $this->app->booting(function (): void {
                     $kernel = $this->app->make(Kernel::class);
 
                     foreach ([
@@ -65,14 +65,14 @@ class FormsServiceProvider extends PackageServiceProvider
                 });
             }
 
-            return $app;
+            return $application;
         });
     }
 
     public function registeringPackage(): void
     {
-        Route::middleware(['web'])->group(function () {
-            Route::prefix('forms')->group(function () {
+        Route::middleware(['web'])->group(function (): void {
+            Route::prefix('forms')->group(function (): void {
                 Route::post('/submit', [FormsSubmitController::class, 'handleSubmit'])
                     ->name('forms.validate');
             });
@@ -81,10 +81,5 @@ class FormsServiceProvider extends PackageServiceProvider
                 return view('forms::components.thank-you');
             })->name('forms.thank-you');
         });
-    }
-
-    private function providerIsLoaded($app, $providerClass): bool
-    {
-        return collect($app->getLoadedProviders())->has($providerClass);
     }
 }

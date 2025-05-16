@@ -18,17 +18,19 @@ class FormsSubmitController extends Controller
     use FormsSpamDetectionTrait;
 
     protected FormsProcessingService $formProcessingService;
+
     protected FormsHandlerService $formHandlerService;
+
     protected FormsValidationRuleService $validationRuleService;
 
     public function __construct(
-        FormsHandlerService $formHandlerService,
-        FormsValidationRuleService $validationRuleService,
-        FormsProcessingService $formProcessingService
+        FormsHandlerService $formsHandlerService,
+        FormsValidationRuleService $formsValidationRuleService,
+        FormsProcessingService $formsProcessingService
     ) {
-        $this->formHandlerService = $formHandlerService;
-        $this->validationRuleService = $validationRuleService;
-        $this->formProcessingService = $formProcessingService;
+        $this->formHandlerService = $formsHandlerService;
+        $this->validationRuleService = $formsValidationRuleService;
+        $this->formProcessingService = $formsProcessingService;
     }
 
     public function handleSubmit(Request $request)
@@ -41,7 +43,7 @@ class FormsSubmitController extends Controller
             return $result;
         }
 
-        if (is_array($result) && $result['status'] === 'failure') {
+        if ($result['status'] === 'failure') {
             session()->flash('status', 'failure');
             session()->flash('message', $result['message'] ?? 'There was an issue submitting the form.');
 
@@ -58,5 +60,6 @@ class FormsSubmitController extends Controller
 
             return redirect()->route('forms.thank-you');
         }
+        return null;
     }
 }

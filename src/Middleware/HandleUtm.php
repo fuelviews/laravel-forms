@@ -14,13 +14,13 @@ class HandleUtm
 
         $utmParameters = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
 
-        foreach ($utmParameters as $param) {
-            if ($value = $request->query($param)) {
-                if (! $request->cookies->has($param)) {
-                    Cookie::queue($param, $value, 43200);
+        foreach ($utmParameters as $utmParameter) {
+            if ($value = $request->query($utmParameter)) {
+                if (! $request->cookies->has($utmParameter)) {
+                    Cookie::queue($utmParameter, $value, 43200);
                 }
 
-                $request->session()->put($param, $value);
+                $request->session()->put($utmParameter, $value);
             }
         }
 

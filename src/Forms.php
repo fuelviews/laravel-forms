@@ -19,7 +19,7 @@ class Forms
 
     public static function getModalStepTitle($step)
     {
-        return config("forms.modal.steps.{$step}.heading");
+        return config(sprintf('forms.modal.steps.%s.heading', $step));
     }
 
     /**
@@ -70,12 +70,12 @@ class Forms
         return config('forms.modal.optional_div.link_route');
     }
 
-    public static function getAdditionalRulesForForm($formKey): ?array
+    public static function getAdditionalRulesForForm(string $formKey): ?array
     {
-        $rules = config("forms.validation.{$formKey}");
+        $rules = config('forms.validation.' . $formKey);
 
         if (is_null($rules)) {
-            $rules = config('forms.validation.default', []);
+            return config('forms.validation.default', []);
         }
 
         return $rules;
@@ -86,9 +86,9 @@ class Forms
         return config('forms.validation.default', []);
     }
 
-    public static function getAdditionalRulesForStep($step): ?array
+    public static function getAdditionalRulesForStep(string $step): ?array
     {
-        return config("forms.validation.steps.{$step}", []);
+        return config('forms.validation.steps.' . $step, []);
     }
 
     public static function getLastStep(): ?int

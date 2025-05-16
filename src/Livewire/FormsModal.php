@@ -7,6 +7,7 @@ use Fuelviews\Forms\Contracts\FormsHandlerService;
 use Fuelviews\Forms\Services\FormsProcessingService;
 use Fuelviews\Forms\Services\FormsValidationRuleService;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 use Livewire\Component;
 
 #[AllowDynamicProperties] class FormsModal extends Component
@@ -59,14 +60,14 @@ use Livewire\Component;
 
     public $location;
 
-    public function boot(FormsHandlerService $formHandler, FormsProcessingService $formProcessingService, FormsValidationRuleService $validationRuleService)
+    public function boot(FormsHandlerService $formsHandlerService, FormsProcessingService $formsProcessingService, FormsValidationRuleService $formsValidationRuleService): void
     {
-        $this->formHandler = $formHandler;
-        $this->validationRuleService = $validationRuleService;
-        $this->formProcessingService = $formProcessingService;
+        $this->formHandler = $formsHandlerService;
+        $this->validationRuleService = $formsValidationRuleService;
+        $this->formProcessingService = $formsProcessingService;
     }
 
-    public function mount()
+    public function mount(): void
     {
         $this->loadInitialData([
             'gclid',
@@ -78,7 +79,7 @@ use Livewire\Component;
         ]);
     }
 
-    public function openModal()
+    public function openModal(): void
     {
         $this->isOpen = true;
         $this->step = 1;
@@ -88,7 +89,7 @@ use Livewire\Component;
     /**
      * @throws \Exception
      */
-    public function nextStep()
+    public function nextStep(): void
     {
         $validatedData = $this->validateStepData();
         $this->formData = array_merge($validatedData, $this->formData);
@@ -109,7 +110,7 @@ use Livewire\Component;
         }
     }
 
-    public function backStep()
+    public function backStep(): void
     {
         if ($this->step > 1) {
             $this->step--;
@@ -124,7 +125,7 @@ use Livewire\Component;
         return $this->validate($rules);
     }
 
-    private function isLastStep($step)
+    private function isLastStep($step): bool
     {
         return $step >= $this->totalSteps;
     }
@@ -139,19 +140,17 @@ use Livewire\Component;
         if ($result instanceof \Illuminate\Http\RedirectResponse) {
             $this->addError('form.submit.limit', 'Form submit limit exceeded');
 
-            return;
+            return false;
         }
 
         if (is_array($result) && $result['status'] === 'success') {
             return redirect()->route('forms.thank-you')->with('status', 'success');
-        } else {
-            Log::error('Error processing form: '.($result['message'] ?? 'Unknown error'));
-
-            return back()->withInput()->withErrors(['error' => $result['message'] ?? 'An unknown error occurred']);
         }
+        Log::error('Error processing form: '.($result['message'] ?? 'Unknown error'));
+        return back()->withInput()->withErrors(['error' => $result['message'] ?? 'An unknown error occurred']);
     }
 
-    private function loadInitialData(array $keys)
+    private function loadInitialData(array $keys): void
     {
         foreach ($keys as $propertyName => $requestKey) {
             if (is_numeric($propertyName)) {
@@ -162,12 +161,12 @@ use Livewire\Component;
         }
     }
 
-    public function closeModal()
+    public function closeModal(): void
     {
         $this->isOpen = false;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('forms::livewire.forms-modal');
     }

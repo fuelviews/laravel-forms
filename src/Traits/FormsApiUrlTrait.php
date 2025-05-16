@@ -16,7 +16,7 @@ trait FormsApiUrlTrait
     {
         $environment = $this->determineEnvironment();
 
-        return config("forms.forms.{$formKey}.{$environment}", null);
+        return config(sprintf('forms.forms.%s.%s', $formKey, $environment), null);
     }
 
     /**
