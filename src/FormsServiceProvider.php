@@ -33,7 +33,7 @@ class FormsServiceProvider extends PackageServiceProvider
     {
         $this->app->singleton(FormsHandlerService::class, FormsSubmitService::class);
 
-        $this->app->singleton(function ($app): \Fuelviews\Forms\Services\FormsValidationRuleService {
+        $this->app->singleton(\Fuelviews\Forms\Services\FormsValidationRuleService::class, function ($app): \Fuelviews\Forms\Services\FormsValidationRuleService {
             return new FormsValidationRuleService();
         });
     }

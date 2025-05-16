@@ -39,7 +39,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Fuelviews\\Forms\\Tests\\": "tests/",
+            "Fuelviews\\Forms\\Tests\\": "tests/"
         }
     },
     "scripts": {
