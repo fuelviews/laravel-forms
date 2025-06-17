@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.24 - 2025-06-17
+
+### What's Changed
+
+* Add loading state to the submit button and form processing to enhanceuser experience during form submission. Introduce a configuration file to manage project settings related to server functionality. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/35
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.23...v0.0.24
+
 ## v0.0.23 - 2025-05-10
 
 ### What's Changed
