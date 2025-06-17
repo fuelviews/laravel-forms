@@ -19,6 +19,8 @@ use Livewire\Component;
 
     public $formData = [];
 
+    public $isLoading = false;
+
     private $formProcessingService;
 
     private $formHandler;
@@ -90,6 +92,10 @@ use Livewire\Component;
      */
     public function nextStep()
     {
+        if ($this->isLastStep($this->step)) {
+            $this->isLoading = true;
+        }
+
         $validatedData = $this->validateStepData();
         $this->formData = array_merge($validatedData, $this->formData);
 
