@@ -11,10 +11,21 @@ class FormsSubmitService implements FormsHandlerService
     public function handle(array $data): array
     {
         try {
+            // Filter out Turnstile token and other internal fields before sending to API
+            $fieldsToExclude = [
+                'cf-turnstile-response',
+                'turnstileToken',
+                'g-recaptcha-response', // In case of future reCAPTCHA support
+            ];
+
+            $filteredData = collect($data['validatedData'])
+                ->except($fieldsToExclude)
+                ->toArray();
+
             if (App::environment('production') && ! config('app.debug')) {
-                $response = Http::asForm()->post($data['url'], $data['validatedData']);
+                $response = Http::asForm()->post($data['url'], $filteredData);
             } else {
-                $response = Http::withOptions(['verify' => false])->asForm()->post($data['url'], $data['validatedData']);
+                $response = Http::withOptions(['verify' => false])->asForm()->post($data['url'], $filteredData);
             }
 
             if ($response->successful()) {

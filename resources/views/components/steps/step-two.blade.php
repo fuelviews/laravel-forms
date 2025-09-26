@@ -69,6 +69,19 @@
         <div class="sm:col-span-2">
             <x-forms::error :errorKey="'form.submit.limit'" />
         </div>
+
+        {{-- Turnstile widget - always visible when enabled --}}
+        @if(config('forms.turnstile.enabled'))
+            <div class="sm:col-span-2">
+                <x-forms::turnstile
+                    id="modal-turnstile"
+                    wire:model="turnstileToken"
+                    :callback="'window.turnstileCallbacks.onSuccess'"
+                    :error-callback="'window.turnstileCallbacks.onError'"
+                    :expired-callback="'window.turnstileCallbacks.onExpired'"
+                />
+            </div>
+        @endif
     </div>
 
     <input type="text" name="gotcha" class="hidden" />

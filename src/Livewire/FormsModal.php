@@ -61,6 +61,8 @@ use Livewire\Component;
 
     public $location;
 
+    public $turnstileToken;
+
     public function boot(FormsHandlerService $formHandler, FormsProcessingService $formProcessingService, FormsValidationRuleService $validationRuleService)
     {
         $this->formHandler = $formHandler;
@@ -139,6 +141,11 @@ use Livewire\Component;
     {
         $request = request();
         $validatedData = session()->get('form_data', []);
+
+        // Add Turnstile token to request if present
+        if ($this->turnstileToken) {
+            $request->merge(['cf-turnstile-response' => $this->turnstileToken]);
+        }
 
         $result = $this->formProcessingService->processForm($request, $validatedData);
 

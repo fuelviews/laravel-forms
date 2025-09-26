@@ -92,4 +92,18 @@ return [
         'yelp' => 'https://yelp.com',
         'bbb' => 'https://bbb.org',
     ],
+
+    'turnstile' => [
+        'enabled' => env('TURNSTILE_ENABLED', false),
+        'site_key' => env('TURNSTILE_SITE_KEY'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY'),
+        'theme' => env('TURNSTILE_THEME', 'auto'), // light, dark, auto
+        'size' => env('TURNSTILE_SIZE', 'normal'), // normal, compact
+        'appearance' => env('TURNSTILE_APPEARANCE', 'always'), // always, interaction-only
+        'verify_url' => 'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+        'script_url' => 'https://challenges.cloudflare.com/turnstile/v0/api.js',
+        'timeout' => 30, // seconds for verification request
+        'retry_interval' => 5, // seconds before retry on failure
+        'max_retries' => 3,
+    ],
 ];
