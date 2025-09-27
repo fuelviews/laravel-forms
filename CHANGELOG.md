@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v0.0.25 - 2025-09-27
+
+### What's Changed
+
+* Bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot[bot] in https://github.com/fuelviews/laravel-forms/pull/36
+* Bump platisd/openai-pr-description from 1.4.0 to 1.5.0 by @dependabot[bot] in https://github.com/fuelviews/laravel-forms/pull/38
+* Bump anothrNick/github-tag-action from 1.73.0 to 1.75.0 by @dependabot[bot] in https://github.com/fuelviews/laravel-forms/pull/39
+* Update button color classes for consistency and improve dark mode support in the thank-you component. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/40
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.24...v0.0.25
+
 ## v0.0.24 - 2025-06-17
 
 ### What's Changed
