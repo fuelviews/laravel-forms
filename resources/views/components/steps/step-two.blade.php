@@ -69,6 +69,32 @@
         <div class="sm:col-span-2">
             <x-forms::error :errorKey="'form.submit.limit'" />
         </div>
+
+        @if(config('forms.turnstile.enabled') && config('forms.turnstile.site_key'))
+        <div class="sm:col-span-2">
+            <div
+                x-data="{
+                    initTurnstile() {
+                        if (typeof turnstile !== 'undefined' && this.$el.querySelector('.cf-turnstile')) {
+                            const container = this.$el.querySelector('.cf-turnstile');
+                            if (!container.hasChildNodes() || container.children.length === 0) {
+                                turnstile.render(container, {
+                                    sitekey: '{{ config('forms.turnstile.site_key') }}',
+                                    callback: function(token) {
+                                        @this.set('turnstileToken', token);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                }"
+                x-init="$nextTick(() => { setTimeout(() => initTurnstile(), 500); })"
+                wire:ignore
+            >
+                <div class="cf-turnstile" data-sitekey="{{ config('forms.turnstile.site_key') }}"></div>
+            </div>
+        </div>
+        @endif
     </div>
 
     <input type="text" name="gotcha" class="hidden" />
