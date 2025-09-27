@@ -33,6 +33,16 @@ class FormsSubmitController extends Controller
 
     public function handleSubmit(Request $request)
     {
+        // Validate Turnstile if it's enabled
+        if (config('forms.turnstile.enabled') && config('forms.turnstile.site_key')) {
+            $request->validate([
+                'cf-turnstile-response' => ['required', 'turnstile'],
+            ], [
+                'cf-turnstile-response.required' => 'Please complete the security challenge.',
+                'cf-turnstile-response.turnstile' => 'Security challenge validation failed. Please try again.',
+            ]);
+        }
+
         $formKey = request()->input('form_key', 'default');
         $rules = FormsValidationRuleService::getRulesForDefault($formKey);
         $result = $this->formProcessingService->processForm($request, $request->validate($rules));
