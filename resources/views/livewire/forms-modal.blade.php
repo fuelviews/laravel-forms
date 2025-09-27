@@ -1,4 +1,5 @@
 <div>
+    @turnstileScripts()
     @if($isOpen)
         <div class="fixed inset-0 flex justify-center items-center z-50 bg-black bg-opacity-50">
             <div wire:click="closeModal" class="relative p-4 flex justify-center items-center flex-col w-full">

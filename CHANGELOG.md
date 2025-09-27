@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v1.0.0 - 2025-09-27
+
+### What's Changed
+
+* Add Cloudflare Turnstile CAPTCHA support for spam protection with configuration, validation, and UI integration; enhance form inputs to retain old values; include middleware to handle fbclid query parameter; update dependencies and documentation accordingly. #major by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/41
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v0.0.25...v1.0.0
+
 ## v0.0.25 - 2025-09-27
 
 ### What's Changed

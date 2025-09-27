@@ -6,7 +6,7 @@
         <input type="text" name="gotcha" style="display:none" />
 
         <div class="col-span-2">
-            <div class="flex space-x-2 pt-4">
+            <div class="flex flex-wrap gap-x-2 gap-y-6 pt-4">
                 @foreach (config('forms.modal.steps.1.locations') as $location)
                     <div>
                         <x-forms::buttons.location-button :location="$location" />
