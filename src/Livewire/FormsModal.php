@@ -36,6 +36,7 @@ use Livewire\Component;
     public $submitClicked;
 
     public $gclid;
+    public $fbclid;
 
     public $utmCampaign;
 
@@ -74,6 +75,7 @@ use Livewire\Component;
     {
         $this->loadInitialData([
             'gclid',
+            'fbclid',
             'utmSource' => 'utm_source',
             'utmMedium' => 'utm_medium',
             'utmCampaign' => 'utm_campaign',
