@@ -53,11 +53,6 @@ TURNSTILE_SECRET_KEY=your_secret_key_here
 The package configuration in `config/forms.php` supports flexible environment variables:
 
 ```php
-'turnstile' => [
-    'enabled' => env('FORMS_TURNSTILE_ENABLED', false),
-    'site_key' => env('TURNSTILE_SITE_KEY', env('FORMS_TURNSTILE_SITE_KEY', '')),
-    'secret_key' => env('TURNSTILE_SECRET_KEY', env('FORMS_TURNSTILE_SECRET_KEY', '')),
-],
     'turnstile' => [
         'enabled' => env('FORMS_TURNSTILE_ENABLED', false),
         'site_key' => env('TURNSTILE_SITE_KEY','1x00000000000000000000AA'),
