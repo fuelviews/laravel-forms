@@ -61,6 +61,8 @@ use Livewire\Component;
 
     public $location;
 
+    public $turnstileToken = '';
+
     public function boot(FormsHandlerService $formHandler, FormsProcessingService $formProcessingService, FormsValidationRuleService $validationRuleService)
     {
         $this->formHandler = $formHandler;
@@ -92,11 +94,25 @@ use Livewire\Component;
      */
     public function nextStep()
     {
+        // Validate Turnstile on step 2 if enabled
+        if ($this->step === 2 && config('forms.turnstile.enabled') && config('forms.turnstile.site_key')) {
+            $this->validate([
+                'turnstileToken' => ['required', 'turnstile'],
+            ], [
+                'turnstileToken.required' => 'Please complete the security challenge.',
+                'turnstileToken.turnstile' => 'Security challenge validation failed. Please try again.',
+            ]);
+        }
+
         if ($this->isLastStep($this->step)) {
             $this->isLoading = true;
         }
 
         $validatedData = $this->validateStepData();
+
+        // Remove turnstileToken from validated data so it's not stored
+        unset($validatedData['turnstileToken']);
+
         $this->formData = array_merge($validatedData, $this->formData);
 
         if ($this->step < $this->totalSteps) {

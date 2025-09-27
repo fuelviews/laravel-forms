@@ -1,6 +1,6 @@
 # Laravel forms package
 
-Laravel forms package
+Laravel forms package with built-in spam protection and optional Cloudflare Turnstile support.
 
 ## Installation
 
@@ -26,6 +26,43 @@ You can publish the view files with:
 
 ```bash
 php artisan vendor:publish --tag="forms-views"
+```
+
+## Cloudflare Turnstile Setup (Optional)
+
+This package includes built-in support for Cloudflare Turnstile CAPTCHA to protect your forms from spam.
+
+### 1. Get Your Turnstile Keys
+
+1. Sign up for a free [Cloudflare account](https://dash.cloudflare.com/sign-up) if you don't have one
+2. Go to the [Turnstile dashboard](https://dash.cloudflare.com/?to=/:account/turnstile)
+3. Create a new site and get your Site Key and Secret Key
+
+### 2. Configure Your Environment
+
+Add these to your `.env` file:
+
+```env
+FORMS_TURNSTILE_ENABLED=true
+TURNSTILE_SITE_KEY=your_site_key_here
+TURNSTILE_SECRET_KEY=your_secret_key_here
+```
+
+### Configuration Options
+
+The package configuration in `config/forms.php` supports flexible environment variables:
+
+```php
+'turnstile' => [
+    'enabled' => env('FORMS_TURNSTILE_ENABLED', false),
+    'site_key' => env('TURNSTILE_SITE_KEY', env('FORMS_TURNSTILE_SITE_KEY', '')),
+    'secret_key' => env('TURNSTILE_SECRET_KEY', env('FORMS_TURNSTILE_SECRET_KEY', '')),
+],
+    'turnstile' => [
+        'enabled' => env('FORMS_TURNSTILE_ENABLED', false),
+        'site_key' => env('TURNSTILE_SITE_KEY','1x00000000000000000000AA'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY','1x0000000000000000000000000000000AA'),
+    ],
 ```
 
 ## Form Usage (basic)
@@ -63,6 +100,7 @@ Include form method type, form method route, spam strap in the start and end of 
                     name="firstName"
                     id="firstName"
                     wire:model="firstName"
+                    value="{{ old('firstName') }}"
                     autocomplete="given-name"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     pattern="[A-Za-z]{2,}"
@@ -82,6 +120,7 @@ Include form method type, form method route, spam strap in the start and end of 
                     name="first-name"
                     id="lastName"
                     wire:model="lastName"
+                    value="{{ old('lastName') }}"
                     autocomplete="family-name"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     pattern=".{2,}"
@@ -101,6 +140,7 @@ Include form method type, form method route, spam strap in the start and end of 
                     name="email"
                     type="email"
                     wire:model="email"
+                    value="{{ old('email') }}"
                     autocomplete="email"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                 @error('email')
@@ -118,6 +158,7 @@ Include form method type, form method route, spam strap in the start and end of 
                     name="phone"
                     id="phone"
                     wire:model="phone"
+                    value="{{ old('phone') }}"
                     autocomplete="tel"
                     aria-describedby="phone-description"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -141,6 +182,7 @@ Include form method type, form method route, spam strap in the start and end of 
                     id="message"
                     name="message"
                     wire:model="message"
+                    value="{{ old('messsage') }}"
                     rows="4"
                     aria-describedby="message-description"
                     class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
@@ -178,7 +220,7 @@ Add laravel-forms to your tailwind.config.js file.
 
 ```javascript
 content: [
-    './vendor/fuelviews/laravel-forms/resources/**/*.php'
+    './vendor/fuelviews/laravel-forms/resources/**/*.blade.php',
 ]
 ```
 
