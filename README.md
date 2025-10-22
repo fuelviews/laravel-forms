@@ -84,7 +84,7 @@ Include form method type, form method route, spam strap in the start and end of 
 ```bladehtml
 <form method="POST" action="{{ route('forms.validate') }}" class="mt-16">
     <div class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
-        <input type="text" name="_gotcha" style="display:none" />
+        <input type="text" name="gotcha" style="display:none" />
         <div>
             <label for="firstName" class="block text-sm font-semibold leading-6 text-gray-900">
                 First name
