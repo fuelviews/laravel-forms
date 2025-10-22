@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v1.0.1 - 2025-10-22
+
+### What's Changed
+
+* Fix hidden input field name from "_gotcha" to "gotcha" to match expected spam trap handling in the form. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/42
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v1.0.0...v1.0.1
+
 ## v1.0.0 - 2025-09-27
 
 ### What's Changed
