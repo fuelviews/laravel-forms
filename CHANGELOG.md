@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v1.0.2 - 2025-12-05
+
+### What's Changed
+
+* Update terms of service language by replacing specific company name with a generic placeholder for broader applicability. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/47
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v1.0.1...v1.0.2
+
 ## v1.0.1 - 2025-10-22
 
 ### What's Changed
