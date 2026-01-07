@@ -47,3 +47,4 @@ error_log
 /.DS_Store
 /storage/**/*
 .php-cs-fixer.cache
+/.claude/**

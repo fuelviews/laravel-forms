@@ -101,8 +101,8 @@ class FormsServiceProvider extends PackageServiceProvider
 
         // Use the TURNSTILE_SITE_KEY and TURNSTILE_SECRET_KEY env vars directly
         // with fallback to the test keys if not set
-        $siteKey = env('TURNSTILE_SITE_KEY', '1x00000000000000000000AA');
-        $secretKey = env('TURNSTILE_SECRET_KEY',  '1x0000000000000000000000000000000AA');
+        $siteKey = config('TURNSTILE_SITE_KEY', '1x00000000000000000000AA');
+        $secretKey = config('TURNSTILE_SECRET_KEY',  '1x0000000000000000000000000000000AA');
 
         // Set the services.turnstile config that the Turnstile package expects
         config([
