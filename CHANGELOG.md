@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v1.0.4 - 2026-01-07
+
+### What's Changed
+
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/fuelviews/laravel-forms/pull/45
+* Refactor Turnstile key retrieval to use forms configuration with environment variable fallbacks, improving compatibility with the Turnstile package. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/50
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v1.0.3...v1.0.4
+
 ## v1.0.3 - 2026-01-07
 
 ### What's Changed

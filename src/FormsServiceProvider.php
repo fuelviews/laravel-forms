@@ -99,10 +99,9 @@ class FormsServiceProvider extends PackageServiceProvider
         // Merge Turnstile configuration from forms.turnstile to services.turnstile
         // This ensures compatibility with the ryangjchandler/laravel-cloudflare-turnstile package
 
-        // Use the TURNSTILE_SITE_KEY and TURNSTILE_SECRET_KEY env vars directly
-        // with fallback to the test keys if not set
-        $siteKey = config('TURNSTILE_SITE_KEY', '1x00000000000000000000AA');
-        $secretKey = config('TURNSTILE_SECRET_KEY',  '1x0000000000000000000000000000000AA');
+        // Get turnstile keys from forms config (which reads from env vars with fallbacks)
+        $siteKey = config('forms.turnstile.site_key');
+        $secretKey = config('forms.turnstile.secret_key');
 
         // Set the services.turnstile config that the Turnstile package expects
         config([
