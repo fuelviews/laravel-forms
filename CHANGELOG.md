@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-forms` will be documented in this file.
 
+## v1.0.3 - 2026-01-07
+
+### What's Changed
+
+* Replace env() with config() to retrieve TURNSTILE keys, ensuring configuration values are used instead of environment variables directly. by @thejmitchener in https://github.com/fuelviews/laravel-forms/pull/49
+
+**Full Changelog**: https://github.com/fuelviews/laravel-forms/compare/v1.0.2...v1.0.3
+
 ## v1.0.2 - 2025-12-05
 
 ### What's Changed
